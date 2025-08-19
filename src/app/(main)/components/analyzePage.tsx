@@ -3,7 +3,7 @@ import { Heart, Sparkles, Star, Zap } from "lucide-react";
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { CalendarDays } from "lucide-react";
-import { motion } from "framer-motion";
+
 import DiaryCalendar from "./calendar";
 
 export const AnalyzePage = ({ data }: { data: any }) => {
