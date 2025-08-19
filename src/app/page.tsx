@@ -1,8 +1,9 @@
 "use client";
 import { HomePage } from "@/components/homePage";
 import { useState } from "react";
-import { AnalyzePage } from "./(main)/components/analyzePage";
+
 import axios from "axios";
+import { AnalyzePage } from "./(main)/components/analyzePage";
 
 export default function Home() {
   const [step, setStep] = useState(0);
