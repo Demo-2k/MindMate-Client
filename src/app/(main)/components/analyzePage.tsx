@@ -1,7 +1,9 @@
 "use client";
+
 import { Heart, MoveLeft, Sparkles, Star, Zap } from "lucide-react";
 
 export const AnalyzePage = ({ data, handleBack }: any) => {
+
 
 // Emoji map
 const emojiMap: Record<string, string> = {
@@ -72,6 +74,7 @@ console.log(emotion);
           </p>
         </div>
       </div>
+
     </div>
   );
 };
