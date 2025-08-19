@@ -1,10 +1,5 @@
 "use client";
 import { Heart, Sparkles, Star, Zap } from "lucide-react";
-import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { CalendarDays } from "lucide-react";
-
-import DiaryCalendar from "./calendar";
 
 export const AnalyzePage = ({ data }: { data: any }) => {
   console.log(data.emotions);
@@ -21,19 +16,7 @@ export const AnalyzePage = ({ data }: { data: any }) => {
     // return e;
   }
 
-//   const [entries, setEntries] = useState([
-//     { date: "2025-08-01", mood: 0.5 },
-//     { date: "2025-08-02", mood: -0.3 },
-//     { date: "2025-08-05", mood: 0.8 },
-//   ]);
-//   const [selectedDate, setSelectedDate] = useState(
-//     new Date().toISOString().slice(0, 10)
-//   );
 
-//   const datesInMonth = Array.from({ length: 31 }, (_, i) => {
-//     const day = (i + 1).toString().padStart(2, "0");
-//     return `2025-08-${day}`;
-//   });
 
   return (
     <div className="max-w-md mx-auto space-y-6 pt-50">
@@ -75,45 +58,8 @@ export const AnalyzePage = ({ data }: { data: any }) => {
           </p>
         </div>
       </div>
-      {/* <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100 p-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="p-4 shadow-lg rounded-2xl bg-white max-w-4xl mx-auto">
-            <h2 className="text-xl font-semibold mb-4 flex items-center">
-              <CalendarDays className="w-5 h-5 mr-2 text-indigo-600" /> August
-              2025
-            </h2>
-            <div className="grid grid-cols-7 gap-2">
-              {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
-                <div key={d} className="text-center font-medium text-gray-600">
-                  {d}
-                </div>
-              ))}
-              {datesInMonth.map((date) => {
-                const dayEntry = entries.find((e) => e.date === date);
-                const bgColor = dayEntry
-                  ? dayEntry.mood > 0
-                    ? "bg-green-400"
-                    : "bg-red-400"
-                  : "bg-gray-200";
-                return (
-                  <div
-                    key={date}
-                    className={`h-12 flex items-center justify-center rounded cursor-pointer ${bgColor} text-white`}
-                    onClick={() => setSelectedDate(date)}
-                  >
-                    {parseInt(date.split("-")[2])}
-                  </div>
-                );
-              })}
-            </div>
-          </Card>
-        </motion.div>
-      </div> */}
-      <DiaryCalendar/>
+      
+      
     </div>
   );
 };
