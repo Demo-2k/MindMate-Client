@@ -1,25 +1,41 @@
 "use client";
-import { Heart, Sparkles, Star, Zap } from "lucide-react";
 
-export const AnalyzePage = ({ data }: { data: any }) => {
-  console.log(data.emotions);
-  const emotions = data?.emotions;
-  console.log("emationd:", emotions);
+import { Heart, MoveLeft, Sparkles, Star, Zap } from "lucide-react";
 
-  let emotion = [];
-  for (let i = 0; i <= emotions.length; i++) {
-    let e = emotions[i];
-    if (e === "БАЯРТАЙ" || e === "ХӨӨРСӨН" || e === "ЭНЕРГИ_ДҮҮРЭН") {
-      let emoji = "🤩 Happy";
-      emotion.push(emoji);
-    }
-    // return e;
-  }
+export const AnalyzePage = ({ data, handleBack }: any) => {
+
+
+// Emoji map
+const emojiMap: Record<string, string> = {
+  БАЯРТАЙ: "🤩 Happy",
+  ХӨӨРСӨН: "😄 Excited",
+  ЭНЕРГИ_ДҮҮРЭН: "⚡ Energetic",
+  ГУНИГТАЙ: "😢 Sad",
+  СТРЕССТЭЙ: "😓 Stressed",
+  УРАМ_ЗОРИГТОЙ: "💪 Motivated",
+  ТАЙВАН: "😌 Calm",
+  САНАА_ЗОВСОН: "😟 Worried",
+  УУРТАЙ: "😠 Angry",
+  ГАНЦААРДСАН: "😔 Lonely",
+  СОНИРХОЛГҮЙ: "😒 Bored",
+  ИЧСЭН: "😳 Shy"
+};
+
+
+const emationd: string[] = data?.emotions;
+
+
+const emotion: string[] = emationd.map(e => emojiMap[e]).filter(Boolean);
+
+console.log(emotion);
 
 
 
   return (
-    <div className="max-w-md mx-auto space-y-6 pt-50">
+    <div className="max-w-md mx-auto space-y-6 pt-20">
+      <button onClick={handleBack}>
+        <MoveLeft />
+      </button>
       <div className="flex flex-col gap-5">
         <div className="w-full max-w-md bg-white/60 backdrop-blur-xl rounded-2xl shadow-xl p-6 ">
           <div className="flex items-center gap-3 mb-4">
@@ -58,8 +74,7 @@ export const AnalyzePage = ({ data }: { data: any }) => {
           </p>
         </div>
       </div>
-      
-      
+
     </div>
   );
 };
