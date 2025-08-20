@@ -1,4 +1,5 @@
 // enums
+
 export type EmotionCategory =
   | "БАЯРТАЙ"
   | "ГУНИГТАЙ"
