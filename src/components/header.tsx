@@ -2,6 +2,8 @@
 
 import { MessageSquareHeart, Settings } from "lucide-react";
 import Link from "next/link";
+import { ModeToggle } from "./themeSwitcher";
+import { Button } from "./ui/button";
 
 export default function Header() {
   return (
@@ -16,10 +18,10 @@ export default function Header() {
       </div>
       </Link>
 
-      
-      <button className="p-10 rounded-full hover:bg-gray-100" >
+       <ModeToggle/>
+      {/* <Button className="p-10 rounded-full hover:bg-gray-100" >
         <Settings className="w-10 h-10 color-gray" />
-      </button>
+      </Button> */}
     </header>
   );
 }
