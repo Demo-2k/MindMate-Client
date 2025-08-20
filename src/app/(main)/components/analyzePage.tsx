@@ -18,11 +18,85 @@ type EmotionsType = {
   ИЧСЭН: string;
 };
 
-interface TarotCard {
-  emotion: keyof EmotionsType; // object-ийн key
+export type TarotCard = {
+  emotion: string; // object-ийн key
   name: string;
   imageUrl: string;
-}
+};
+
+export const tarotCards: TarotCard[] = [
+  {
+    emotion: "БАЯРТАЙ",
+    name: "The Sun",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg",
+  },
+  {
+    emotion: "ХӨӨРСӨН",
+    name: "The Fool",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/RWS_Tarot_00_Fool.jpg/250px-RWS_Tarot_00_Fool.jpg",
+  },
+  {
+    emotion: "ЭНЕРГИ_ДҮҮРЭН",
+    name: "Wheel of Fortune",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg",
+  },
+  {
+    emotion: "ГУНИГТАЙ",
+    name: "Nine of Swords",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Swords09.jpg/250px-Swords09.jpg",
+  },
+  {
+    emotion: "СТРЕССТЭЙ",
+    name: "The Tower",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/RWS_Tarot_16_Tower.jpg/1024px-RWS_Tarot_16_Tower.jpg",
+  },
+  {
+    emotion: "УРАМ_ЗОРИГТОЙ",
+    name: "The Chariot",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg",
+  },
+  {
+    emotion: "ТАЙВАН",
+    name: "The Hermit",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/RWS_Tarot_09_Hermit.jpg/250px-RWS_Tarot_09_Hermit.jpg",
+  },
+  {
+    emotion: "САНАА_ЗОВСОН",
+    name: "The Moon",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg",
+  },
+  {
+    emotion: "УУРТАЙ",
+    name: "Five of Wands",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Wands02.jpg",
+  },
+  {
+    emotion: "ГАНЦААРДСАН",
+    name: "Eight of Cups",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cups08.jpg/250px-Cups08.jpg",
+  },
+  {
+    emotion: "СОНИРХОЛГҮЙ",
+    name: "Four of Swords",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Swords04.jpg/1024px-Swords04.jpg",
+  },
+  {
+    emotion: "ИЧСЭН",
+    name: "Seven of Cups",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Cups07.jpg/1024px-Cups07.jpg",
+  },
+];
 
 export const AnalyzePage = ({ data, handleBack }: any) => {
   // Emoji map
@@ -45,80 +119,7 @@ export const AnalyzePage = ({ data, handleBack }: any) => {
   const emotion: string[] = emationd.map((e) => emojiMap[e]).filter(Boolean);
 
   // Tarot card list
-  const tarotCards: TarotCard[] = [
-    {
-      emotion: "БАЯРТАЙ",
-      name: "The Sun",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg",
-    },
-    {
-      emotion: "ХӨӨРСӨН",
-      name: "The Fool",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/RWS_Tarot_00_Fool.jpg/250px-RWS_Tarot_00_Fool.jpg",
-    },
-    {
-      emotion: "ЭНЕРГИ_ДҮҮРЭН",
-      name: "Wheel of Fortune",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg",
-    },
-    {
-      emotion: "ГУНИГТАЙ",
-      name: "Nine of Swords",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Swords09.jpg/250px-Swords09.jpg",
-    },
-    {
-      emotion: "СТРЕССТЭЙ",
-      name: "The Tower",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/RWS_Tarot_16_Tower.jpg/1024px-RWS_Tarot_16_Tower.jpg",
-    },
-    {
-      emotion: "УРАМ_ЗОРИГТОЙ",
-      name: "The Chariot",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg",
-    },
-    {
-      emotion: "ТАЙВАН",
-      name: "The Hermit",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/RWS_Tarot_09_Hermit.jpg/250px-RWS_Tarot_09_Hermit.jpg",
-    },
-    {
-      emotion: "САНАА_ЗОВСОН",
-      name: "The Moon",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg",
-    },
-    {
-      emotion: "УУРТАЙ",
-      name: "Five of Wands",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/0/0f/Wands02.jpg",
-    },
-    {
-      emotion: "ГАНЦААРДСАН",
-      name: "Eight of Cups",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cups08.jpg/250px-Cups08.jpg",
-    },
-    {
-      emotion: "СОНИРХОЛГҮЙ",
-      name: "Four of Swords",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Swords04.jpg/1024px-Swords04.jpg",
-    },
-    {
-      emotion: "ИЧСЭН",
-      name: "Seven of Cups",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Cups07.jpg/1024px-Cups07.jpg",
-    },
-  ];
+
   const cardsToShow = tarotCards.filter(
     (emo) => emo.emotion === data?.emotions[0]
   );

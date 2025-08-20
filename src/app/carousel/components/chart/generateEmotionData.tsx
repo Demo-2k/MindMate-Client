@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { DiaryNote } from "../CarouselCard";
+import { DiaryNote } from "@/types";
+
 
 export interface EmotionData {
   emotion: string;
@@ -14,6 +15,8 @@ export interface EmotionData {
   impact: number;
   proportion?: number;
 }
+
+
 
  const EMOTIONS = [
     { emotion: "Joy", color: "#FFD700", gradient: "from-yellow-400 to-yellow-600", icon: "😊", description: "Moments of happiness and delight" },

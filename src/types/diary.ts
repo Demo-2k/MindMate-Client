@@ -17,15 +17,13 @@ export interface DiaryNote {
   id: number;
   userId: number;
   note: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
 
-  
   avatar?: string;
   time?: string;
   likes?: number;
   replies?: number;
 
-  
   analysis?: Analysis;
 }

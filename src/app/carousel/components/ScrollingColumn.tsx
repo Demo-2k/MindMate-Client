@@ -12,6 +12,7 @@ interface Props {
 
 export default function ScrollingColumn({ diary, direction, onCommentClick }: Props) {
   const tripledComments = [...diary, ...diary, ...diary];
+  
 
   return (
     <div className="h-[700px] overflow-hidden relative rounded-lg column-container">
