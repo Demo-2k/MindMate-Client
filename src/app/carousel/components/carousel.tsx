@@ -10,97 +10,171 @@ import {
 } from "@/components/ui/dialog";
 import axios from "axios";
 
-const comments = [
+// const comments = [
+//   {
+//     id: 1,
+//     author: "Sarah Chen",
+//     content:
+//       "This is such an amazing feature! Love how smooth the animations are. The attention to detail in the hover effects and the way the carousels pause is really thoughtful UX design.",
+//     avatar: "🥰",
+//     time: "08/19/2025",
+//     likes: 24,
+//     replies: 3,
+//   },
+//   {
+//     id: 2,
+//     author: "Mike Johnson",
+//     content:
+//       "The infinite scroll effect is really well done. Great work on the implementation! I've been trying to build something similar for weeks.",
+//     avatar: "MJ",
+//     time: "5m ago",
+//     likes: 18,
+//     replies: 7,
+//   },
+//   {
+//     id: 3,
+//     author: "Emma Davis",
+//     content:
+//       "Beautiful design and the hover pause is a nice touch. Very user-friendly! The color scheme works perfectly with the overall aesthetic.",
+//     avatar: "ED",
+//     time: "8m ago",
+//     likes: 31,
+//     replies: 2,
+//   },
+//   {
+//     id: 4,
+//     author: "Alex Rodriguez",
+//     content:
+//       "I've been looking for something like this. The three-column layout works perfectly for displaying multiple conversation threads simultaneously.",
+//     avatar: "AR",
+//     time: "12m ago",
+//     likes: 15,
+//     replies: 5,
+//   },
+//   {
+//     id: 5,
+//     author: "Lisa Wang",
+//     content:
+//       "The scrolling directions are so creative! Left and right up, center down - genius. It creates this mesmerizing flow that keeps you engaged.",
+//     avatar: "LW",
+//     time: "15m ago",
+//     likes: 42,
+//     replies: 8,
+//   },
+//   {
+//     id: 6,
+//     author: "David Kim",
+//     content:
+//       "This would be perfect for a social media feed. Really impressed with the execution and the smooth transitions between states.",
+//     avatar: "DK",
+//     time: "18m ago",
+//     likes: 27,
+//     replies: 4,
+//   },
+//   {
+//     id: 7,
+//     author: "Rachel Green",
+//     content:
+//       "The pause on hover makes it easy to read longer comments. Thoughtful UX design! The modal interaction is clean and doesn't interrupt the flow.",
+//     avatar: "RG",
+//     time: "22m ago",
+//     likes: 19,
+//     replies: 6,
+//   },
+//   {
+//     id: 8,
+//     author: "Tom Wilson",
+//     content:
+//       "Clean code and smooth animations. This is exactly what I needed for my project. The semantic design tokens make customization so much easier.",
+//     avatar: "TW",
+//     time: "25m ago",
+//     likes: 33,
+//     replies: 9,
+//   },
+// ];
+
+const tarotCards: any = [
   {
-    id: 1,
-    author: "Sarah Chen",
-    content:
-      "This is such an amazing feature! Love how smooth the animations are. The attention to detail in the hover effects and the way the carousels pause is really thoughtful UX design.",
-    avatar: "🥰",
-    time: "08/19/2025",
-    likes: 24,
-    replies: 3,
+    emotion: "БАЯРТАЙ",
+    name: "The Sun",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg",
   },
   {
-    id: 2,
-    author: "Mike Johnson",
-    content:
-      "The infinite scroll effect is really well done. Great work on the implementation! I've been trying to build something similar for weeks.",
-    avatar: "MJ",
-    time: "5m ago",
-    likes: 18,
-    replies: 7,
+    emotion: "ХӨӨРСӨН",
+    name: "The Fool",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/RWS_Tarot_00_Fool.jpg/250px-RWS_Tarot_00_Fool.jpg",
   },
   {
-    id: 3,
-    author: "Emma Davis",
-    content:
-      "Beautiful design and the hover pause is a nice touch. Very user-friendly! The color scheme works perfectly with the overall aesthetic.",
-    avatar: "ED",
-    time: "8m ago",
-    likes: 31,
-    replies: 2,
+    emotion: "ЭНЕРГИ_ДҮҮРЭН",
+    name: "Wheel of Fortune",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg",
   },
   {
-    id: 4,
-    author: "Alex Rodriguez",
-    content:
-      "I've been looking for something like this. The three-column layout works perfectly for displaying multiple conversation threads simultaneously.",
-    avatar: "AR",
-    time: "12m ago",
-    likes: 15,
-    replies: 5,
+    emotion: "ГУНИГТАЙ",
+    name: "Nine of Swords",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Swords09.jpg/250px-Swords09.jpg",
   },
   {
-    id: 5,
-    author: "Lisa Wang",
-    content:
-      "The scrolling directions are so creative! Left and right up, center down - genius. It creates this mesmerizing flow that keeps you engaged.",
-    avatar: "LW",
-    time: "15m ago",
-    likes: 42,
-    replies: 8,
+    emotion: "СТРЕССТЭЙ",
+    name: "The Tower",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/RWS_Tarot_16_Tower.jpg/1024px-RWS_Tarot_16_Tower.jpg",
   },
   {
-    id: 6,
-    author: "David Kim",
-    content:
-      "This would be perfect for a social media feed. Really impressed with the execution and the smooth transitions between states.",
-    avatar: "DK",
-    time: "18m ago",
-    likes: 27,
-    replies: 4,
+    emotion: "УРАМ_ЗОРИГТОЙ",
+    name: "The Chariot",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg",
   },
   {
-    id: 7,
-    author: "Rachel Green",
-    content:
-      "The pause on hover makes it easy to read longer comments. Thoughtful UX design! The modal interaction is clean and doesn't interrupt the flow.",
-    avatar: "RG",
-    time: "22m ago",
-    likes: 19,
-    replies: 6,
+    emotion: "ТАЙВАН",
+    name: "The Hermit",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/RWS_Tarot_09_Hermit.jpg/250px-RWS_Tarot_09_Hermit.jpg",
   },
   {
-    id: 8,
-    author: "Tom Wilson",
-    content:
-      "Clean code and smooth animations. This is exactly what I needed for my project. The semantic design tokens make customization so much easier.",
-    avatar: "TW",
-    time: "25m ago",
-    likes: 33,
-    replies: 9,
+    emotion: "САНАА_ЗОВСОН",
+    name: "The Moon",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg",
+  },
+  {
+    emotion: "УУРТАЙ",
+    name: "Five of Wands",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Wands02.jpg",
+  },
+  {
+    emotion: "ГАНЦААРДСАН",
+    name: "Eight of Cups",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cups08.jpg/250px-Cups08.jpg",
+  },
+  {
+    emotion: "СОНИРХОЛГҮЙ",
+    name: "Four of Swords",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Swords04.jpg/1024px-Swords04.jpg",
+  },
+  {
+    emotion: "ИЧСЭН",
+    name: "Seven of Cups",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Cups07.jpg/1024px-Cups07.jpg",
   },
 ];
 
 function CarouselCard({ diary, onClick }: { diary: any; onClick: () => void }) {
   return (
     <Card
-      className="mb-4 min-h-[140px] flex-shrink-0 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-lg border-border/50 backdrop-blur-sm"
+      className="bg-[url(/img/mountains.jpg)]  mb-4 w-full min-h-[340px] flex-shrink-0 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-lg border-border/50 backdrop-blur-sm"
       onClick={onClick}
     >
       <CardContent className="p-4">
-        <div className="flex items-start gap-3">
+        <div className="flex items-start gap-3 bg-blue-200">
           <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground text-sm font-semibold flex items-center justify-center flex-shrink-0 shadow-sm">
             {diary?.analysis?.calendarType}
           </div>
@@ -141,9 +215,9 @@ function ScrollingColumn({
   console.log("diary", diary);
 
   return (
-    <div className="h-[700px] overflow-hidden relative rounded-lg">
+    <div className="h-[700px] overflow-hidden relative rounded-lg bg-yellow-200">
       <div
-        className={`flex flex-col animate-scroll-${direction}`}
+        className={`flex flex-col items-center animate-scroll-${direction}`}
         style={{
           animation: `scroll-${direction} 60s linear infinite`,
         }}
@@ -254,7 +328,7 @@ export default function DiaryCarousel() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
-      <div className="container mx-auto p-6">
+      <div className="container mx-auto p-6 bg-green-300 flex flex-cols justify-center">
         <style jsx>{`
           @keyframes scroll-up {
             0% {
@@ -295,7 +369,7 @@ export default function DiaryCarousel() {
           }
         `}</style>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 bg-blue-500 w-[60%] gap-6">
           {/* Left Column - Scrolls Up */}
           <div className="column-container">
             <ScrollingColumn
@@ -323,7 +397,13 @@ export default function DiaryCarousel() {
             />
           </div>
         </div>
-        {diary.map((item)=> <CommentModal diary={item} isOpen={isModalOpen} onClose={closeModal} />)}
+        {diary.map((item) => (
+          <CommentModal
+            diary={item}
+            isOpen={isModalOpen}
+            onClose={closeModal}
+          />
+        ))}
         {/* <CommentModal diary={diary} isOpen={isModalOpen} onClose={closeModal} /> */}
       </div>
     </div>
