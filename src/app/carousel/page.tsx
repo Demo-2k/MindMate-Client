@@ -1,4 +1,5 @@
-import DiaryCarousel from "./components/carousel";
+import DiaryCarousel from "./components/DairyCarousel";
+
 
 export default function Carousel () {
     return (
