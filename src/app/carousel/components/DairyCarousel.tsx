@@ -1,17 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import ScrollingColumn from "./ScrollingColumn";
 
 import { DiaryNote } from "@/types/diary";
 import CommentModal from "./CommentMotal";
-
+import { userDiaryContext } from "@/provider/userDiaryProvider";
 
 export default function DiaryCarousel() {
-  const [selectedComment, setSelectedComment] = useState<DiaryNote | null>(null);
+  const { diaries } = useContext(userDiaryContext);
+  const diary = diaries as DiaryNote[];
+
+  console.log("userDiaryyy", diaries);
+
+  const [selectedComment, setSelectedComment] = useState<DiaryNote | null>(
+    null
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [diary, setDiary] = useState<DiaryNote[]>([]);
+  
 
   const handleCommentClick = (comment: DiaryNote) => {
     setSelectedComment(comment);
@@ -23,27 +30,34 @@ export default function DiaryCarousel() {
     setSelectedComment(null);
   };
 
-  useEffect(() => {
-    const fetchDiary = async () => {
-      try {
-        const response = await axios.get<DiaryNote[]>(`http://localhost:4001/ai/getAllDiaryNotes/1`);
-        setDiary(response.data);
-      } catch (error) {
-        console.error("Failed to fetch diary notes:", error);
-      }
-    };
-    fetchDiary();
-  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
-      <div className="container mx-auto p-6">
+      <div className="container mx-auto p-6 flex flex-cols justify-center">
         <style jsx>{`
-          @keyframes scroll-up { 0% { transform: translateY(0); } 100% { transform: translateY(-33.333%); } }
-          @keyframes scroll-down { 0% { transform: translateY(-33.333%); } 100% { transform: translateY(0); } }
+          @keyframes scroll-up {
+            0% {
+              transform: translateY(0);
+            }
+            100% {
+              transform: translateY(-33.333%);
+            }
+          }
+          @keyframes scroll-down {
+            0% {
+              transform: translateY(-33.333%);
+            }
+            100% {
+              transform: translateY(0);
+            }
+          }
 
-          .animate-scroll-up { animation: scroll-up 30s linear infinite; }
-          .animate-scroll-down { animation: scroll-down 30s linear infinite; }
+          .animate-scroll-up {
+            animation: scroll-up 30s linear infinite;
+          }
+          .animate-scroll-down {
+            animation: scroll-down 30s linear infinite;
+          }
 
           .column-container:hover .animate-scroll-up,
           .column-container:hover .animate-scroll-down {
@@ -58,14 +72,30 @@ export default function DiaryCarousel() {
           }
         `}</style>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <ScrollingColumn diary={diary.slice(0, 5)} direction="up" onCommentClick={handleCommentClick} />
-          <ScrollingColumn diary={diary.slice(5, 10)} direction="down" onCommentClick={handleCommentClick} />
-          <ScrollingColumn diary={diary.slice(10, 15)} direction="up" onCommentClick={handleCommentClick} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-[60%]">
+          <ScrollingColumn
+            diary={diary.slice(0, 5)}
+            direction="up"
+            onCommentClick={handleCommentClick}
+          />
+          <ScrollingColumn
+            diary={diary.slice(5, 10)}
+            direction="down"
+            onCommentClick={handleCommentClick}
+          />
+          <ScrollingColumn
+            diary={diary.slice(10, 15)}
+            direction="up"
+            onCommentClick={handleCommentClick}
+          />
         </div>
 
         {selectedComment && (
-          <CommentModal diary={selectedComment} isOpen={isModalOpen} onClose={closeModal} />
+          <CommentModal
+            diary={selectedComment}
+            isOpen={isModalOpen}
+            onClose={closeModal}
+          />
         )}
       </div>
     </div>
