@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ScrollingColumn from "./ScrollingColumn";
 
-import { DiaryNote } from "./CarouselCard";
+import { DiaryNote } from "@/types/diary";
 import CommentModal from "./CommentMotal";
 
 

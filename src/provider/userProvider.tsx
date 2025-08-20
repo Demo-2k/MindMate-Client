@@ -1,6 +1,6 @@
 "use client";
  
-import { User } from "@/types/types";
+import { User } from "@/types";
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
  
