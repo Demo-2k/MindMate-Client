@@ -1,6 +1,7 @@
 "use client";
 
-import CarouselCard, { DiaryNote } from "./CarouselCard";
+import { DiaryNote } from "@/types/diary";
+import CarouselCard from "./CarouselCard";
 
 
 interface Props {

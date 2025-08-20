@@ -1,24 +1,7 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-
-export type DiaryNote = {
-  id: number;
-  note: string;
-  createdAt: string;
-  updatedAt: string;
-  likes?: number;
-  replies?: number;
-  avatar?: string;
-  time?: string;
-  analysis?: {
-    id: number;
-    calendarType?: string;
-    calendarHighlight?: string;
-    horoscope?: string;
-    result?: string;
-  };
-};
+import { DiaryNote } from "@/types/diary";
 
 
 interface Props {
