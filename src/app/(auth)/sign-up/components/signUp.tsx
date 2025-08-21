@@ -37,35 +37,36 @@ export const SignUpEmailPassword = () => {
 
  
   const handleBudaa = async (username: string, email: string, password: string) => {
-    try {
-      const response = await axios.post("http://localhost:4001/auth/sign-up", {
-        username, 
-        email,
-        password,
-      });
+  try {
+    const response = await axios.post("http://localhost:4001/auth/sign-up", {
+      username, 
+      email,
+      password,
+    });
 
-      
-      localStorage.setItem("token", response?.data?.accessToken);
+    // Токен localStorage-д хадгалах
+    localStorage.setItem("token", response?.data?.signUpUserAccessToken);
 
-      return true;
-    } catch (error) {
-      const axiosError = error as AxiosError;
+    return true;
+  } catch (error) {
+    const axiosError = error as AxiosError;
 
-      if (axiosError.response) {
-        const errorMessage = (axiosError.response.data as { message: string })
-          .message;
-        console.log("error message:", errorMessage);
+    if (axiosError.response) {
+      const errorMessage = (axiosError.response.data as { message: string })
+        .message;
+      console.log("error message:", errorMessage);
 
-        if (errorMessage === "User profile already created") {
-          return false;
-        } else {
-          alert(`error: ${errorMessage}`);
-          return false;
-        }
+      if (errorMessage === "User profile already created") {
+        return false;
+      } else {
+        alert(`error: ${errorMessage}`);
+        return false;
       }
-      return false;
     }
-  };
+    return false;
+  }
+};
+
 
   // Form submit
   async function onSubmit(values: z.infer<typeof formSchema>) {
