@@ -1,5 +1,6 @@
 "use client";
 
+import { AiAnalysis } from "@/types";
 import { Heart, MoveLeft, Sparkles, Star, Zap } from "lucide-react";
 import { useState } from "react";
 
@@ -97,16 +98,13 @@ export const tarotCards: TarotCard[] = [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Cups07.jpg/1024px-Cups07.jpg",
   },
 ];
-<<<<<<< Updated upstream
 
-export const AnalyzePage = ({ data, handleBack }: any) => {
-=======
 type AnalyzePageProps = {
-  data: AiAnalysis ,
+  data: AiAnalysis,
   handleBack: () => void
 }
 export const AnalyzePage = ({ data, handleBack }: AnalyzePageProps) => {
->>>>>>> Stashed changes
+
   // Emoji map
   const emojiMap: Record<string, string> = {
     БАЯРТАЙ: "🤩 Happy",
@@ -171,11 +169,11 @@ export const AnalyzePage = ({ data, handleBack }: AnalyzePageProps) => {
                   <Zap className="w-6 h-6 text-yellow-600" />
                 </div>
                 <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
-                  Daily Motivation
+                 Daily Motivation
                 </h2>
               </div>
               <blockquote className="text-lg sm:text-xl font-bold leading-relaxed text-gray-800 relative pl-4 border-l-4 border-gradient-to-b from-yellow-400 to-orange-500">
-                "{data?.message}..."
+                &quot;{data?.message}...&quot;
               </blockquote>
             </div>
           </div>
