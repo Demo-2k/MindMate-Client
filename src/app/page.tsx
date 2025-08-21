@@ -10,7 +10,6 @@ export default function Home() {
 
  const { userProvider } = useContext(UserContext);
  
- console.log(userProvider)
  
   const [step, setStep] = useState(0);
   const [analyzeData, setAnalyzeData] = useState<any>(null);
@@ -22,7 +21,7 @@ export default function Home() {
 
   const diaryPost = async () => {
     if (!userProvider?.id) {
-      alert("User not loaded yet");
+      alert("burtguulnuu");
       return;
     }
     try {

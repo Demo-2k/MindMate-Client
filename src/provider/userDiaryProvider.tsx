@@ -3,8 +3,8 @@
 import Loading from "@/lib/loading";
 import { DiaryNote } from "@/types";
 import axios from "axios";
-
-import { createContext, useEffect, useState } from "react";
+import { UserContext } from "@/provider/userProvider";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 type userDiariesProviderType = {
@@ -22,29 +22,29 @@ export default function UserDiaryProvider({
 }) {
   const [loading, setLoading] = useState(false);
   const [diaries, setDiaries] = useState<DiaryNote[]>([]);
+  const { userProvider } = useContext(UserContext);
 
   const fetchDiary = async () => {
-    setLoading(true);
-    axios
-      .get<DiaryNote[]>(`http://localhost:4001/ai/getAllDiaryNotes/1`)
-      .then((response) => {
-        console.log("res:", response.data);
+    if (!userProvider?.id) return; 
 
-        setDiaries(response.data);
-      })
-      .catch((error) => {
-        toast.error("Error");
-      })
-      .finally(() => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
-      });
+    setLoading(true);
+    try {
+      const response = await axios.get<DiaryNote[]>(
+        `http://localhost:4001/ai/getAllDiaryNotes/${userProvider.id}`
+      );
+      console.log("res:", response.data);
+      setDiaries(response.data);
+    } catch (error) {
+      toast.error("Error fetching diary notes");
+      console.error(error);
+    } finally {
+      setLoading(false); // 
+    }
   };
 
   useEffect(() => {
     fetchDiary();
-  }, []);
+  }, [userProvider]); 
 
   if (loading) return <Loading />;
 
