@@ -117,16 +117,11 @@ export default function EmotionBubbleChart() {
     };
   });
 
-  console.log("mergedData", mergedData);
-
-  console.log("counted:", counted);
-
   useEffect(() => {
     setEmotionData(mergedData);
   }, []);
   // setEmotionData(mergedData)
 
-  console.log("emotiondata:", emotionData);
 
   const totalFrequency = emotionData.reduce((sum, e) => sum + e.frequency, 0);
   const emotionsWithProportions = emotionData.map((e) => ({
