@@ -21,7 +21,7 @@ export default function Sitebar() {
 
   const links = [
     { href: "/", label: "Home", icon: Home },
-    { href: "/calendar", label: "Calendar", icon: Calendar },
+    { href: "/chart", label: "Chart", icon: Calendar },
     { href: "/carousel", label: "Stats", icon: BarChart3 },
   ];
 
