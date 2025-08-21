@@ -1,6 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { EmotionData,  } from "./generateEmotionData"
-
+import { EmotionData } from "./EmotionBubbleChart"
 
 interface Props {
   emotions: EmotionData[]

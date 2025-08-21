@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { EmotionData } from "./generateEmotionData"
+import { EmotionData } from "./EmotionBubbleChart"
+
 
 
 interface Props { emotion: EmotionData }
@@ -30,7 +31,7 @@ export default function SelectedEmotionPanel({ emotion }: Props) {
               <span className="text-sm font-medium">Intensity</span>
               <span className="text-sm text-muted-foreground">{emotion.intensity}/10</span>
             </div>
-            <Progress value={emotion.intensity*10} className="h-3" />
+            {/* <Progress value={emotion.intensity*10} className="h-3" /> */}
             <p className="text-xs text-muted-foreground">Average emotional intensity</p>
           </div>
           <div className="space-y-2">
