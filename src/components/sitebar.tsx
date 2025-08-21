@@ -2,24 +2,37 @@
 
 import { Home, Calendar, BarChart3, Settings, Sun } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 
 export default function Sitebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    router.push("/sign-in");
+  };
 
   const links = [
     { href: "/", label: "Home", icon: Home },
     { href: "/calendar", label: "Calendar", icon: Calendar },
     { href: "/carousel", label: "Stats", icon: BarChart3 },
-    { href: "/settings", label: "Settings", icon: Settings },
   ];
 
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex fixed top-0 left-0 h-screen w-16 
-                      bg-gradient-to-b from-yellow-50 to-blue-50 
-                      flex-col items-center py-4 shadow-md">
+      <div
+        className="hidden md:flex fixed top-0 left-0 h-screen w-16 
+                    bg-gradient-to-b from-yellow-50 to-blue-50 
+                    flex-col items-center py-4 shadow-md"
+      >
         <div className="mb-6">
           <Sun className="h-6 w-6 text-orange-600" />
         </div>
@@ -37,6 +50,22 @@ export default function Sitebar() {
               </button>
             </Link>
           ))}
+
+          {/* Settings dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className={`p-2 rounded-xl transition hover:bg-yellow-100 text-gray-600`}
+              >
+                <Settings className="h-6 w-6" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-40">
+              <DropdownMenuItem onClick={handleSignOut}>
+                Sign Out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 
@@ -54,6 +83,21 @@ export default function Sitebar() {
             </button>
           </Link>
         ))}
+
+        {/* Mobile Settings dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="flex flex-col items-center text-xs text-gray-600">
+              <Settings className="h-6 w-6" />
+              <span className="text-[10px]">Settings</span>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-32">
+            <DropdownMenuItem onClick={handleSignOut}>
+              Sign Out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </>
   );
