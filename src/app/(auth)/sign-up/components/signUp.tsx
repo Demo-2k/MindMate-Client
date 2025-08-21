@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
+import Link from "next/link";
 
 
 const formSchema = z.object({
@@ -180,6 +181,17 @@ export const SignUpEmailPassword = () => {
           >
             {isSubmitting ? "Loading..." : "Start writing with Email"}
           </button>
+
+               {/* Sign up link */}
+        <p className="text-sm text-gray-500 mt-4">
+          Already have an account?{" "}
+          <Link
+            href="/sign-in"
+            className="text-blue-500 hover:underline font-medium"
+          >
+            Log in
+          </Link>
+        </p>
         </form>
       </div>
     </div>
