@@ -81,7 +81,6 @@ export const AllUsersDiaries = () => {
     if (value === "Joy") {
       filtered = diaries.filter((diary) => {
         return diary?.analysis?.emotions[0] === "БАЯРТАЙ";
-        console.log(diary.analysis?.emotions[0]);
       });
       console.log("filtered: joy:", filtered);
     } else if (value === "Sadness") {
@@ -159,7 +158,7 @@ export const AllUsersDiaries = () => {
         </div>
       </div>
       {filteredDiaries.length === 0 && <div> шүүлт олдсонгүй... </div>}
-      <div className="grid grid-cols-4 gap-4 ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 ">
         {filteredDiaries.map((item, i) => (
           <div key={i}>
             <CarouselCard
