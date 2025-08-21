@@ -6,6 +6,7 @@ import UserDiaryProvider from "@/provider/userDiaryProvider";
 import { Toaster } from "sonner";
 import UserContextProvider from "@/provider/userProvider";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,14 +33,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {" "}
+         <UserContextProvider>
         <UserDiaryProvider>
-          <UserContextProvider>
+         
         <Header />
-        
           <Toaster />
           {children}
-          </UserContextProvider>
+          
         </UserDiaryProvider>
+        </UserContextProvider>
       </body>
     </html>
   );
