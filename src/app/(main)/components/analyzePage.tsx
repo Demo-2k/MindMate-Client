@@ -97,8 +97,16 @@ export const tarotCards: TarotCard[] = [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Cups07.jpg/1024px-Cups07.jpg",
   },
 ];
+<<<<<<< Updated upstream
 
 export const AnalyzePage = ({ data, handleBack }: any) => {
+=======
+type AnalyzePageProps = {
+  data: AiAnalysis ,
+  handleBack: () => void
+}
+export const AnalyzePage = ({ data, handleBack }: AnalyzePageProps) => {
+>>>>>>> Stashed changes
   // Emoji map
   const emojiMap: Record<string, string> = {
     БАЯРТАЙ: "🤩 Happy",

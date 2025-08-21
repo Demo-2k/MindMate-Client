@@ -53,7 +53,11 @@ export default function Home() {
       setDiary={setDiary}
       loading={loading}
     />,
-    <AnalyzePage key={1} data={analyzeData} handleBack={handleBack} />,
+    analyzeData ? (
+      <AnalyzePage key={1} data={analyzeData} handleBack={handleBack} />
+    ) : (
+      <div key={1}>Loading...</div> 
+    ),
   ];
 
   return stepComponents[step];
