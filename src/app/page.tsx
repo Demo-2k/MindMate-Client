@@ -5,9 +5,12 @@ import axios from "axios";
 import { AnalyzePage } from "./(main)/components/analyzePage";
 import { UserContext } from "@/provider/userProvider";
 import { AiAnalysis } from "@/types";
+import { useRouter } from "next/navigation";
+
 
 export default function Home() {
   const { userProvider } = useContext(UserContext);
+  const {push}  =useRouter();
 
   const [step, setStep] = useState(0);
   const [analyzeData, setAnalyzeData] = useState<AiAnalysis | null>(null);
@@ -23,6 +26,7 @@ export default function Home() {
   const diaryPost = async () => {
     if (!userProvider?.id) {
       alert("burtguulnuu");
+      push("/sign-in")
       return;
     }
     try {
