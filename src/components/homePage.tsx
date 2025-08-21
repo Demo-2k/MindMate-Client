@@ -1,8 +1,17 @@
 import { Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
+import { DiaryNote } from "@/types";
+import { Dispatch, SetStateAction } from "react";
 
-
-export const HomePage = ({ HandleDiary, diary, setDiary, loading}: any) => {
+type HomePageProps = {
+  HandleDiary: ()=> void,
+  setDiary: Dispatch<SetStateAction<string>>,
+  diary:string,
+  loading:boolean
+}
+export const HomePage = ({ HandleDiary, diary, setDiary, loading}: HomePageProps) => {
+  console.log("setDIaryyy:", setDiary);
+  
 
   return (
     <div>
@@ -10,7 +19,7 @@ export const HomePage = ({ HandleDiary, diary, setDiary, loading}: any) => {
       <div className="w-full max-w-md bg-white/60 backdrop-blur-xl rounded-2xl shadow-xl p-6">
         <div className="flex items-center gap-2 mb-4">
           <span className="w-3 h-3 rounded-full bg-pink-400"></span>
-          <h2 className="text-lg font-semibold">How's your day going?</h2>
+          <h2 className="text-lg font-semibold">How&apos;s your day going?</h2>
         </div>
 
         <textarea
