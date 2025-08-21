@@ -10,88 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import axios from "axios";
 
-const comments = [
-  {
-    id: 1,
-    author: "Sarah Chen",
-    content:
-      "This is such an amazing feature! Love how smooth the animations are. The attention to detail in the hover effects and the way the carousels pause is really thoughtful UX design.",
-    avatar: "🥰",
-    time: "08/19/2025",
-    likes: 24,
-    replies: 3,
-  },
-  {
-    id: 2,
-    author: "Mike Johnson",
-    content:
-      "The infinite scroll effect is really well done. Great work on the implementation! I've been trying to build something similar for weeks.",
-    avatar: "MJ",
-    time: "5m ago",
-    likes: 18,
-    replies: 7,
-  },
-  {
-    id: 3,
-    author: "Emma Davis",
-    content:
-      "Beautiful design and the hover pause is a nice touch. Very user-friendly! The color scheme works perfectly with the overall aesthetic.",
-    avatar: "ED",
-    time: "8m ago",
-    likes: 31,
-    replies: 2,
-  },
-  {
-    id: 4,
-    author: "Alex Rodriguez",
-    content:
-      "I've been looking for something like this. The three-column layout works perfectly for displaying multiple conversation threads simultaneously.",
-    avatar: "AR",
-    time: "12m ago",
-    likes: 15,
-    replies: 5,
-  },
-  {
-    id: 5,
-    author: "Lisa Wang",
-    content:
-      "The scrolling directions are so creative! Left and right up, center down - genius. It creates this mesmerizing flow that keeps you engaged.",
-    avatar: "LW",
-    time: "15m ago",
-    likes: 42,
-    replies: 8,
-  },
-  {
-    id: 6,
-    author: "David Kim",
-    content:
-      "This would be perfect for a social media feed. Really impressed with the execution and the smooth transitions between states.",
-    avatar: "DK",
-    time: "18m ago",
-    likes: 27,
-    replies: 4,
-  },
-  {
-    id: 7,
-    author: "Rachel Green",
-    content:
-      "The pause on hover makes it easy to read longer comments. Thoughtful UX design! The modal interaction is clean and doesn't interrupt the flow.",
-    avatar: "RG",
-    time: "22m ago",
-    likes: 19,
-    replies: 6,
-  },
-  {
-    id: 8,
-    author: "Tom Wilson",
-    content:
-      "Clean code and smooth animations. This is exactly what I needed for my project. The semantic design tokens make customization so much easier.",
-    avatar: "TW",
-    time: "25m ago",
-    likes: 33,
-    replies: 9,
-  },
-];
+
 
 function CarouselCard({ diary, onClick }: { diary: any; onClick: () => void }) {
   return (
@@ -133,7 +52,7 @@ function ScrollingColumn({
 }: {
   diary: any;
   direction: "up" | "down";
-  onCommentClick: (comment: (typeof comments)[0]) => void;
+  onCommentClick: (comment: (typeof diary)[0]) => void;
 }) {
   // Triple the comments for seamless infinite scroll
   const tripledComments = [...diary, ...diary, ...diary];
@@ -212,11 +131,11 @@ function CommentModal({
 
 export default function DiaryCarousel() {
   const [selectedComment, setSelectedComment] = useState<
-    (typeof comments)[0] | null
+    (typeof diary)[0] | null
   >(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleCommentClick = (comment: (typeof comments)[0]) => {
+  const handleCommentClick = (comment: (typeof diary)[0]) => {
     setSelectedComment(comment);
     setIsModalOpen(true);
   };
