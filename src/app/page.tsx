@@ -4,15 +4,16 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { AnalyzePage } from "./(main)/components/analyzePage";
 import { UserContext } from "@/provider/userProvider";
-
+import { AiAnalysis } from "@/types";
 
 export default function Home() {
+  const { userProvider } = useContext(UserContext);
 
- const { userProvider } = useContext(UserContext);
- 
- 
   const [step, setStep] = useState(0);
-  const [analyzeData, setAnalyzeData] = useState<any>(null);
+  const [analyzeData, setAnalyzeData] = useState<AiAnalysis | null>(null);
+
+  console.log("analyzepage:", analyzeData);
+
   const [diary, setDiary] = useState("");
   const [loading, setLoading] = useState(false);
 
