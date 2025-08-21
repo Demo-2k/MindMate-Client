@@ -1,9 +1,10 @@
-import SignUpUsername from "./components/signUp";
+import { SignUpEmailPassword } from "./components/signUp";
+
 
 export default function SignUpPage() {
   return (
-    <main>
-      <SignUpUsername />
-    </main>
+    <div>
+     <SignUpEmailPassword/>
+    </div>
   );
 }

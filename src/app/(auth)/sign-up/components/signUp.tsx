@@ -3,55 +3,83 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
-// Zod schema
+
 const formSchema = z.object({
-  email: z.string().email({ message: "Зөв email оруулна уу" }),
-  password: z.string().min(6, { message: "Нууц үг дор хаяж 6 тэмдэгттэй байх ёстой" }),
+  username: z.string().min(2, { message: "Username is required" }),
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Please enter a valid email." }),
+  password: z
+    .string()
+    .min(2, { message: "Password must be at least 2 characters." }),
 });
 
-type FormData = z.infer<typeof formSchema>;
-
-export default function SignUpForm() {
+export const SignUpEmailPassword = () => {
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
-    watch,
-    trigger,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({
+  } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    mode: "onChange", // real-time validation
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    mode: "all",
   });
 
-  const emailValue = watch("email");
-  const passwordValue = watch("password");
-
-  useEffect(() => {
-    if (emailValue !== "") trigger("email");
-  }, [emailValue, trigger]);
-
-  useEffect(() => {
-    if (passwordValue !== "") trigger("password");
-  }, [passwordValue, trigger]);
-
-  const onSubmit = async (data: FormData) => {
+ 
+  const handleBudaa = async (username: string, email: string, password: string) => {
     try {
-      // Backend руу signup хүсэлт илгээх
-      await axios.post("/api/signup", data);
+      const response = await axios.post("http://localhost:4001/auth/sign-up", {
+        username, 
+        email,
+        password,
+      });
 
-      // Амжилттай signup бол HomePage руу чиглүүлэх
-      router.push("/"); // HomePage-ийн route
-    } catch (error: any) {
-      console.error(error);
-      alert("Бүртгэл амжилтгүй боллоо");
+      
+      localStorage.setItem("token", response?.data?.accessToken);
+
+      return true;
+    } catch (error) {
+      const axiosError = error as AxiosError;
+
+      if (axiosError.response) {
+        const errorMessage = (axiosError.response.data as { message: string })
+          .message;
+        console.log("error message:", errorMessage);
+
+        if (errorMessage === "User profile already created") {
+          return false;
+        } else {
+          alert(`error: ${errorMessage}`);
+          return false;
+        }
+      }
+      return false;
     }
   };
+
+  // Form submit
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log("Submitted values:", values);
+
+    const isSuccess = await handleBudaa(values.username, values.email, values.password);
+    console.log("isSuccess", isSuccess);
+
+    if (!isSuccess) {
+      alert("User profile already created");
+    } else {
+      router.push("/");
+    }
+  }
 
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-gradient-to-b from-blue-200 to-blue-400">
@@ -87,31 +115,60 @@ export default function SignUpForm() {
 
         {/* Email + Password Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+          {/* Username */}
+          <div className="text-left">
+            <input
+              type="text"
+              placeholder="Username"
+              {...register("username")}
+              className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 ${
+                errors.username
+                  ? "focus:ring-red-400 border-red-500"
+                  : "focus:ring-blue-400"
+              }`}
+            />
+            {errors.username && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.username.message}
+              </p>
+            )}
+          </div>
+
+          {/* Email */}
           <div className="text-left">
             <input
               type="email"
               placeholder="Email"
               {...register("email")}
               className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 ${
-                errors.email ? "focus:ring-red-400 border-red-500" : "focus:ring-blue-400"
+                errors.email
+                  ? "focus:ring-red-400 border-red-500"
+                  : "focus:ring-blue-400"
               }`}
             />
             {errors.email && (
-              <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+              <p className="text-red-500 text-xs mt-1">
+                {errors.email.message}
+              </p>
             )}
           </div>
 
+          {/* Password */}
           <div className="text-left">
             <input
               type="password"
               placeholder="Password"
               {...register("password")}
               className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 ${
-                errors.password ? "focus:ring-red-400 border-red-500" : "focus:ring-blue-400"
+                errors.password
+                  ? "focus:ring-red-400 border-red-500"
+                  : "focus:ring-blue-400"
               }`}
             />
             {errors.password && (
-              <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
+              <p className="text-red-500 text-xs mt-1">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
@@ -126,4 +183,4 @@ export default function SignUpForm() {
       </div>
     </div>
   );
-}
+};
