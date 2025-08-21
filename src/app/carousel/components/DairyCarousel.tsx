@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useContext, useState } from "react";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
-import { DiaryNote } from "@/types/diary";
+
 import CommentModal from "./CommentMotal";
 import CarouselCard from "./CarouselCard";
 
@@ -15,12 +15,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { AllUsersDiaries } from "./selectedDiaries";
+import { DiaryNote } from "@/types";
+
 
 export default function DiaryCarousel() {
   const { diaries } = useContext(userDiaryContext);
   const diary = diaries as DiaryNote[];
 
-  const [selectedComment, setSelectedComment] = useState<DiaryNote | null>(null);
+  const [selectedComment, setSelectedComment] = useState<DiaryNote | null>(
+    null
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCommentClick = (comment: DiaryNote) => {
@@ -61,6 +66,9 @@ export default function DiaryCarousel() {
             onClose={closeModal}
           />
         )}
+        <div className="w-[90%]">
+          <AllUsersDiaries />
+        </div>
       </div>
     </div>
   );

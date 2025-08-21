@@ -5,7 +5,7 @@ export default function Carousel() {
   return (
     <div>
       <DiaryCarousel />
-      <EmotionBubbleChart />
+      {/* <EmotionBubbleChart /> */}
     </div>
   );
 }

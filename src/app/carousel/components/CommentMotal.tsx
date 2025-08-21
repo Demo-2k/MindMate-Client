@@ -1,8 +1,12 @@
 "use client";
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { DiaryNote } from "@/types/diary";
-
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { DiaryNote } from "@/types";
 
 interface Props {
   diary: DiaryNote | null;
@@ -50,21 +54,27 @@ export default function CommentModal({ diary, isOpen, onClose }: Props) {
             {diary.analysis?.summary && (
               <div>
                 <h4 className="font-semibold text-foreground">📝 Summary</h4>
-                <p className="text-sm text-muted-foreground">{diary?.analysis.summary}</p>
+                <p className="text-sm text-muted-foreground">
+                  {diary?.analysis.summary}
+                </p>
               </div>
             )}
 
             {diary.analysis?.message && (
               <div>
                 <h4 className="font-semibold text-foreground">💡 Message</h4>
-                <p className="text-sm text-muted-foreground">{diary.analysis.message}</p>
+                <p className="text-sm text-muted-foreground">
+                  {diary.analysis.message}
+                </p>
               </div>
             )}
 
             {diary.analysis?.horoscope && (
               <div>
                 <h4 className="font-semibold text-foreground">🔮 Horoscope</h4>
-                <p className="text-sm text-muted-foreground">{diary.analysis.horoscope}</p>
+                <p className="text-sm text-muted-foreground">
+                  {diary.analysis.horoscope}
+                </p>
               </div>
             )}
 
@@ -89,10 +99,10 @@ export default function CommentModal({ diary, isOpen, onClose }: Props) {
         {/* Footer actions */}
         <div className="flex items-center gap-6 text-sm text-muted-foreground border-t pt-4 mt-6">
           <button className="flex items-center gap-2 hover:text-accent transition-colors">
-            <span className="text-accent">♥</span> {diary.likes || 0} likes
+            <span className="text-accent">♥</span> {0} likes
           </button>
           <button className="flex items-center gap-2 hover:text-primary transition-colors">
-            💬 {diary.replies || 0} replies
+            💬 {0} replies
           </button>
           <button className="flex items-center gap-2 hover:text-primary transition-colors">
             🔗 Share
