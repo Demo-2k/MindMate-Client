@@ -2,10 +2,11 @@
 
 import { MessageSquareHeart, Settings } from "lucide-react";
 import Link from "next/link";
+import Sitebar from "./sitebar";
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between p-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 z-50">
+    <header className="flex flex-col items-center p-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 ">
      <Link href={"/"}>
       <div className="flex items-center gap-2">
         <MessageSquareHeart className="w-10 h-10 text-pink-500" />
@@ -15,11 +16,6 @@ export default function Header() {
         </div>
       </div>
       </Link>
-
-      
-      <button className="p-10 rounded-full hover:bg-gray-100" >
-        <Settings className="w-10 h-10 color-gray" />
-      </button>
     </header>
   );
 }
