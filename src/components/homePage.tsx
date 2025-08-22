@@ -14,6 +14,7 @@ export const HomePage = ({ HandleDiary, diary, setDiary, loading}: HomePageProps
 
 
   return (
+
    <div>
       <div className="min-h-screen flex flex-col items-center  bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-6 z-0">
         <div className="w-full max-w-md bg-white/60 backdrop-blur-xl rounded-2xl shadow-xl p-6">
@@ -21,6 +22,7 @@ export const HomePage = ({ HandleDiary, diary, setDiary, loading}: HomePageProps
             <span className="w-3 h-3 rounded-full bg-pink-400"></span>
             <h2 className="text-lg font-semibold">How&apos;s your day going?</h2>
           </div>
+
 
           <RichTextEditor
             value={diary}
