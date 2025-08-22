@@ -2,11 +2,16 @@
 
 import { MessageSquareHeart, Settings } from "lucide-react";
 import Link from "next/link";
-import Sitebar from "./sitebar";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+   const pathname = usePathname();
+
+  if (pathname === "/sign-in" || pathname === "/sign-up") {
+    return null;
+  }
   return (
-    <header className="flex flex-col items-center p-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 ">
+    <header className="flex flex-col items-center p-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50  ">
      <Link href={"/"}>
       <div className="flex items-center gap-2">
         <MessageSquareHeart className="w-10 h-10 text-pink-500" />
