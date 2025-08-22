@@ -120,10 +120,9 @@ export default function EmotionBubbleChart() {
   useEffect(() => {
     setEmotionData(mergedData);
   }, []);
-  // setEmotionData(mergedData)
-
 
   const totalFrequency = emotionData.reduce((sum, e) => sum + e.frequency, 0);
+
   const emotionsWithProportions = emotionData.map((e) => ({
     ...e,
     proportion: totalFrequency > 0 ? (e.frequency / totalFrequency) * 100 : 0,

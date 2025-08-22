@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 
 import { EmotionData } from "./EmotionBubbleChart";
+import { useEffect, useState } from "react";
 
 interface MainChartProps {
   emotions: EmotionData[];
@@ -17,6 +18,21 @@ export default function MainChart({
   hoveredEmotion,
   setHoveredEmotion,
 }: MainChartProps) {
+  const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  console.log("dimensions", dimensions);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight * 0.6;
+      setDimensions({ width: w, height: h });
+    };
+
+    handleResize();
+    window.addEventListener("resized", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const getBubblePosition = (
     index: number,
     total: number,
@@ -25,6 +41,7 @@ export default function MainChart({
     radius: number
   ) => {
     const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
+
     return {
       x: centerX + Math.cos(angle) * radius,
       y: centerY + Math.sin(angle) * radius,
@@ -34,7 +51,7 @@ export default function MainChart({
   return (
     <Card className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <CardContent>
-        <div className="relative w-full h-[600px] overflow-hidden rounded-xl bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-800 dark:via-slate-900 dark:to-indigo-900">
+        <div className="relative lg:w-[50%] h-[700px] overflow-hidden rounded-xl bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-800 dark:via-slate-900 dark:to-indigo-900">
           <svg width="100%" height="100%" className="absolute inset-0">
             <defs>
               {emotions.map((e, i) => (
@@ -51,8 +68,28 @@ export default function MainChart({
             </defs>
 
             {emotions.map((e, i) => {
-              const pos = getBubblePosition(i, emotions.length, 400, 300, 180);
-              const baseRadius = Math.max(e.proportion! * 3 + 20, 25);
+              const centerX =
+                dimensions.width < 450
+                  ? dimensions.width / 2.3
+                  : dimensions.width / 4;
+              const centerY =
+                dimensions.width < 450
+                  ? dimensions.height / 2.5
+                  : dimensions.height / 1.5;
+              const circleRadius =
+                dimensions.width < 650
+                  ? Math.min(dimensions.width, dimensions.height) / 4.5
+                  : Math.min(dimensions.width, dimensions.height) / 3;
+              const pos = getBubblePosition(
+                i,
+                emotions.length,
+                centerX,
+                centerY,
+                circleRadius
+              );
+              console.log("e.proportion", e.proportion);
+              const scale = dimensions.width < 640 ? 1.5 : 3;
+              const baseRadius = Math.max(e.proportion! * scale + 20, 25);
               const isSelected = selectedEmotion?.emotion === e.emotion;
               const isHovered = hoveredEmotion === e.emotion;
               const radius = isSelected

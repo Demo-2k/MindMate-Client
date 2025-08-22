@@ -15,7 +15,7 @@ export const HomePage = ({ HandleDiary, diary, setDiary, loading}: HomePageProps
 
   return (
     <div>
-  <div className="min-h-screen flex flex-col items-center  bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-6 z-0">
+  <div className="min-h-screen flex flex-col items-center  p-6 z-0">
       <div className="w-full max-w-md bg-white/60 backdrop-blur-xl rounded-2xl shadow-xl p-6">
         <div className="flex items-center gap-2 mb-4">
           <span className="w-3 h-3 rounded-full bg-pink-400"></span>
