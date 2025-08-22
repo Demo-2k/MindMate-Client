@@ -132,7 +132,7 @@ export const AnalyzePage = ({ data, handleBack }: AnalyzePageProps) => {
   console.log("cardsToShow", cardsToShow);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100  ">
       <div className="max-w-7xl mx-auto pt-8 sm:pt-12 lg:pt-20">
         {/* Back Button */}
         <button

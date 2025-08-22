@@ -224,7 +224,7 @@ export default function FloatMain() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50text-slate-100  relative overflow-hidden ">
-      <header className="flex justify-between items-center p-6 relative z-20">
+      <header className="flex justify-between items-center  relative z-20">
         <div></div>
       </header>
 
@@ -232,7 +232,7 @@ export default function FloatMain() {
 
       <main className="relative z-20">
         <motion.div
-          className="text-center px-4"
+          className="text-center "
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
