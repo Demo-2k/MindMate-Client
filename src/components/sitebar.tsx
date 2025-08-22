@@ -3,6 +3,7 @@
 import { Home, Calendar, BarChart3, Settings, Sun } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -13,11 +14,22 @@ import {
 export default function Sitebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsAuth(!!token);
+  }, [pathname]); 
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
+    setIsAuth(false);
     router.push("/sign-in");
   };
+
+  if (pathname === "/sign-in" || pathname === "/sign-up" || !isAuth) {
+    return null;
+  }
 
   const links = [
     { href: "/", label: "Home", icon: Home },
@@ -27,7 +39,6 @@ export default function Sitebar() {
 
   return (
     <>
-      {/* Desktop Sidebar */}
       <div
         className="hidden md:flex fixed top-0 left-0 h-screen w-16 
                     bg-gradient-to-b from-yellow-50 to-blue-50 
@@ -51,12 +62,9 @@ export default function Sitebar() {
             </Link>
           ))}
 
-          {/* Settings dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button
-                className={`p-2 rounded-xl transition hover:bg-yellow-100 text-gray-600`}
-              >
+              <button className="p-2 rounded-xl transition hover:bg-yellow-100 text-gray-600">
                 <Settings className="h-6 w-6" />
               </button>
             </DropdownMenuTrigger>
@@ -69,7 +77,6 @@ export default function Sitebar() {
         </div>
       </div>
 
-      {/* Mobile Bottom Nav */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t flex justify-around py-2 z-50">
         {links.map(({ href, label, icon: Icon }) => (
           <Link key={href} href={href}>
@@ -84,7 +91,6 @@ export default function Sitebar() {
           </Link>
         ))}
 
-        {/* Mobile Settings dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="flex flex-col items-center text-xs text-gray-600">
