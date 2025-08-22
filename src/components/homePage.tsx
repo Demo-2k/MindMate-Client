@@ -31,7 +31,7 @@ export const HomePage = ({
             value={diary}
             onChange={setDiary}
             placeholder="Spill the tea... what's on your mind today? ☁️"
-            maxLength={500}
+            maxLength={2000}
           />
 
           <div className="flex items-center justify-between mt-3">
