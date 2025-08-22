@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import Link from "next/link";
+import { MessageSquareHeart } from "lucide-react";
 
 
 const formSchema = z.object({
@@ -84,7 +85,18 @@ export const SignUpEmailPassword = () => {
   }
 
   return (
+   <div className="flex flex-col items-center justify-center h-full w-full">
+
+    <header className="w-full bg-gradient-to-b from-blue-200 to-blue-200  p-4 flex items-center gap-3 justify-center">
+    <MessageSquareHeart className="w-8 h-8 text-pink-500" />
+    <div className="flex flex-col leading-tight">
+      <span className="text-4xl font-bold text-black">MindMate</span>
+      <span className="text-lg font-medium text-black">Your daily vibe check ✨</span>
+    </div>
+  </header>
+
     <div className="h-screen w-screen flex items-center justify-center bg-gradient-to-b from-blue-200 to-blue-400">
+      
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-sm text-center">
         {/* Logo */}
         <div className="flex items-center justify-center mb-4">
@@ -194,6 +206,7 @@ export const SignUpEmailPassword = () => {
         </p>
         </form>
       </div>
+    </div>
     </div>
   );
 };
