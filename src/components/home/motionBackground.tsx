@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { HomePage } from "../homePage";
 import { AnalyzePage } from "@/app/(main)/components/analyzePage";
 import axios from "axios";
-import { AiAnalysis } from "@/types";
+import { AiAnalysis, Diary } from "@/types";
 
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/provider/userProvider";
@@ -166,6 +166,10 @@ export default function FloatMain() {
 
   const [step, setStep] = useState(0);
   const [analyzeData, setAnalyzeData] = useState<AiAnalysis | null>(null);
+  const [savedDiary, setSavedDiary] = useState<Diary | null>(null);
+
+  console.log("diary note", savedDiary);
+  
 
   console.log("analyzepage:", analyzeData);
 
@@ -189,9 +193,23 @@ export default function FloatMain() {
       );
       console.log("ress:", response.data);
       setAnalyzeData(response.data);
+      setSavedDiary(response.data);
       handleNext();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const analyzeDiary = async () => {
+    if (!savedDiary) return;
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `http://localhost:4001/diary/${savedDiary.id}/analyze`
+      );
+      setAnalyzeData(response.data);
     } finally {
       setLoading(false);
     }
@@ -232,7 +250,7 @@ export default function FloatMain() {
 
       <main className="relative z-20">
         <motion.div
-          className="text-center "
+          className="text-left "
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}

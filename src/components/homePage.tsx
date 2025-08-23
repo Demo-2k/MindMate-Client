@@ -49,8 +49,7 @@ export const HomePage = ({
           disabled={loading}
           className="mt-6 px-10 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-pink-300 via-pink-200 to-purple-300 shadow-[0_0_25px_rgba(236,72,153,0.3),0_0_40px_rgba(168,85,247,0.3)] hover:opacity-90 transition flex items-center justify-center gap-2"
         >
-          {loading && <Loader2 className="w-5 h-5 animate-spin" />}⚡ Analyze My
-          Vibes ✨
+          {loading && <Loader2 className="w-5 h-5 animate-spin" />}⚡ Save ✨
         </Button>
       </div>
     </div>

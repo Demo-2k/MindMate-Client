@@ -68,3 +68,19 @@ export type Progress = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Diary = {
+  id: number;
+  userId: number;
+  note: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+//  "createDiary": {
+//         "id": 47,
+//         "userId": 1,
+//         "note": "Хажуунаас ямар нэгэн санаа гаргаад алдаа дутагдал засах юу байна сайжруулах юм байна гээд санал хүсэлт хэлэх хүн байхгүй болохоор бүр хийж байгаа юмандаа эргэлзээд бүр нэг л бишээ. Сүүлдээ бүр хэтэрхий их бодоод хаанаас яаж эхэлхээч мэдэхээ байлаа бүр",
+//         "createdAt": "2025-08-22T08:53:05.736Z",
+//         "updatedAt": "2025-08-22T08:53:05.736Z"
+//     }
