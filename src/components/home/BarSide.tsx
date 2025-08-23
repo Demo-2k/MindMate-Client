@@ -1,4 +1,4 @@
-import { ChartNoAxesCombined } from "lucide-react";
+import { ChartNoAxesCombined, ListTodo } from "lucide-react";
 
 import { DialogTheme } from "../theme/theme";
 import { DialogToDo } from "../toDo/toDo";
@@ -7,12 +7,18 @@ import { DialogUser } from "../userPen/user";
 import { Button } from "../ui/button";
 import { useState } from "react";
 
-export const BarSide = ({ setStats, stats }: any) => {
+export const BarSide = ({ setStats, stats, setTodo, todo }: any) => {
   return (
     <div className="flex gap-4">
       <SheetDiary />
 
-      <DialogToDo />
+      <Button
+        onClick={() => setTodo(!todo)}
+        variant="outline"
+        className="hover:scale-119 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
+      >
+        <ListTodo />
+      </Button>
 
       <Button
         onClick={() => setStats(!stats)}
