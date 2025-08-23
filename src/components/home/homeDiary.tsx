@@ -4,15 +4,18 @@ import { useState } from "react";
 import { MusicPlayer } from "../musicplayer/player";
 import { AllStats } from "../stats/allStats";
 import { BarSide } from "./BarSide";
+import { DialogToDo } from "../toDo/toDo";
 
 export default function HomeDiary() {
   const [stats, setStats] = useState(false);
+  const [todo, setTodo] = useState(false);
   return (
     // <div className=" w-fit h-[700px]  ">
     //   <AllStats />
     // </div>
     <div className="w-full h-screen my-bg flex flex-col items-center justify-center ">
       {stats && <AllStats />}
+      {todo && <DialogToDo/>}
 
       <div className="flex  pt-[200px]  justify-center  gap-10">
         <div>
@@ -30,7 +33,8 @@ export default function HomeDiary() {
       </div>
 
       <div className="backdrop-blur-md mt-15 py-3 px-7 border-none rounded-lg">
-        <BarSide setStats={setStats} stats={stats} />
+        <BarSide setStats={setStats} stats={stats} setTodo={setTodo} todo={todo}/>
+        
       </div>
     </div>
   );
