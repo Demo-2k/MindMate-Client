@@ -1,6 +1,6 @@
 "use client";
 
-import Loading from "@/lib/loading";
+import Loading from "@/components/loading";
 import { DiaryNote } from "@/types";
 import axios from "axios";
 import { UserContext } from "@/provider/userProvider";
