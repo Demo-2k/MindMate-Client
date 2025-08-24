@@ -4,7 +4,7 @@ export const DialyChallenge = () => {
       <div className="flex gap-8">
         <div>
           <div className="text-white h-fit w-[350px] border-[#2a2a2a] border rounded-xl pb-[30px] pt-[20px] pl-[20px] bg-[#111111] shadow-md shadow-black/30">
-            <p className="text-sm flex gap-4">
+            <p className="text-[13px] font-semibold text-[#a1a1aa] flex gap-4">
               Your daily challenge <img src="/idea.png" className="w-5 h-5" />
             </p>
             {/* <div className="flex gap-4 items-center"> */}
@@ -18,7 +18,7 @@ export const DialyChallenge = () => {
         </div>
 
         <div className="text-white h-fit w-[260px] border-[#2a2a2a] border rounded-xl pb-[30px] pt-[20px] pl-[20px] bg-[#111111] shadow-md shadow-black/30">
-          <p className="text-sm">Your hightlight:</p>
+          <p className="text-[13px] font-semibold text-[#a1a1aa]">Your hightlight:</p>
           <img src="/CatPlaying.gif" alt="" className="" />
           <p>Залхуутай л өдөр байлаа</p>
           {/* <h1 className="text-lg">3 өдөр дараалж тэмдэглэл бичлээ 🔥</h1> */}
@@ -26,7 +26,7 @@ export const DialyChallenge = () => {
       </div>
 
       <div className="text-white h-fit border-[#2a2a2a] border rounded-xl p-5 bg-[#111111] shadow-md shadow-black/30">
-        <p className="text-sm mb-2">Micro action feedback</p>
+        <p className="text-[13px] font-semibold text-[#a1a1aa] mb-2">Micro action feedback</p>
         <p className="text-sm text-gray-400">
           Өнөөдөр <span className="text-white font-semibold">3</span> жижиг
           зорилгоо биелүүлсэн,
@@ -41,7 +41,7 @@ export const DialyChallenge = () => {
       </div>
 
       <div className="text-white h-fit w-[260px] border-[#2a2a2a] border rounded-xl pb-[30px] pt-[20px] pl-[20px] bg-[#111111] shadow-md shadow-black/30">
-        <p className="text-sm">Your streaks</p>
+        <p className="text-[13px] font-semibold text-[#a1a1aa]">Your streaks</p>
         <h1 className="text-lg">3 өдөр дараалж тэмдэглэл бичлээ 🔥</h1>
       </div>
     </div>
