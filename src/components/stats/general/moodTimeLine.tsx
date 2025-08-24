@@ -11,34 +11,39 @@ import {
 export const MoodTimeLine = ({ weeklyTimeline, data }) => {
   return (
     <div>
-      <h2 className="text-lg font-bold mb-3">📅 7 хоногийн мүүд timeline</h2>
+      <h2 className="text-xl md:text-2xl font-extrabold tracking-tight mb-2">
+        📅 Weekly Mood
+      </h2>
+      <p className="text-xs text-white/60 mb-3">This week at a glance</p>
+
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={weeklyTimeline}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="day" />
           <YAxis />
           <Tooltip
-            content={({ active, payload }) => {
-              if (active && payload && payload.length) {
-                const data = payload[0].payload;
-                return (
-                  <div className="bg-white text-black p-2 rounded shadow">
-                    <p>Өдөр: {data.day}</p>
-                    <p>Score: {data.score}</p>
-                    <p>Emotion: {data.emotion}</p>
-                  </div>
-                );
-              }
+            contentStyle={{
+              borderRadius: 12,
+              padding: 8,
+            }}
+            formatter={(value, _name, props) => [
+              `Score: ${value}`,
+              `Mood ${props.payload.emotion}`,
+            ]}
+          />
+          <Line
+            type="monotone"
+            dataKey="score"
+            stroke="#999"
+            strokeWidth={2}
+            dot={({ cx, cy, value }) => {
+              let color =
+                value >= 70 ? "#22c55e" : value >= 50 ? "#f59e0b" : "#ef4444";
+              return <circle cx={cx} cy={cy} r={6} fill={color} />;
             }}
           />
-          <Line type="monotone" dataKey="score" stroke="#8884d8" />
         </LineChart>
       </ResponsiveContainer>
-      <div className="flex justify-between mt-2">
-        {weeklyTimeline.map((d, i) => (
-          <span key={i}>{d.emotion}</span>
-        ))}
-      </div>
     </div>
   );
 };
