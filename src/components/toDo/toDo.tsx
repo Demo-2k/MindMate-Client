@@ -9,7 +9,7 @@ export function DialogToDo() {
     <div className="bg-black flex flex-col gap-4 p-[30px] border-2 border-[#2a2a2a] rounded-lg absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
       <CoverImage />
       <div className="bg-black text-white grid grid-cols-4 gap-4 ">
-{/* Sidebar */}
+        {/* Sidebar */}
         <div className="col-span-1 flex flex-col gap-4">
           <Card className="bg-neutral-900 text-white p-3">
             <div className="flex gap-5">
@@ -21,12 +21,16 @@ export function DialogToDo() {
                 <div>
                   <h3 className="text-sm text-gray-400">Day started:</h3>
                   <h4 className="text-sm">1:55 PM</h4>
-                </div> 
+                </div>
               </div>
-               <img src="https://media.giphy.com/media/rwiOduiq2oatO/giphy.gif" alt="gif" className="h-23 w-23"/>
+              <img
+                src="https://media.giphy.com/media/rwiOduiq2oatO/giphy.gif"
+                alt="gif"
+                className="h-23 w-23"
+              />
             </div>
           </Card>
-{/* mood cart */}
+          {/* mood cart */}
           <Card className="bg-neutral-900 text-white p-3">
             <div className="flex flex-col ">
               <div className="flex flex-col items-center">
