@@ -39,7 +39,7 @@ export const MoodTimeLine = ({ weeklyTimeline, data }) => {
             dot={({ cx, cy, value }) => {
               let color =
                 value >= 70 ? "#22c55e" : value >= 50 ? "#f59e0b" : "#ef4444";
-              return <circle cx={cx} cy={cy} r={6} fill={color} />;
+              return <circle cx={cx} cy={cy} r={6} fill={color} key={weeklyTimeline.day}/>;
             }}
           />
         </LineChart>
