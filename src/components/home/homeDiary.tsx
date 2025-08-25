@@ -12,6 +12,7 @@ import { userDiaryContext } from "@/provider/userDiaryProvider";
 import { DiaryNote } from "@/types";
 import { number } from "zod";
 import { Button } from "../ui/button";
+import { CoverImage } from "../toDo/coverImage";
 
 export default function HomeDiary() {
   const [stats, setStats] = useState(false);
@@ -99,7 +100,7 @@ export default function HomeDiary() {
     // </div>
     <div className="w-full h-screen my-bg flex flex-col items-center justify-center ">
       {stats && <AllStats />}
-      {todo && <DialogToDo />}
+      {todo && <CoverImage />}
 
       <div className="flex  pt-[200px]  justify-center  gap-10">
         <div>

@@ -1,6 +1,4 @@
 import { BellRing, Goal, House } from "lucide-react";
-import { DialyChallenge } from "./today/chall";
-import { FirstStats } from "./today/firstStats";
 import { useState } from "react";
 import { GeneralStats } from "./general/generalFirst";
 import TodaySection from "./today/todaySection";

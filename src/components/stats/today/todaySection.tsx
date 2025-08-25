@@ -82,7 +82,7 @@ export default function TodaySection({ mood, streak, progress }: TodayProps) {
 
       {/* Action Suggestion */}
       <div className="flex gap-6">
-        <Card className="rounded-2xl shadow-md border-0 bg-black/60 text-white border border-white/50 w-1/2">
+        <Card className="rounded-2xl shadow-md  bg-black/60 text-white border border-white/50 w-1/2">
           <CardContent className="p-6 flex flex-col items-start gap-2">
             <h3 className="text-lg font-semibold flex items-center gap-2">
               <Sparkles size={20} /> Өнөөдрийн жижиг action
@@ -108,7 +108,7 @@ export default function TodaySection({ mood, streak, progress }: TodayProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl shadow-md border-0 bg-black/60 text-white border border-white/50 w-1/2">
+        <Card className="rounded-2xl shadow-md  bg-black/60 text-white border border-white/50 w-1/2">
           <CardContent>
             {/* <div className="text-white h-fit w-[260px] border-[#2a2a2a] border rounded-xl pb-[30px] pt-[20px] pl-[20px] bg-[#111111] shadow-md shadow-black/30"> */}
             <p className="text-[13px] font-semibold text-[#a1a1aa]">
@@ -124,7 +124,7 @@ export default function TodaySection({ mood, streak, progress }: TodayProps) {
 
       {/* Progress + Streak */}
       <div className="grid grid-cols-2 gap-4">
-        <Card className="rounded-2xl shadow-md border-0 bg-black/60 text-white border border-white/50">
+        <Card className="rounded-2xl shadow-md  bg-black/60 text-white border border-white/50">
           <CardContent className="p-6 flex flex-col items-center gap-2">
             <motion.div
               animate={{ scale: [1, 1.1, 1] }}
@@ -138,7 +138,7 @@ export default function TodaySection({ mood, streak, progress }: TodayProps) {
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl shadow-md border-0 bg-black/60 text-white border border-white/50">
+        <Card className="rounded-2xl shadow-md  bg-black/60 text-white border border-white/50">
           <CardContent className="p-6">
             <h3 className="text-lg font-semibold flex items-center gap-2">
               <Activity size={20} /> Өдрийн зорилго
