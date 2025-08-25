@@ -1,20 +1,20 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { StickyNote } from "lucide-react";
 import { SheetDiaryItem } from "./diaryItem";
+import { useContext } from "react";
+import { userDiaryContext } from "@/provider/userDiaryProvider";
 
-export function SheetDiary() {
+export function SheetDiary({ HandleDiaryItemClick, handleNewNote }: any) {
+  const { diaries } = useContext(userDiaryContext);
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -29,16 +29,19 @@ export function SheetDiary() {
         <SheetHeader>
           <SheetTitle className="">Таны өдрийн тэмдэглэлүүд</SheetTitle>
         </SheetHeader>
+
+        <p onClick={() => handleNewNote()} className="text-white">
+          New Note
+        </p>
         <p className="text-white font-bold px-4">Өнөөдөр</p>
-        <div className="grid flex-1 auto-rows-min gap-6 px-4">
-          <SheetDiaryItem />
+
+        <div className="grid flex-1 auto-rows-min gap-6 px-4 overflow-y-scroll">
+          {diaries.map((diary, i) => (
+            <div onClick={() => HandleDiaryItemClick(diary.id, diary.note)} key={i}>
+              <SheetDiaryItem key={diary.id} diary={diary} />
+            </div>
+          ))}
         </div>
-        {/* <SheetFooter>
-          <Button type="submit">Save changes</Button>
-          <SheetClose asChild>
-            <Button variant="outline">Close</Button>
-          </SheetClose>
-        </SheetFooter> */}
       </SheetContent>
     </Sheet>
   );

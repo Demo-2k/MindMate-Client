@@ -7,10 +7,10 @@ import { DialogUser } from "../userPen/user";
 import { Button } from "../ui/button";
 import { useState } from "react";
 
-export const BarSide = ({ setStats, stats, setTodo, todo }: any) => {
+export const BarSide = ({ setStats, stats, setTodo, todo, HandleDiaryItemClick, handleNewNote }: any) => {
   return (
     <div className="flex gap-4">
-      <SheetDiary />
+      <SheetDiary HandleDiaryItemClick={HandleDiaryItemClick} handleNewNote={handleNewNote}/>
 
       <Button
         onClick={() => setTodo(!todo)}
