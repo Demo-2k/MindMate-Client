@@ -13,8 +13,8 @@ export const MostEmotions = ({data, weeklyTimeline}) => {
             .map((mood, index) => (
               <div
                 key={index}
-                className="px-4 py-2 rounded-xl bg-opacity-20"
-                style={{ backgroundColor: mood.color }}
+                className="px-4 py-2 rounded-xl bg-opacity-20 border"
+                style={{ borderColor: mood.color }}
               >
                 🏅 {index + 1}-р байр: {mood.name} ({mood.value})
               </div>
