@@ -97,7 +97,7 @@ export default function HomeDiary() {
     // <div className=" w-fit h-[700px]  ">
     //   <AllStats />
     // </div>
-    <div className="w-full h-screen my-bg flex flex-col items-center justify-center ">
+    <div className="w-full h-screen flex flex-col items-center justify-center ">
       {stats && <AllStats />}
       {todo && <DialogToDo />}
 
