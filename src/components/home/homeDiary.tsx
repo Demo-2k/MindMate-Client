@@ -13,8 +13,12 @@ import { CoverImage } from "../toDo/coverImage";
 import { ButtonHome } from "../verseUi/homeDiaryButton";
 import { DairyText } from "../verseUi/diaryTextArea";
 import Loader from "../loading";
+import { UserContext } from "@/provider/userProvider";
 
 export default function HomeDiary() {
+  const {userProvider} =useContext(UserContext)
+
+
   const [stats, setStats] = useState(false);
   const [todo, setTodo] = useState(false);
   const [text, setText] = useState("");
@@ -46,7 +50,7 @@ export default function HomeDiary() {
     try {
       // Шинэ note үүсгэх
       const response = await axios.post(
-        "http://localhost:4001/ai/postDiary/1",
+        `http://localhost:4001/ai/postDiary/${userProvider.id}`,
         { text: text }
       );
       // setCurrentPostDiary(response.data);
