@@ -16,16 +16,18 @@ import { Palette } from "lucide-react";
 import Image from "next/image";
 
 const themes = [
-  { id: 1, url: "https://sdmntprnortheu.oaiusercontent.com/files/00000000-c2f8-61f4-a614-5f7d11eca93a/raw?se=2025-08-25T09%3A51%3A57Z&sp=r&sv=2024-08-04&sr=b&scid=a4244c9c-4ea7-593a-9f25-cf1ef6b93af2&skoid=03727f49-62d3-42ac-8350-1c0e6559d238&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-08-24T22%3A04%3A49Z&ske=2025-08-25T22%3A04%3A49Z&sks=b&skv=2024-08-04&sig=L1p9ythmasJpPgQ7VeV0UuQBgNyEI18UiVEjfphM%2BxQ%3D" },
-  { id: 2, url: "https://cdn.magicdecor.in/com/2024/07/09150655/Famous-Landmarks-Travel-Theme-Wallpaper-M.jpg" },
-  { id: 3, url: "https://t4.ftcdn.net/jpg/11/33/96/81/360_F_1133968132_sJ9c4UCGnKav7H4Kc842CDCMldNhgbsW.jpg" },
+  { id: 1, url: "https://images.hdqwalls.com/download/beyond-the-rings-cosmic-odyssey-q9-3840x2160.jpg" },
+  { id: 2, url: "https://images.unsplash.com/photo-1753826188215-6076831cab97?q=80&w=3879&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { id: 3, url: "https://images.hdqwalls.com/download/high-angle-view-of-cityscape-against-cloudy-sky-new-york-rq-3840x2160.jpg" },
   { id: 4, url: "https://wallpapercave.com/wp/wp6287510.jpg" },
-  { id: 5, url: "https://motionbgs.com/media/2621/night-study-on-the-balcony.jpg" },
-  { id: 6, url: "https://cdn3.vectorstock.com/i/1000x1000/80/07/love-theme-on-background-vector-35038007.jpg" },
-  { id: 7, url: "https://img.freepik.com/free-vector/dynamic-wallpaper-theme_52683-44743.jpg" },
-  { id: 8, url: "https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-91d8-622f-abfd-57077ef63535/raw?se=2025-08-25T10%3A02%3A44Z&sp=r&sv=2024-08-04&sr=b&scid=62fb508e-982d-56b5-b326-9c1576653e7a&skoid=03727f49-62d3-42ac-8350-1c0e6559d238&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-08-25T01%3A46%3A48Z&ske=2025-08-26T01%3A46%3A48Z&sks=b&skv=2024-08-04&sig=xKUKQJutjrjYmMMfOVsK2grRfyr6Ykxou00qFgEEP4A%3D" },
-  { id: 9, url: "https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-15cc-61f7-8c31-20d52684dd6e/raw?se=2025-08-25T09%3A59%3A37Z&sp=r&sv=2024-08-04&sr=b&scid=f6d81788-ed52-549b-a77e-7f5b42949e6f&skoid=03727f49-62d3-42ac-8350-1c0e6559d238&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-08-25T08%3A58%3A14Z&ske=2025-08-26T08%3A58%3A14Z&sks=b&skv=2024-08-04&sig=r0OAqd72t9IjGt9ewhGi/9aTsyMXUCIFtHY9ygf5WDM%3D" },
-  { id: 10, url: "https://cosmosmagazine.com/wp-content/uploads/2020/02/230318_Astro_Katie_Katie_Mack_01.jpg" },
+  { id: 5, url: "https://images.hdqwalls.com/download/wonder-woman-symbol-of-hope-nm-3840x2160.jpg" },
+  { id: 6, url: "https://images.unsplash.com/photo-1743376272672-c130603a3af2?q=80&w=3929&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { id: 7, url: "https://4kwallpapers.com/images/wallpapers/anime-girl-5120x2880-15604.jpg" },
+  { id: 8, url: "https://images.hdqwalls.com/download/anime-landscape-d5-1920x1080.jpg" },
+  { id: 9, url: "https://images.hdqwalls.com/download/superman-earth-greatest-guardian-52-3840x2160.jpg" },
+  { id: 10, url: "https://cdn.wallpapersafari.com/45/17/fsFvBk.jpg" },
+  { id: 11, url: "https://images.hdqwalls.com/download/soldier-battlefield-6-game-xo-3840x2160.jpg" },
+  { id: 12, url: "https://images.hdqwalls.com/wallpapers/bthumb/final-of-time-synthwave-5k-rx.jpg" },
 ];
 
 export function DialogTheme() {
