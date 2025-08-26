@@ -1,4 +1,4 @@
-import { GeneralStats } from "./generalFirst";
+
 import { Card } from "../ui/card";
 import Calendar from "./calendar";
 import MoodJournal from "./moodJournal";

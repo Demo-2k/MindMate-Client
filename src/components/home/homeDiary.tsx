@@ -53,8 +53,11 @@ export default function HomeDiary() {
         `http://localhost:4001/ai/postDiary/${userProvider.id}`,
         { text: text }
       );
+      console.log("userrrrrrrrr",response.data);
+      
       // setCurrentPostDiary(response.data);
       setCurrentDiaryId(response.data.id);
+      
       // Хуучин note устгах
       if (curenDiary[0]?.id) {
         const res = await axios.delete(

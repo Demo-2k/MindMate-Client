@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import { CoverImage } from "./coverImage";
 import { Activity, Flame, Sparkles } from "lucide-react";
-import { GeneralStats } from "./generalFirst";
 import { DiaryNote } from "@/types";
 
 const data = {
@@ -20,36 +19,46 @@ interface TodayProps {
   progress: number;
 }
 
-const moodText: Record<TodayProps["mood"], { emoji: string; text: string }> = {
-  happy: { emoji: "😊", text: "Өнөөдөр чи их баяртай байна!" },
-  neutral: { emoji: "😐", text: "Өнөөдөр тайван өдөр байна." },
-  sad: { emoji: "😢", text: "Өнөөдөр бага зэрэг гунигтай байна." },
-  stressed: { emoji: "😣", text: "Өнөөдөр бага зэрэг стресстэй байна." },
+interface MoodBarProps {
+  moodsFromBackend: string[]; // жишээ: ['ТАЙВАН','ТАЙВАН']
+}
+
+const moodMap: Record<string, { emoji: string; color: string }> = {
+  БАЯРТАЙ: { emoji: "БАЯРТАЙ", color: "amber-500" },
+  ТАЙВАН: { emoji: "ТАЙВАН", color: "green-500" },
+  УУРТАЙ: { emoji: "УУРТАЙ", color: "red-500" },
+  ГУНИГТАЙ: { emoji: "ГУНИГТАЙ", color: "blue-500" },
+  СТРЕССТЭЙ: { emoji: "СТРЕССТЭЙ", color: "purple-600" },
 };
 
-const moodAction: Record<TodayProps["mood"], string> = {
-  happy: "Найздаа баяртайгаа хуваалцаарай 👯",
-  neutral: "10 минут алхаж тархиа сэргээгээрэй 🚶‍♀️",
-  sad: "Өөртөө дуртай зүйл хийж баярлуул ☕️",
-  stressed: "Амьсгалын дасгал хийгээд завсарлаарай 🌿",
-};
+const allMoods = Object.values(moodMap);
+// console.log("allMood", moodMap[0].color);
 
 export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
   console.log(
     "lastDiary?.aiinsight?.mood_caption",
     lastDiary?.aiInsight?.mood_caption
   );
+  console.log("lastDiary.lastDiary", lastDiary.analysis?.emotions);
 
-  const [actionDone, setActionDone] = useState(false);
-  const [streakCount, setStreakCount] = useState(data.streak);
+  const moodsFromBackend = lastDiary.analysis?.emotions;
+
   const [progressValue, setProgressValue] = useState(data.progress);
+  const [greeting, setGreeting] = useState("");
 
-  const handleActionClick = () => {
-    if (!actionDone) {
-      setActionDone(true);
-      setStreakCount(streakCount + 1);
+  useEffect(() => {
+    const hour = new Date().getHours();
+
+    if (hour >= 5 && hour < 12) {
+      setGreeting("Өглөөний мэнд ☀️,");
+    } else if (hour >= 12 && hour < 17) {
+      setGreeting("Өдрийн мэнд 🌤,");
+    } else if (hour >= 17 && hour < 21) {
+      setGreeting("Оройн мэнд 🌇,");
+    } else {
+      setGreeting("Сайхан амраарай 🌙,");
     }
-  };
+  }, []);
 
   return (
     <div>
@@ -58,16 +67,11 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
         <div className="flex flex-col gap-4">
           <Card className="bg-black text-white p-6 border-white/50">
             <div className="flex justify-between">
-              <div className="flex flex-col gap-2">
-                <div>
-                  <h2 className="text-sm text-gray-400">Өглөөний мэнд ☀️,</h2>
-                  <h1 className="text-md font-bold">Zolomoloko</h1>
-                </div>
-                <div>
-                  <h3 className="text-sm text-gray-400">Day started:</h3>
-                  <h4 className="text-sm">1:55 PM</h4>
-                </div>
+              <div>
+                <h2 className="text-sm text-gray-400">{greeting}</h2>
+                <h1 className="text-md font-bold">Zolomoloko</h1>
               </div>
+
               <img
                 src="https://media.giphy.com/media/rwiOduiq2oatO/giphy.gif"
                 alt="gif"
@@ -76,41 +80,41 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
             </div>
           </Card>
           <Card className="bg-black text-white p-6 border-white/50">
-            <div className="flex flex-col gap-4 ">
-              <div className="flex flex-col items-center">
-                <h1 className="text-md font-extrabold">Өнөөдрийн Mood</h1>
-                <h2 className="text-sm text-gray-400">BAR</h2>
-              </div>
-              <div className="flex justify-between">
-                <div className="flex flex-col gap-1 items-center">
-                  <p className="text-2xl">😊</p>
-                  <p className="border-2 border-amber-500 rounded-4xl w-4"></p>
-                  <p className="text-xs">0%</p>
+            {allMoods.map((mood) => {
+              // moodsFromBackend-д байгаа эсэхийг шалгах
+              const isActive = moodsFromBackend?.includes(mood?.emoji);
+
+              // Tailwind class-уудыг static хадгалах
+              const moodClasses: Record<string, string> = {
+                БАЯРТАЙ: "border-amber-500",
+                ТАЙВАН: "border-green-500",
+                УУРТАЙ: "border-red-500",
+                ГУНИГТАЙ: "border-blue-500",
+                СТРЕССТЭЙ: "border-purple-600",
+              };
+
+              return (
+                <div
+                  key={mood.emoji}
+                  className="flex flex-col gap-1 items-center"
+                >
+                  <p
+                    className={`text-2xl ${
+                      isActive ? "opacity-100" : "opacity-30"
+                    }`}
+                  >
+                    {mood.emoji}
+                  </p>
+                  <div
+                    className={`border-2 rounded-4xl w-4 h-1 ${
+                      isActive ? moodClasses[mood.emoji] : "border-gray-500"
+                    }`}
+                  ></div>
                 </div>
-                <div className="flex flex-col gap-1 items-center">
-                  <p className="text-2xl">😌</p>
-                  <p className="border-2 border-green-500 rounded-4xl w-4"></p>
-                  <p className="text-xs">0%</p>
-                </div>
-                <div className="flex flex-col gap-1 items-center">
-                  <p className="text-2xl">😡</p>
-                  <p className="border-2 border-red-500 rounded-4xl w-4"></p>
-                  <p className="text-xs">0%</p>
-                </div>
-                <div className="flex flex-col gap-1 items-center">
-                  <p className="text-2xl">🥺</p>
-                  <p className="border-2 border-blue-500 rounded-4xl w-4"></p>
-                  <p className="text-xs">0%</p>
-                </div>
-                <div className="flex flex-col gap-1 items-center">
-                  <p className="text-2xl">😨</p>
-                  <p className="border-2 border-purple-600 rounded-4xl w-4"></p>
-                  <p className="text-xs">0%</p>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </Card>
-          <Card className=" bg-black text-white p-3 border-white/50">
+          {/* <Card className=" bg-black text-white p-3 border-white/50">
             <div className="flex gap-3">
               <img
                 src="https://i.pinimg.com/1200x/34/b7/8c/34b78ca9887b259597f1c40f916d6d78.jpg"
@@ -123,7 +127,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
                 түгээгээрэй.
               </p>
             </div>
-          </Card>
+          </Card> */}
         </div>
 
         {/* Journal Section */}
@@ -135,7 +139,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
             <p className="mt-2 text-base">{lastDiary?.aiInsight?.tldr}</p>
           </Card>
 
-          <Card className="bg-[url('https://i.pinimg.com/736x/34/b4/b6/34b4b69d4324d8f221d246fcdd3b0e93.jpg')] text-white border-0 p-6">
+          {/* <Card className="bg-[url('https://i.pinimg.com/736x/34/b4/b6/34b4b69d4324d8f221d246fcdd3b0e93.jpg')] text-white border-0 p-6">
             <CardContent className="flex flex-col items-start gap-2">
               <h3 className="text-lg font-semibold flex items-center gap-2">
                 <Sparkles size={20} /> Өнөөдрийн жижиг action
@@ -169,7 +173,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
                 {streakCount} өдөр дараалж challenge биелүүллээ!
               </p>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
 
         {/* Right Sidebar */}
