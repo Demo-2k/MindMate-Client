@@ -40,7 +40,7 @@ export default function Calendar() {
   };
 
   return (
-    <div className="flex flex-col items-center p-4 bg-black text-white rounded-2xl w-full max-w-3xl">
+    <div className="flex flex-col items-center p-4 bg-black text-white rounded-2xl w-full max-w-3xl gap-5">
       {/* Header */}
       <div className="flex justify-between items-center w-full mb-4">
         <button
@@ -85,8 +85,14 @@ export default function Calendar() {
                     text-xs sm:text-sm md:text-base
                     h-4 sm:h-12 md:h-16 lg:h-20
                     ${isToday ? "border-orange-400" : "border-transparent"}
-                    ${special === "pink" ? "bg-pink-500 shadow-[0_0_10px_#ff00ff]" : ""}
-                    ${special === "blue" ? "bg-blue-600 border-orange-400" : ""}`}
+                    ${
+                      special === "pink"
+                        ? "bg-pink-500 shadow-[0_0_10px_#ff00ff]"
+                        : ""
+                    }
+                    ${
+                      special === "blue" ? "bg-blue-600 border-orange-400" : ""
+                    }`}
                 >
                   {day.date()}
                 </div>
@@ -94,6 +100,33 @@ export default function Calendar() {
             })}
           </div>
         ))}
+      </div>
+      <p>Давамгайлсан сэтгэл хөдлөл</p>
+      <div className="grid  grid-cols-3 gap-4">
+        <div className="flex items-center gap-2">
+          <p className="h-3 w-3 rounded-2xl bg-amber-500 "></p>
+          <p>😊 Баяртай</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <p className="h-3 w-3 rounded-2xl bg-green-500 "></p>
+          <p>😌 Тайван</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <p className="h-3 w-3 rounded-2xl bg-red-500 "></p>
+          <p>😡 Ууртай</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <p className="h-3 w-3 rounded-2xl bg-blue-500 "></p>
+          <p>🥺 Гунигтай</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <p className="h-3 w-3 rounded-2xl bg-purple-600 "></p>
+          <p>😨 Стресстэй</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <p className="h-3 w-3 rounded-2xl bg-black border "></p>
+          <p>mood aahgui</p>
+        </div>
       </div>
     </div>
   );
