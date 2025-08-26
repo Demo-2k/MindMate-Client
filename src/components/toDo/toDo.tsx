@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import { CoverImage } from "./coverImage";
 import { Activity, Flame, Sparkles } from "lucide-react";
-import { GeneralStats } from "../stats/general/generalFirst";
+import { GeneralStats } from "./generalFirst";
 import { DiaryNote } from "@/types";
 
 const data = {
@@ -132,9 +132,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
             <h2 className="text-2xl font-bold flex items-center gap-2 text-white">
               {lastDiary?.aiInsight?.mood_caption}
             </h2>
-            <p className="mt-2 text-base">
-              {lastDiary?.aiInsight?.tldr}
-            </p>
+            <p className="mt-2 text-base">{lastDiary?.aiInsight?.tldr}</p>
           </Card>
 
           <Card className="bg-[url('https://i.pinimg.com/736x/34/b4/b6/34b4b69d4324d8f221d246fcdd3b0e93.jpg')] text-white border-0 p-6">
@@ -143,10 +141,14 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
                 <Sparkles size={20} /> Өнөөдрийн жижиг action
               </h3>
               <div className="bg-gray-800 text-white p-4 rounded-lg shadow-md w-full sm:w-80">
-                <h2 className="text-lg font-bold mb-2">{lastDiary.aiInsight.moodChallenge.title}</h2>
-                <p className="text-sm mb-4">{lastDiary.aiInsight.moodChallenge.shareStyle}</p>
+                <h2 className="text-lg font-bold mb-2">
+                  {lastDiary?.aiInsight?.moodChallenge.title}
+                </h2>
+                <p className="text-sm mb-4">
+                  {lastDiary?.aiInsight?.moodChallenge.shareStyle}
+                </p>
                 <p className="text-yellow-400 font-semibold">
-                  {lastDiary.aiInsight.moodChallenge.description}
+                  {lastDiary?.aiInsight?.moodChallenge.description}
                 </p>
               </div>
               <button

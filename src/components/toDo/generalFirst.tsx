@@ -7,8 +7,8 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import { AiInsight } from "./AiInsight";
-import { MoodTimeLine } from "./moodTimeLine";
+
+
 import { MostEmotions } from "./topEmotions";
 
 const data = [
@@ -34,11 +34,8 @@ export const GeneralStats = () => {
       {/* Top 3 эмоци */}
       <MostEmotions weeklyTimeline={weeklyTimeline} data={data} />
 
-      {/* Weekly Timeline */}
-      <MoodTimeLine weeklyTimeline={weeklyTimeline} data={data} />
 
-      {/* AI Insight */}
-      <AiInsight />
+     
     </div>
   );
 };

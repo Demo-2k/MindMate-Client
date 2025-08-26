@@ -29,14 +29,7 @@ export const BarSide = ({
         <ListTodo />
       </Button>
 
-      <Button
-        onClick={() => setStats(!stats)}
-        variant="outline"
-        className="hover:scale-119 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
-      >
-        <ChartNoAxesCombined />
-      </Button>
-
+     
       <DialogTheme />
 
       <DialogUser />

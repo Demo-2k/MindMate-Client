@@ -25,26 +25,29 @@ export default function UserDiaryProvider({
   const { userProvider } = useContext(UserContext);
 
   const fetchDiary = async () => {
-    if (!userProvider?.id) return; 
+    if (!userProvider?.id) return;
 
     setLoading(true);
     try {
       const response = await axios.get<DiaryNote[]>(
         `http://localhost:4001/ai/getAllDiaryNotes/${userProvider.id}`
       );
-      console.log("res:", response.data);
+      console.log("res:", response);
       setDiaries(response.data);
     } catch (error) {
       toast.error("Error fetching diary notes");
       console.error(error);
     } finally {
-      setLoading(false); // 
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+      //
     }
   };
 
   useEffect(() => {
     fetchDiary();
-  }, [userProvider]); 
+  }, [userProvider]);
 
   if (loading) return <Loading />;
 

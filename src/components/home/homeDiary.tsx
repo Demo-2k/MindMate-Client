@@ -2,7 +2,7 @@
 
 import { useCallback, useContext, useMemo, useState } from "react";
 import { MusicPlayer } from "../musicplayer/player";
-import { AllStats } from "../stats/allStats";
+
 import { BarSide } from "./BarSide";
 
 import axios from "axios";
@@ -11,21 +11,20 @@ import { userDiaryContext } from "@/provider/userDiaryProvider";
 
 import { CoverImage } from "../toDo/coverImage";
 import { ButtonHome } from "../verseUi/homeDiaryButton";
-import DairyText from "../verseUi/diaryTextArea";
+import { DairyText } from "../verseUi/diaryTextArea";
+import Loader from "../loading";
 
 export default function HomeDiary() {
   const [stats, setStats] = useState(false);
   const [todo, setTodo] = useState(false);
   const [text, setText] = useState("");
+
   const [currenDiaryId, setCurrentDiaryId] = useState<number | null>(null);
+  const [laoding, setLoading] = useState(false);
+
+  console.log("diaryyy", text);
 
   const [showdiary, setShowdiary] = useState(false);
-
-  // const [currentPostDiary, setCurrentPostDiary] = useState<DiaryNote | null>(
-  //   null
-  // );
-  console.log("tesxtttt", text);
-  
 
   const { diaries } = useContext(userDiaryContext);
 
@@ -37,42 +36,13 @@ export default function HomeDiary() {
     setCurrentDiaryId(id);
   };
 
-  const handleNewNote = (text:string) => {
+  const handleNewNote = (text: string) => {
     setCurrentDiaryId(null);
     console.log("currentusre", curenDiary);
   };
 
-  // const saveDiary = useMemo(
-  //   () =>
-  //     debounce(async (value: string, oldDiary?: DiaryNote | null) => {
-  //       try {
-  //         // Шинэ note үүсгэх
-  //         const response = await axios.post(
-  //           "http://localhost:4001/ai/postDiary/1",
-  //           { text: value }
-  //         );
-  //         setCurrentPostDiary(response.data);
-  //         setCurrentDiaryId(response.data.id);
-  //         // Хуучин note устгах
-  //         if (curenDiary[0]?.id) {
-  //           const res = await axios.delete(
-  //             `http://localhost:4001/ai/deleteDiary/${curenDiary[0]?.id}`
-  //           );
-  //           console.log("Deleted old diary:", res.data);
-  //         }
-
-  //         // Шинэ note state-д хадгалах
-
-  //         console.log("POST new note:", response.data);
-  //       } catch (error) {
-  //         toast.error("Error saving diary");
-  //         console.error(error);
-  //       }
-  //     }, 9000),
-  //   []
-  // );
-
   const handleClick = async () => {
+    setLoading(true);
     try {
       // Шинэ note үүсгэх
       const response = await axios.post(
@@ -88,29 +58,50 @@ export default function HomeDiary() {
         );
         console.log("Deleted old diary:", res.data);
       }
+      console.log("responssee", response);
+      
+      if (response.status === 200) {
+        toast.success("Амжилттай нэмэгдлээ");
+      }
 
       console.log("POST new note:", response.data);
     } catch (error) {
       toast.error("Error saving diary");
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const handleDiarySave = () => {
+    handleClick();
+    setShowdiary(false);
+  };
+
+  if (laoding) {
+    return <Loader />;
+  }
 
   return (
     // <div className=" w-fit h-[700px]  ">
     //   <AllStats />
     // </div>
     <div className="w-full h-screen flex flex-col items-center justify-center ">
-      {stats && <AllStats />}
+
       {todo && <CoverImage />}
       <div
-        className="h-[90%] flex items-center justify-center "
+        className="h-[80%] flex items-center justify-center "
         onClick={() => setShowdiary(true)}
       >
         {!showdiary && !stats && !todo && <ButtonHome />}{" "}
       </div>
 
-      {showdiary && <DairyText setText={setText} handleClick={handleClick}/>}
+      <DairyText
+        setText={setText}
+        handleDiarySave={handleDiarySave}
+        setIsOpen={setShowdiary}
+        isOpen={showdiary}
+      />
 
       <div className="backdrop-blur-md mt-15 py-3 px-7 border-none rounded-lg ">
         <BarSide

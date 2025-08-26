@@ -1,14 +1,15 @@
-import { GeneralStats } from "../stats/general/generalFirst"
-import { Card } from "../ui/card"
-import Calendar from "./calendar"
+import { GeneralStats } from "./generalFirst";
+import { Card } from "../ui/card";
+import Calendar from "./calendar";
+import MoodJournal from "./moodJournal";
 
-export const Month = () =>{
-    return(
-        <div>
-            <Card className="bg-black text-white p-3 border-white/50">
-            <GeneralStats />
-          </Card>
-          <Calendar/>
-        </div>
-    )
-}
+export const Month = () => {
+  return (
+    <div className="flex gap-10">
+      {/* <div className="absolute inset-0 bg-grid-paper pointer-events-none"></div> */}
+
+      <Calendar />
+      <MoodJournal />
+    </div>
+  );
+};
