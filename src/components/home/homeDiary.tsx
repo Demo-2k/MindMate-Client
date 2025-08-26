@@ -10,14 +10,13 @@ import { toast } from "sonner";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
 
 import { CoverImage } from "../toDo/coverImage";
-import { ButtonHome } from "../verseUi/homeDiaryButton";
+
 import { DairyText } from "../verseUi/diaryTextArea";
 import Loader from "../loading";
 import { UserContext } from "@/provider/userProvider";
 
 export default function HomeDiary() {
-  const {userProvider} =useContext(UserContext)
-
+  const { userProvider } = useContext(UserContext);
 
   const [stats, setStats] = useState(false);
   const [todo, setTodo] = useState(false);
@@ -66,7 +65,7 @@ export default function HomeDiary() {
         console.log("Deleted old diary:", res.data);
       }
       console.log("responssee", response);
-      
+
       if (response.status === 200) {
         toast.success("Амжилттай нэмэгдлээ");
       }
@@ -94,21 +93,16 @@ export default function HomeDiary() {
     //   <AllStats />
     // </div>
     <div className="w-full h-screen flex flex-col items-center justify-center ">
-
       {todo && <CoverImage />}
-      <div
-        className="h-[80%] flex items-center justify-center "
-        onClick={() => setShowdiary(true)}
-      >
-        {!showdiary && !stats && !todo && <ButtonHome />}{" "}
-      </div>
 
-      <DairyText
-        setText={setText}
-        handleDiarySave={handleDiarySave}
-        setIsOpen={setShowdiary}
-        isOpen={showdiary}
-      />
+      <div className="h-[80%]">
+        <DairyText
+          setText={setText}
+          handleDiarySave={handleDiarySave}
+          setIsOpen={setShowdiary}
+          isOpen={showdiary}
+        />
+      </div>
 
       <div className="backdrop-blur-md mt-15 py-3 px-7 border-none rounded-lg ">
         <BarSide
@@ -120,6 +114,7 @@ export default function HomeDiary() {
           todo={todo}
         />
       </div>
+      
     </div>
   );
 }
