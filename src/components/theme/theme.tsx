@@ -17,7 +17,7 @@ import Image from "next/image";
 
 const themes = [
   { id: 1, url: "https://images.hdqwalls.com/download/beyond-the-rings-cosmic-odyssey-q9-3840x2160.jpg" },
-  { id: 2, url: "https://images.unsplash.com/photo-1753826188215-6076831cab97?q=80&w=3879&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { id: 2, url: "https://images.unsplash.com/photo-1754630551378-e1ecffe9da6b?q=80&w=3866&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 3, url: "https://images.hdqwalls.com/download/high-angle-view-of-cityscape-against-cloudy-sky-new-york-rq-3840x2160.jpg" },
   { id: 4, url: "https://wallpapercave.com/wp/wp6287510.jpg" },
   { id: 5, url: "https://images.hdqwalls.com/download/wonder-woman-symbol-of-hope-nm-3840x2160.jpg" },
@@ -28,6 +28,7 @@ const themes = [
   { id: 10, url: "https://cdn.wallpapersafari.com/45/17/fsFvBk.jpg" },
   { id: 11, url: "https://images.hdqwalls.com/download/soldier-battlefield-6-game-xo-3840x2160.jpg" },
   { id: 12, url: "https://images.hdqwalls.com/wallpapers/bthumb/final-of-time-synthwave-5k-rx.jpg" },
+  { id: 13, url: "https://images.unsplash.com/photo-1752430038064-250d400e220f?q=80&w=3962&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
 ];
 
 export function DialogTheme() {
@@ -62,9 +63,9 @@ export function DialogTheme() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px] bg-black">
         <DialogHeader>
-          <DialogTitle>Choose your theme</DialogTitle>
+          <DialogTitle> Дэвсгэр зурагууд</DialogTitle>
           <DialogDescription>
-            Background photos
+            Дэвсгэр зурагууд
           </DialogDescription>
         </DialogHeader>
 
@@ -88,7 +89,7 @@ export function DialogTheme() {
               />
               {selectedTheme === theme.url && (
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-semibold">
-                  Selected
+                  Сонгох уу?
                 </div>
               )}
             </div>
@@ -97,10 +98,10 @@ export function DialogTheme() {
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">Болих</Button>
           </DialogClose>
           <Button onClick={handleSave} disabled={!selectedTheme}>
-            Save Theme
+            Хадгалах
           </Button>
         </DialogFooter>
       </DialogContent>
