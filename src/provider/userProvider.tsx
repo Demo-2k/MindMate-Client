@@ -32,6 +32,8 @@ export default function UserContextProvider({
           },
         }
       );
+      console.log("responsee", response.data);
+      
  
       setUserProvider(response?.data?.user);
     } catch (error) {
