@@ -1,6 +1,7 @@
 "use client";
 
-import { AiAnalysis } from "@/types";
+
+import { AiAnalysis } from "@/types/aiAnalyze";
 import { Heart, MoveLeft, Sparkles, Star, Zap } from "lucide-react";
 import { useState } from "react";
 

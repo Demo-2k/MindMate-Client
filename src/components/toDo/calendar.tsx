@@ -1,11 +1,14 @@
 import { useState } from "react";
 import dayjs from "dayjs";
+import isoWeek from "dayjs/plugin/isoWeek";
+
+dayjs.extend(isoWeek);
 
 export default function Calendar() {
   const [currentMonth, setCurrentMonth] = useState(dayjs());
 
   const daysInMonth = currentMonth.daysInMonth();
-  const startDay = currentMonth.startOf("month").day();
+  const startDay = currentMonth.startOf("month").isoWeekday() - 1;
 
   const today = dayjs();
 
@@ -37,7 +40,7 @@ export default function Calendar() {
   };
 
   return (
-    <div className="flex flex-col items-center p-4 bg-black text-white rounded-2xl w-[400px]">
+    <div className="flex flex-col items-center p-4 bg-black text-white rounded-2xl w-full max-w-3xl">
       {/* Header */}
       <div className="flex justify-between items-center w-full mb-4">
         <button
@@ -58,16 +61,16 @@ export default function Calendar() {
       </div>
 
       {/* Days of week */}
-      <div className="grid grid-cols-7 gap-2 w-full text-center text-gray-400 mb-2">
+      <div className="grid grid-cols-7 gap-1 sm:gap-2 w-full text-center text-gray-400 mb-2 text-xs sm:text-sm md:text-base">
         {"Mon Tue Wed Thu Fri Sat Sun".split(" ").map((d) => (
           <div key={d}>{d}</div>
         ))}
       </div>
 
       {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-2 w-full">
+      <div className="grid grid-cols-7 gap-1 sm:gap-2 w-full">
         {generateCalendar().map((week, i) => (
-          <>
+          <div key={i} className="contents">
             {week.map((day, idx) => {
               if (!day) return <div key={i + "-" + idx}></div>;
 
@@ -78,7 +81,9 @@ export default function Calendar() {
               return (
                 <div
                   key={dateStr}
-                  className={`h-12 flex items-center justify-center rounded-md border 
+                  className={`flex items-center justify-center rounded-md border 
+                    text-xs sm:text-sm md:text-base
+                    h-4 sm:h-12 md:h-16 lg:h-20
                     ${isToday ? "border-orange-400" : "border-transparent"}
                     ${special === "pink" ? "bg-pink-500 shadow-[0_0_10px_#ff00ff]" : ""}
                     ${special === "blue" ? "bg-blue-600 border-orange-400" : ""}`}
@@ -87,7 +92,7 @@ export default function Calendar() {
                 </div>
               );
             })}
-          </>
+          </div>
         ))}
       </div>
     </div>

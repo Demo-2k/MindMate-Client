@@ -2,7 +2,7 @@
 
 import { useCallback, useContext, useMemo, useState } from "react";
 import { MusicPlayer } from "../musicplayer/player";
-import { AllStats } from "../stats/allStats";
+
 import { BarSide } from "./BarSide";
 
 import axios from "axios";
@@ -87,7 +87,7 @@ export default function HomeDiary() {
     //   <AllStats />
     // </div>
     <div className="w-full h-screen flex flex-col items-center justify-center ">
-      {stats && <AllStats />}
+
       {todo && <CoverImage />}
       <div
         className="h-[80%] flex items-center justify-center "

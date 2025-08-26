@@ -39,7 +39,7 @@ export type DiaryNote = {
   user: User;
   note: string;
   analysis?: AiAnalysis;
-  aiInsight:AiInsight;
+  aiInsight?:AiInsight;
   createdAt: Date;
   updatedAt: Date;
 };
