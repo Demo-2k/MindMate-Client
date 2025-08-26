@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CoverImage } from "./coverImage";
 import { Activity, Flame, Sparkles } from "lucide-react";
 import { GeneralStats } from "../stats/general/generalFirst";
+import { DiaryNote } from "@/types";
 
 const data = {
   mood: "happy",
@@ -33,7 +34,12 @@ const moodAction: Record<TodayProps["mood"], string> = {
   stressed: "Амьсгалын дасгал хийгээд завсарлаарай 🌿",
 };
 
-export function DialogToDo() {
+export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
+  console.log(
+    "lastDiary?.aiinsight?.mood_caption",
+    lastDiary?.aiInsight?.mood_caption
+  );
+
   const [actionDone, setActionDone] = useState(false);
   const [streakCount, setStreakCount] = useState(data.streak);
   const [progressValue, setProgressValue] = useState(data.progress);
@@ -76,7 +82,6 @@ export function DialogToDo() {
                 <h2 className="text-sm text-gray-400">BAR</h2>
               </div>
               <div className="flex justify-between">
-                
                 <div className="flex flex-col gap-1 items-center">
                   <p className="text-2xl">😊</p>
                   <p className="border-2 border-amber-500 rounded-4xl w-4"></p>
@@ -107,8 +112,16 @@ export function DialogToDo() {
           </Card>
           <Card className=" bg-black text-white p-3 border-white/50">
             <div className="flex gap-3">
-              <img src="https://i.pinimg.com/1200x/34/b7/8c/34b78ca9887b259597f1c40f916d6d78.jpg" alt="tarot"className="w-25 h-35"/>
-            <p>Чиний өмнө гэрэлтэй зам байна, итгэлтэйгээр урагшил. Өөрийгөө илэрхийл, аз жаргалаа бусадтай хуваалц. Нар шиг гэгээ түгээгээрэй.</p>
+              <img
+                src="https://i.pinimg.com/1200x/34/b7/8c/34b78ca9887b259597f1c40f916d6d78.jpg"
+                alt="tarot"
+                className="w-25 h-35"
+              />
+              <p>
+                Чиний өмнө гэрэлтэй зам байна, итгэлтэйгээр урагшил. Өөрийгөө
+                илэрхийл, аз жаргалаа бусадтай хуваалц. Нар шиг гэгээ
+                түгээгээрэй.
+              </p>
             </div>
           </Card>
         </div>
@@ -116,28 +129,26 @@ export function DialogToDo() {
         {/* Journal Section */}
         <div className="flex flex-col gap-4 lg:col-span-2">
           <Card className="bg-black text-white border-white/50 p-6">
-            <h2 className="text-2xl font-bold flex items-center gap-2">
-              {moodText[data.mood].emoji} {moodText[data.mood].text}
+            <h2 className="text-2xl font-bold flex items-center gap-2 text-white">
+              {lastDiary?.aiInsight?.mood_caption}
             </h2>
             <p className="mt-2 text-base">
-              {data.mood === "happy"
-                ? "Good vibes ✨"
-                : "Бүх зүйл зүгээр болно 💪"}
+              {lastDiary?.aiInsight?.tldr}
             </p>
           </Card>
 
           <Card className="bg-[url('https://i.pinimg.com/736x/34/b4/b6/34b4b69d4324d8f221d246fcdd3b0e93.jpg')] text-white border-0 p-6">
-          <CardContent className="flex flex-col items-start gap-2">
+            <CardContent className="flex flex-col items-start gap-2">
               <h3 className="text-lg font-semibold flex items-center gap-2">
                 <Sparkles size={20} /> Өнөөдрийн жижиг action
               </h3>
-              <p
-                className={`text-base ${
-                  actionDone ? "line-through opacity-50" : ""
-                }`}
-              >
-                {moodAction[data.mood]}
-              </p>
+              <div className="bg-gray-800 text-white p-4 rounded-lg shadow-md w-full sm:w-80">
+                <h2 className="text-lg font-bold mb-2">{lastDiary.aiInsight.moodChallenge.title}</h2>
+                <p className="text-sm mb-4">{lastDiary.aiInsight.moodChallenge.shareStyle}</p>
+                <p className="text-yellow-400 font-semibold">
+                  {lastDiary.aiInsight.moodChallenge.description}
+                </p>
+              </div>
               <button
                 onClick={handleActionClick}
                 className={`mt-2 px-4 py-2 rounded-lg font-semibold transition ${

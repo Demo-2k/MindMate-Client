@@ -1,16 +1,25 @@
 import { ChartNoAxesCombined, ListTodo } from "lucide-react";
 
 import { DialogTheme } from "../theme/theme";
-import { DialogToDo } from "../toDo/toDo";
+
 import { SheetDiary } from "./sheetDiary/sheetLeftDiaries";
 import { DialogUser } from "../userPen/user";
 import { Button } from "../ui/button";
-import { useState } from "react";
 
-export const BarSide = ({ setStats, stats, setTodo, todo, HandleDiaryItemClick, handleNewNote }: any) => {
+export const BarSide = ({
+  setStats,
+  stats,
+  setTodo,
+  todo,
+  HandleDiaryItemClick,
+  handleNewNote,
+}: any) => {
   return (
     <div className="flex gap-4">
-      <SheetDiary HandleDiaryItemClick={HandleDiaryItemClick} handleNewNote={handleNewNote}/>
+      <SheetDiary
+        HandleDiaryItemClick={HandleDiaryItemClick}
+        handleNewNote={handleNewNote}
+      />
 
       <Button
         onClick={() => setTodo(!todo)}
