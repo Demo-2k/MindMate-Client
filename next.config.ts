@@ -5,15 +5,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "sdmntprnortheu.oaiusercontent.com",
+        hostname: "cdn.wallpapersafari.com",
       },
       {
         protocol: "https",
-        hostname: "cdn.magicdecor.in",
-      },
-      {
-        protocol: "https",
-        hostname: "t4.ftcdn.net",
+        hostname: "images3.alphacoders.com",
       },
       {
         protocol: "https",
@@ -21,27 +17,19 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "motionbgs.com"
+        hostname: "images.hdqwalls.com"
       },
       {
         protocol: "https",
-        hostname: "cdn3.vectorstock.com"
-      },
-      {
-        protocol: "https",
-        hostname: "img.freepik.com"
+        hostname: "4kwallpapers.com"
       },
        {
         protocol: "https",
-        hostname: "sdmntprnorthcentralus.oaiusercontent.com"
+        hostname: "images.hdqwalls.com"
       },
        {
         protocol: "https",
-        hostname: "sdmntprsouthcentralus.oaiusercontent.com"
-      },
-       {
-        protocol: "https",
-        hostname: "cosmosmagazine.com"
+        hostname: "images.unsplash.com"
       },
     ],
   },
