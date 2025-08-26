@@ -28,7 +28,7 @@ const lastDiary = diaries[0];
   };
 
   return (
-    <div className="bg-black flex flex-col gap-4 px-100 py-40 border-2 border-[#2a2a2a] rounded-lg absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full min-h-screen overflow-auto">
+    <div className="bg-black flex flex-col gap-4 px-60 py-40 border-2 border-[#2a2a2a] rounded-lg absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full min-h-screen overflow-auto">
       <div
         className="relative w-full mx-auto h-40 pt-18 rounded-xl overflow-hidden shadow-lg"
         style={{
