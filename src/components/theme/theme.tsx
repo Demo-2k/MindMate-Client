@@ -52,7 +52,7 @@ export function DialogTheme() {
   };
 
   return (
-    <Dialog>
+   <Dialog>
       <DialogTrigger asChild>
         <Button
           variant="outline"
@@ -61,32 +61,32 @@ export function DialogTheme() {
           <Palette />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] bg-black">
+
+      <DialogContent className="w-full h-screen sm:h-auto sm:max-w-[600px] bg-black p-4 overflow-auto">
         <DialogHeader>
-          <DialogTitle> Дэвсгэр зурагууд</DialogTitle>
-          <DialogDescription>
-            Дэвсгэр зурагууд
-          </DialogDescription>
+          <DialogTitle>Дэвсгэр зурагууд</DialogTitle>
+          <DialogDescription>Сонгох дэвсгэр зурагууд</DialogDescription>
         </DialogHeader>
 
-        <div className="grid grid-cols-3 gap-2 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mt-4">
           {themes.map((theme) => (
             <div
               key={theme.id}
               className={`relative cursor-pointer rounded-xl overflow-hidden border-4 transition ${
-                selectedTheme === theme.url
-                  ? "border-blue-500"
-                  : "border-transparent"
+                selectedTheme === theme.url ? "border-blue-500" : "border-transparent"
               }`}
               onClick={() => setSelectedTheme(theme.url)}
             >
-              <Image
-                src={theme.url}
-                alt={`Theme ${theme.id}`}
-                width={250}
-                height={150}
-                className="object-cover w-full h-32"
-              />
+              <div className="relative w-full h-[40vh] sm:h-40">
+                <Image
+                  src={theme.url}
+                  alt={`Theme ${theme.id}`}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+
               {selectedTheme === theme.url && (
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-semibold">
                   Сонгох уу?
@@ -96,13 +96,13 @@ export function DialogTheme() {
           ))}
         </div>
 
-        <DialogFooter>
+        <DialogFooter className="mt-4 sticky bottom-0 bg-black/80 flex justify-end gap-2">
           <DialogClose asChild>
-            <Button variant="outline">Болих</Button>
+          <Button variant="outline">Гарах</Button>
           </DialogClose>
           <Button onClick={handleSave} disabled={!selectedTheme}>
             Хадгалах
-          </Button>
+          </Button> 
         </DialogFooter>
       </DialogContent>
     </Dialog>
