@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Sun } from "lucide-react";
 import { Button } from "../ui/button";
 import { DialogToDo } from "./toDo";
 import { Month } from "./month";
+import { userDiaryContext } from "@/provider/userDiaryProvider";
 
 export function CoverImage() {
+const {diaries} = useContext(userDiaryContext);
+console.log("direeeee", diaries[0]);
+const lastDiary = diaries[0];
+
+
   const [view, setView] = useState<"day" | "month">("day");
 
   const today = new Date();
@@ -70,7 +76,7 @@ export function CoverImage() {
       </div>
 
       {/* 👇 энд зөв шалгалт */}
-      {view === "day" && <DialogToDo />}
+      {view === "day" && <DialogToDo lastDiary={lastDiary}/>}
       {view === "month" && <Month />}
     </div>
   );

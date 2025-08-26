@@ -1,5 +1,9 @@
 // src/types/index.ts
 
+import { JsonWebKeyInput } from "node:crypto";
+import { number } from "zod";
+import { AiAnalysis, AiInsight } from "./aiAnalyze";
+
 export type EmotionCategory =
   | "БАЯРТАЙ"
   | "ГУНИГТАЙ"
@@ -11,8 +15,7 @@ export type EmotionCategory =
   | "УУРТАЙ"
   | "ГАНЦААРДСАН"
   | "ЭНЕРГИ_ДҮҮРЭН"
-  | "СОНИРХОЛГҮЙ"
-  | "ИЧСЭН";
+  | "СОНИРХОЛГҮЙ";
 
 export type CalendarType = "DONE" | "GOAL" | "REMINDER";
 
@@ -36,25 +39,7 @@ export type DiaryNote = {
   user: User;
   note: string;
   analysis?: AiAnalysis;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-export type AiAnalysis = {
-  id: number;
-  diaryNoteId: number;
-  diaryNote: DiaryNote;
-
-  summary: string;
-  emotions: EmotionCategory[];
-  horoscope: string;
-  message: string;
-
-  calendarTasks: string[];
-  calendarHighlight: string;
-  calendarDate: Date;
-  calendarType: CalendarType;
-
+  aiInsight:AiInsight;
   createdAt: Date;
   updatedAt: Date;
 };

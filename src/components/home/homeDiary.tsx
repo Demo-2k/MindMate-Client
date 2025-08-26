@@ -4,26 +4,28 @@ import { useCallback, useContext, useMemo, useState } from "react";
 import { MusicPlayer } from "../musicplayer/player";
 import { AllStats } from "../stats/allStats";
 import { BarSide } from "./BarSide";
-import { DialogToDo } from "../toDo/toDo";
-import { debounce, values } from "lodash";
+
 import axios from "axios";
 import { toast } from "sonner";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
-import { DiaryNote } from "@/types";
-import { number } from "zod";
-import { Button } from "../ui/button";
+
 import { CoverImage } from "../toDo/coverImage";
+import { ButtonHome } from "../verseUi/homeDiaryButton";
+import DairyText from "../verseUi/diaryTextArea";
 
 export default function HomeDiary() {
   const [stats, setStats] = useState(false);
   const [todo, setTodo] = useState(false);
   const [text, setText] = useState("");
   const [currenDiaryId, setCurrentDiaryId] = useState<number | null>(null);
-  const [theme, setTheme] = useState();
-  const [profile, setProfile] = useState()
+
+  const [showdiary, setShowdiary] = useState(false);
+
   // const [currentPostDiary, setCurrentPostDiary] = useState<DiaryNote | null>(
   //   null
   // );
+  console.log("tesxtttt", text);
+  
 
   const { diaries } = useContext(userDiaryContext);
 
@@ -35,7 +37,7 @@ export default function HomeDiary() {
     setCurrentDiaryId(id);
   };
 
-  const handleNewNote = () => {
+  const handleNewNote = (text:string) => {
     setCurrentDiaryId(null);
     console.log("currentusre", curenDiary);
   };
@@ -101,29 +103,16 @@ export default function HomeDiary() {
     <div className="w-full h-screen flex flex-col items-center justify-center ">
       {stats && <AllStats />}
       {todo && <CoverImage />}
-
-      <div className="flex  pt-[200px]  justify-center  gap-10">
-        <div>
-          {" "}
-          <MusicPlayer />
-        </div>
-
-        <div>
-          <textarea
-            placeholder="Өдрийн тэмдэглэлээ бичээрэй..."
-            className="w-[800px] px-4 py-3 text-2xl rounded-2xl bg-transparent border-1  text-white shadow-lg outline-none  "
-            rows={15}
-            value={text}
-            onChange={(e) => {
-              setText(e.target.value);
-              // saveDiary(e.target.value, currentPostDiary);
-            }}
-          />
-        </div>
+      <div
+        className="h-[90%] flex items-center justify-center "
+        onClick={() => setShowdiary(true)}
+      >
+        {!showdiary && !stats && !todo && <ButtonHome />}{" "}
       </div>
-      <Button onClick={handleClick}>Save</Button>
 
-      <div className="backdrop-blur-md mt-15 py-3 px-7 border-none rounded-lg">
+      {showdiary && <DairyText setText={setText} handleClick={handleClick}/>}
+
+      <div className="backdrop-blur-md mt-15 py-3 px-7 border-none rounded-lg ">
         <BarSide
           HandleDiaryItemClick={HandleDiaryItemClick}
           handleNewNote={handleNewNote}
