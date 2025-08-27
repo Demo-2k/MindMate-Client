@@ -14,6 +14,8 @@ import { CoverImage } from "../toDo/coverImage";
 import { DairyText } from "../verseUi/diaryTextArea";
 import Loader from "../loading";
 import { UserContext } from "@/provider/userProvider";
+import Calendar from "../calendar/calendar";
+import { Month } from "../calendar/month";
 
 export default function HomeDiary() {
   const { userProvider } = useContext(UserContext);
@@ -52,7 +54,7 @@ export default function HomeDiary() {
         `http://localhost:4001/ai/postDiary/${userProvider.id}`,
         { text: text }
       );
-      console.log("userrrrrrrrr",response.data);
+     
       
       // setCurrentPostDiary(response.data);
       setCurrentDiaryId(response.data.id);
@@ -94,6 +96,7 @@ export default function HomeDiary() {
     // </div>
     <div className="w-full h-screen flex flex-col items-center justify-center ">
       {todo && <CoverImage />}
+      {stats && <Month/>}
 
       <div className="h-[80%]">
         <DairyText
@@ -108,8 +111,8 @@ export default function HomeDiary() {
         <BarSide
           HandleDiaryItemClick={HandleDiaryItemClick}
           handleNewNote={handleNewNote}
-          setStats={setStats}
-          stats={stats}
+          setCalendar={setStats}
+          calendar={stats}
           setTodo={setTodo}
           todo={todo}
         />

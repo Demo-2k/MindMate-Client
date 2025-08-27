@@ -1,4 +1,4 @@
-import { ChartNoAxesCombined, ListTodo } from "lucide-react";
+import { Calendar, ChartNoAxesCombined, ListTodo } from "lucide-react";
 
 import { DialogTheme } from "../theme/theme";
 
@@ -7,8 +7,8 @@ import { DialogUser } from "../userPen/user";
 import { Button } from "../ui/button";
 
 export const BarSide = ({
-  setStats,
-  stats,
+  setCalendar,
+  calendar,
   setTodo,
   todo,
   HandleDiaryItemClick,
@@ -28,8 +28,14 @@ export const BarSide = ({
       >
         <ListTodo />
       </Button>
+      <Button
+        onClick={() => setCalendar(!calendar)}
+        variant="outline"
+        className="hover:scale-119 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
+      >
+        <Calendar />
+      </Button>
 
-     
       <DialogTheme />
 
       <DialogUser />
