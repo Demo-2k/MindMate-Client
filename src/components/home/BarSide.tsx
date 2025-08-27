@@ -2,43 +2,26 @@ import { Calendar, ChartNoAxesCombined, ListTodo } from "lucide-react";
 
 import { DialogTheme } from "../theme/theme";
 
-import { SheetDiary } from "./sheetDiary/sheetLeftDiaries";
 import { DialogUser } from "../userPen/user";
 import { Button } from "../ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@radix-ui/react-tooltip";
+import { Month } from "../calendar/month";
+import { CoverImage } from "../toDo/coverImage";
 
-export const BarSide = ({
-  setCalendar,
-  calendar,
-  setTodo,
-  todo,
-  HandleDiaryItemClick,
-  handleNewNote,
-}: any) => {
+export const BarSide = ({ setCalendar, calendar, setTodo, todo }: any) => {
   return (
-    <div className="flex gap-4">
-      <SheetDiary
-        HandleDiaryItemClick={HandleDiaryItemClick}
-        handleNewNote={handleNewNote}
-      />
-
-      <Button
-        onClick={() => setTodo(!todo)}
-        variant="outline"
-        className="hover:scale-119 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
-      >
-        <ListTodo />
-      </Button>
-      <Button
-        onClick={() => setCalendar(!calendar)}
-        variant="outline"
-        className="hover:scale-119 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
-      >
-        <Calendar />
-      </Button>
-
-      <DialogTheme />
-
-      <DialogUser />
-    </div>
+    <TooltipProvider>
+      <div className="flex gap-4">
+        <CoverImage/>
+        <Month/>
+        <DialogTheme />
+        <DialogUser />
+      </div>
+    </TooltipProvider>
   );
 };

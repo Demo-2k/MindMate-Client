@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
-import { Sun } from "lucide-react";
+import { ListTodo, Sun, TextSelect } from "lucide-react";
 import { Button } from "../ui/button";
 import { DialogToDo } from "./toDo";
 import { Month } from "../calendar/month";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 
 const emojis = ["✨", "🌸", "🍀", "🫧", "🧸"];
 
@@ -44,33 +46,59 @@ export function CoverImage() {
   const weekday = weekdaysMn[today.getDay()];
 
   const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-black flex flex-col gap-4 px-10 py-10 border-2 border-[#2a2a2a] rounded-lg absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2  overflow-auto">
-      <div
-        className="relative w-full mx-auto h-40 pt-18 rounded-xl overflow-hidden shadow-lg"
-        style={{
-          backgroundImage: "url('/cover.jpg')",
-          backgroundSize: "cover",
-        }}
-      >
-        <div className="bg-black/50 w-full h-full absolute inset-0"></div>
+    <div>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            className="hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
+            onClick={() => setOpen(true)}
+          >
+            <TextSelect />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent side="bottom">
+          <p>анализ</p>
+        </TooltipContent>
+      </Tooltip>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="!max-w-7xl w-full h-[80vh] bg-black overflow-auto">
+          <DialogTitle></DialogTitle>
+          <div className="bg-black flex flex-col gap-4 border-[#2a2a2a] rounded-lg w-full h-full ">
+            <div
+              className=" w-full mx-auto h-50  rounded-xl overflow-hidden shadow-lg"
+              style={{
+                backgroundImage:
+                  "url('https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ankzeDZlNGRtNjU2ZnAzOGs1eWVwaHVkbTJxanZwd21zeXkwYmVvNSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/ckr4W2ppxPBeIF8dx4/giphy.gif')",
+                backgroundRepeat: "repeat",
+              }}
+            >
+             
 
-        <div className="relative p-4 flex items-center justify-between text-white">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-3 text-3xl">{randomEmoji}</div>
-            <div>
-              <div className="text-3xl font-bold flex items-baseline gap-2">
-                {day} <span className="text-base font-normal">{weekday}</span>
-              </div>
-              <div className="text-sm">
-                {currentMonth} {year}
+              <div className=" p-4 pt-30 flex items-center justify-between text-white">
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 text-3xl">
+                    {randomEmoji}
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold flex items-baseline gap-2">
+                      {day}{" "}
+                      <span className="text-base font-normal">{weekday}</span>
+                    </div>
+                    <div className="text-sm">
+                      {currentMonth} {year}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            <DialogToDo lastDiary={lastDiary} />
           </div>
-        </div>
-      </div>
-      <DialogToDo lastDiary={lastDiary} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -54,11 +54,10 @@ export default function HomeDiary() {
         `http://localhost:4001/ai/postDiary/${userProvider.id}`,
         { text: text }
       );
-     
-      
+
       // setCurrentPostDiary(response.data);
       setCurrentDiaryId(response.data.id);
-      
+
       // Хуучин note устгах
       if (curenDiary[0]?.id) {
         const res = await axios.delete(
@@ -96,7 +95,7 @@ export default function HomeDiary() {
     // </div>
     <div className="w-full h-screen flex flex-col items-center justify-center ">
       {todo && <CoverImage />}
-      {stats && <Month/>}
+      {stats && <Month />}
 
       <div className="h-[80%]">
         <DairyText
@@ -106,6 +105,18 @@ export default function HomeDiary() {
           isOpen={showdiary}
         />
       </div>
+
+      <iframe
+        data-testid="embed-iframe"
+        style={{ borderRadius: "12px" }}
+        src="https://open.spotify.com/embed/playlist/1buR1viIOgrYIWWX4j14gL?utm_source=generator&theme=0"
+        width="400px"
+        height="652px"
+        frameBorder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        allowFullScreen
+        loading="lazy"
+      />
 
       <div className="backdrop-blur-md mt-15 py-3 px-7 border-none rounded-lg ">
         <BarSide
@@ -117,7 +128,6 @@ export default function HomeDiary() {
           todo={todo}
         />
       </div>
-      
     </div>
   );
 }
