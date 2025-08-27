@@ -13,11 +13,7 @@ const data = {
   progress: 60,
 };
 
-interface TodayProps {
-  mood: "happy" | "neutral" | "sad" | "stressed";
-  streak: number;
-  progress: number;
-}
+
 
 interface MoodBarProps {
   moodsFromBackend: string[]; // жишээ: ['ТАЙВАН','ТАЙВАН']
@@ -39,9 +35,9 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
     "lastDiary?.aiinsight?.mood_caption",
     lastDiary?.aiInsight?.mood_caption
   );
-  console.log("lastDiary.lastDiary", lastDiary.analysis?.emotions);
 
-  const moodsFromBackend = lastDiary.analysis?.emotions;
+
+  const moodsFromBackend = lastDiary?.analysis?.emotions;
 
   const [progressValue, setProgressValue] = useState(data.progress);
   const [greeting, setGreeting] = useState("");
@@ -114,20 +110,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
               );
             })}
           </Card>
-          {/* <Card className=" bg-black text-white p-3 border-white/50">
-            <div className="flex gap-3">
-              <img
-                src="https://i.pinimg.com/1200x/34/b7/8c/34b78ca9887b259597f1c40f916d6d78.jpg"
-                alt="tarot"
-                className="w-25 h-35"
-              />
-              <p>
-                Чиний өмнө гэрэлтэй зам байна, итгэлтэйгээр урагшил. Өөрийгөө
-                илэрхийл, аз жаргалаа бусадтай хуваалц. Нар шиг гэгээ
-                түгээгээрэй.
-              </p>
-            </div>
-          </Card> */}
+       
         </div>
 
         {/* Journal Section */}
@@ -139,41 +122,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
             <p className="mt-2 text-base">{lastDiary?.aiInsight?.tldr}</p>
           </Card>
 
-          {/* <Card className="bg-[url('https://i.pinimg.com/736x/34/b4/b6/34b4b69d4324d8f221d246fcdd3b0e93.jpg')] text-white border-0 p-6">
-            <CardContent className="flex flex-col items-start gap-2">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Sparkles size={20} /> Өнөөдрийн жижиг action
-              </h3>
-              <div className="bg-gray-800 text-white p-4 rounded-lg shadow-md w-full sm:w-80">
-                <h2 className="text-lg font-bold mb-2">
-                  {lastDiary?.aiInsight?.moodChallenge.title}
-                </h2>
-                <p className="text-sm mb-4">
-                  {lastDiary?.aiInsight?.moodChallenge.shareStyle}
-                </p>
-                <p className="text-yellow-400 font-semibold">
-                  {lastDiary?.aiInsight?.moodChallenge.description}
-                </p>
-              </div>
-              <button
-                onClick={handleActionClick}
-                className={`mt-2 px-4 py-2 rounded-lg font-semibold transition ${
-                  actionDone
-                    ? "bg-green-500 cursor-default"
-                    : "bg-orange-400 hover:bg-orange-500"
-                }`}
-                disabled={actionDone}
-              >
-                {actionDone ? "Амжилттай ✔" : "Би хийлээ!"}
-              </button>
-            </CardContent>
-            <CardContent className="flex flex-col items-center gap-2">
-              <Flame size={28} className="text-orange-400" />
-              <p className="text-lg font-bold">
-                {streakCount} өдөр дараалж challenge биелүүллээ!
-              </p>
-            </CardContent>
-          </Card> */}
+      
         </div>
 
         {/* Right Sidebar */}

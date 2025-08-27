@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
+import { userDiaryContext } from "@/provider/userDiaryProvider";
 
 dayjs.extend(isoWeek);
+interface CalendarProps {
+  selectedDate: string | null;
+  onSelectDate: (date: string) => void;
+}
 
-export default function Calendar() {
+export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) {
+
   const [currentMonth, setCurrentMonth] = useState(dayjs());
+
+ 
 
   const daysInMonth = currentMonth.daysInMonth();
   const startDay = currentMonth.startOf("month").isoWeekday() - 1;
@@ -81,18 +89,24 @@ export default function Calendar() {
               return (
                 <div
                   key={dateStr}
+                  onClick={() => onSelectDate(dateStr)}
                   className={`flex items-center justify-center rounded-md border 
                     text-xs sm:text-sm md:text-base
-                    h-4 sm:h-12 md:h-16 lg:h-20
+                    h-4 sm:h-12 md:h-16 lg:h-20 cursor-pointer transition-all duration-200
                     ${isToday ? "border-orange-400" : "border-transparent"}
                     ${
                       special === "pink"
                         ? "bg-pink-500 shadow-[0_0_10px_#ff00ff]"
                         : ""
                     }
+                    ${special === "blue" ? "bg-blue-600 border-orange-400" : ""}
                     ${
-                      special === "blue" ? "bg-blue-600 border-orange-400" : ""
-                    }`}
+                      selectedDate === dateStr
+                        ? "border-yellow-200 shadow-[0_0_15px_#ffe600]"
+                        : ""
+                    }
+                    hover:scale-105 hover:shadow-[0_0_10px_#ffffff]
+                    active:scale-95 active:shadow-[0_0_20px_#ffea00]`}
                 >
                   {day.date()}
                 </div>
@@ -101,6 +115,7 @@ export default function Calendar() {
           </div>
         ))}
       </div>
+
       <p>Давамгайлсан сэтгэл хөдлөл</p>
       <div className="grid  grid-cols-3 gap-4">
         <div className="flex items-center gap-2">
@@ -131,3 +146,44 @@ export default function Calendar() {
     </div>
   );
 }
+
+// const journals = [
+//   {
+//     date: "2024-07-32",
+//     journal: "GOy odr",
+//   },
+//   {
+//     date: "2024-07-32",
+//     journal: "GOy odr",
+//   },
+// ];
+
+// let selectedDateIndex = 0;
+
+// const onSelectJournal = (journalIndex) => {
+//   selectedDateIndex = journalIndex;
+// };
+
+// <div>{journals[selectedDateIndex]}</div>
+
+// const ParentComponent = () => {
+//   let selectedDateIndex = 0;
+//   const journals = [
+//   {
+//     date: "2024-07-32",
+//     journal: "GOy odr",
+//   },
+//   {
+//     date: "2024-07-32",
+//     journal: "GOy odr",
+//   },
+// ];
+
+// const selectedJournal = journals[selectedDateIndex]
+
+//   // return
+//   <div>
+//     {/* //child 1 journals  onSelectJournal */}
+//     {/* //child 2 selectedJournal */}
+//   </div>;
+// };
