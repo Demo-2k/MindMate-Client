@@ -15,31 +15,36 @@ const formSchema = z.object({
   password: z.string().min(2, { message: "Password must be at least 2 characters." }),
 });
 
+type UserType = {
+  email: string;
+  username?: string;
+  avatar?: string;
+};
+
 export default function SignIn() {
   const { push } = useRouter();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<UserType | null>(null);
 
+  // JWT-аас user state авах
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const email = params.get("email");
-    const username = params.get("name");
-    const avatar = params.get("avatar");
+    const tokenFromQuery = params.get("token");
+    let token = tokenFromQuery ? decodeURIComponent(tokenFromQuery) : localStorage.getItem("token");
 
-    if (email) {
-      setUser({ email, username: username || undefined, avatar: avatar || undefined });
+    if (!token) return;
+
+    try {
+      const parsed = JSON.parse(atob(token.split(".")[1]));
+      setUser({
+        email: parsed.data.email,
+        username: parsed.data.username,
+        avatar: parsed.data.avatar,
+      });
+
+      if (tokenFromQuery) localStorage.setItem("token", tokenFromQuery);
       window.history.replaceState({}, document.title, "/");
-    }
-
-    const token = localStorage.getItem("token");
-    if (token && !user) {
-      try {
-        const parsed = JSON.parse(atob(token.split(".")[1]));
-        setUser({
-          email: parsed.data.email,
-          username: parsed.data.username,
-          avatar: parsed.data.avatar,
-        });
-      } catch {}
+    } catch (e) {
+      console.error("JWT parse error:", e);
     }
   }, []);
 
@@ -63,7 +68,7 @@ export default function SignIn() {
   const onSubmit = (values: z.infer<typeof formSchema>) => submitLogin(values.email, values.password);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-200 to-blue-400">
+     <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-200 to-blue-400">
       {/* Header */}
       <header className="w-full bg-blue-200 p-4 flex items-center gap-3 justify-center shadow">
         <MessageSquareHeart className="w-8 h-8 text-pink-500" />
@@ -166,6 +171,7 @@ export default function SignIn() {
               Sign up
             </Link>
           </p>
+
         </div>
       </main>
     </div>
