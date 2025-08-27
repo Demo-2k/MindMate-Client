@@ -58,10 +58,10 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
 
   return (
     <div>
-      <div className="bg-black text-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="bg-black text-white grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
         {/* Sidebar */}
         <div className="flex flex-col gap-4">
-          <Card className="bg-black text-white p-6 border-white/50">
+          <Card className="bg-black text-white p-6 border-white/20">
             <div className="flex justify-between">
               <div>
                 <h2 className="text-sm text-gray-400">{greeting}</h2>
@@ -75,7 +75,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
               />
             </div>
           </Card>
-          <Card className="bg-black text-white p-6 border-white/50">
+          <Card className="bg-black text-white p-6 border-white/20">
             {allMoods.map((mood) => {
               // moodsFromBackend-д байгаа эсэхийг шалгах
               const isActive = moodsFromBackend?.includes(mood?.emoji);
@@ -115,7 +115,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
 
         {/* Journal Section */}
         <div className="flex flex-col gap-4 lg:col-span-2">
-          <Card className="bg-black text-white border-white/50 p-6">
+          <Card className="bg-black text-white border-white/20 p-6">
             <h2 className="text-2xl font-bold flex items-center gap-2 text-white">
               {lastDiary?.aiInsight?.mood_caption}
             </h2>
@@ -127,11 +127,11 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
 
         {/* Right Sidebar */}
         <div className="flex flex-col gap-4">
-          <Card className="bg-cover bg-center text-white p-6 bg-[url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWNhejU3dWw4aTUzenJmZjY0eTEwYmU4YnQ1dGJvcHg2eWZ4NGYzdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1zgzISaYrnMAYRJJEr/giphy.gif')]">
+          <Card className="bg-cover bg-center text-white border-white/20 p-6 bg-[url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWNhejU3dWw4aTUzenJmZjY0eTEwYmU4YnQ1dGJvcHg2eWZ4NGYzdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1zgzISaYrnMAYRJJEr/giphy.gif')]">
             <p className="text-md font-extrabold"> Today's Prompt ✏️ </p>
             <p> How can you ensure you stay positive and motivated today? </p>
           </Card>
-          <Card className="bg-black text-white border-white/50 p-6">
+          <Card className="bg-black text-white border-white/20 p-6">
             <CardContent>
               <p className="text-[13px] font-semibold text-[#a1a1aa]">
                 Онцлох үг:
@@ -141,7 +141,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
             </CardContent>
           </Card>
 
-          <Card className="bg-black text-white border border-white/50 p-6">
+          <Card className="bg-black text-white border border-white/20 p-6">
             <CardContent>
               <h3 className="text-lg font-semibold flex items-center gap-2">
                 <Activity size={20} /> Өдрийн зорилго

@@ -9,7 +9,7 @@ interface CalendarProps {
   onSelectDate: (date: string) => void;
 }
 
-export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) {
+export default function Calendar1({ selectedDate, onSelectDate }: CalendarProps) {
 
   const [currentMonth, setCurrentMonth] = useState(dayjs());
 
@@ -117,7 +117,7 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
       </div>
 
       <p>Давамгайлсан сэтгэл хөдлөл</p>
-      <div className="grid  grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-auto">
         <div className="flex items-center gap-2">
           <p className="h-3 w-3 rounded-2xl bg-amber-500 "></p>
           <p>😊 Баяртай</p>
