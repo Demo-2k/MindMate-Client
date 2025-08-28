@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import { UserContext } from "@/provider/userProvider";
 import Loader from "./loading";
+import { Button } from "./ui/button";
 
 export default function ProfileDropdown() {
   const { userProvider } = useContext(UserContext);
@@ -34,29 +35,40 @@ export default function ProfileDropdown() {
     );
   }
   return (
-    <div className="absolute top-4 left-4 flex items-center gap-3">
+    <div className="absolute top-4 left-4 flex items-center gap-3 ">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="cursor-pointer">
-            <AvatarImage src="https://i.pravatar.cc/100" alt="User"/>
+            <AvatarImage src="https://i.pravatar.cc/100" alt="User" />
             <AvatarFallback>RB</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="w-40 mt-2">
-          <DropdownMenuItem onClick={() => router.push("/profile")}>
-            <User className="mr-2 h-4 w-4" />
-            <span>My Profile</span>
+        <DropdownMenuContent className="w-40 mt-2 bg-black p-2 rounded-lg border border-yellow-400">
+          <DropdownMenuItem
+            onClick={() => router.push("/profile")}
+            className="group flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer hover:bg-transparent"
+          >
+            <User className="h-4 w-4 text-white group-hover:text-black" />
+            <span className="text-white text-sm group-hover:text-black">
+              My Profile
+            </span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={handeLogOut}>
-            <LogOut className="mr-2 h-4 w-4" />
-            <span>Log out</span>
+
+          <DropdownMenuItem
+            onClick={handeLogOut}
+            className="group flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer hover:bg-transparent"
+          >
+            <LogOut className="h-4 w-4 text-white group-hover:text-black" />
+            <span className="text-white text-sm group-hover:text-black">
+              Log out
+            </span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
       <div className="text-white">
-        <p className="font-semibold">{userProvider.username}</p>
+        <p className="font-semibold text-white">{userProvider?.username}</p>
       </div>
     </div>
   );

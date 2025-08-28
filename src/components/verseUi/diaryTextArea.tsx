@@ -16,7 +16,6 @@ export const DairyText = ({
   setIsOpen,
   isOpen,
 }: diaryTextAreaProps) => {
-
   return (
     <div className="flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
       {/* Diary button */}

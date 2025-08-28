@@ -20,8 +20,6 @@ import Calendar from "../calendar/calendar";
 import { Month } from "../calendar/month";
 import SpotifyEmbed from "./music";
 import ProfileDropdown from "../profileDropdown";
-
-import { DairyText } from "../verseUi/diaryTextArea";
 import Clock from "./time";
 
 
