@@ -10,14 +10,21 @@ import { userDiaryContext } from "@/provider/userDiaryProvider";
 
 import { CoverImage } from "../toDo/coverImage";
 
+
+
+import { DairyText } from "../verseUi/diaryTextArea";
+
 import Loader from "../loading";
 import { UserContext } from "@/provider/userProvider";
 import Calendar from "../calendar/calendar";
 import { Month } from "../calendar/month";
 import SpotifyEmbed from "./music";
 import ProfileDropdown from "../profileDropdown";
+
 import { DairyText } from "../verseUi/diaryTextArea";
 import Clock from "./time";
+
+
 
 export default function HomeDiary() {
   const { userProvider } = useContext(UserContext);
@@ -108,8 +115,13 @@ export default function HomeDiary() {
         />
       </div>
       <ProfileDropdown />
+
       <Clock />
       <SpotifyEmbed />
+
+      <SpotifyEmbed />
+
+     
       <div className="backdrop-blur-md mt-15 py-3 px-7 border-none rounded-lg ">
         <BarSide />
       </div>
