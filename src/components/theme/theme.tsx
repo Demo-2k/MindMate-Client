@@ -10,9 +10,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-import { Images, Palette } from "lucide-react";
+import { Images } from "lucide-react";
 import Image from "next/image";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
@@ -23,7 +22,7 @@ const themes = [
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1754630551378-e1ecffe9da6b?q=80&w=3866&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    url: "https://images.unsplash.com/photo-1754630551378-e1ecffe9da6b?q=80&w=3866&auto=format&fit=crop&ixlib=rb-4.1.0",
   },
   {
     id: 3,
@@ -36,7 +35,7 @@ const themes = [
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1743376272672-c130603a3af2?q=80&w=3929&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    url: "https://images.unsplash.com/photo-1743376272672-c130603a3af2?q=80&w=3929&auto=format&fit=crop&ixlib=rb-4.1.0",
   },
   {
     id: 7,
@@ -61,14 +60,17 @@ const themes = [
   },
   {
     id: 13,
-    url: "https://images.unsplash.com/photo-1752430038064-250d400e220f?q=80&w=3962&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    url: "https://images.unsplash.com/photo-1752430038064-250d400e220f?q=80&w=3962&auto=format&fit=crop&ixlib=rb-4.1.0",
   },
 ];
 
 export function DialogTheme() {
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    document.body.classList.add("my-bg");
+
     const savedTheme = localStorage.getItem("app-theme");
     if (savedTheme) {
       setSelectedTheme(savedTheme);
@@ -82,8 +84,6 @@ export function DialogTheme() {
       document.body.style.backgroundImage = `url(${selectedTheme})`;
     }
   };
-
-  const [open, setOpen] = useState(false);
 
   return (
     <div>
@@ -101,6 +101,7 @@ export function DialogTheme() {
           <p>зураг</p>
         </TooltipContent>
       </Tooltip>
+
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="w-full h-[90vh] sm:h-auto sm:max-h-[80vh] sm:max-w-[600px] bg-black p-4 overflow-auto">
           <DialogHeader>
@@ -138,7 +139,7 @@ export function DialogTheme() {
             ))}
           </div>
 
-          <DialogFooter className="mt-4 sticky bottom-0  flex justify-end gap-2">
+          <DialogFooter className="mt-4 sticky bottom-0 flex justify-end gap-2">
             <DialogClose asChild>
               <Button variant="outline">Гарах</Button>
             </DialogClose>
