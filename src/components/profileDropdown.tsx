@@ -38,7 +38,7 @@ export default function ProfileDropdown() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="cursor-pointer">
-            <AvatarImage src="https://i.pravatar.cc/100" alt="User" />
+            <AvatarImage src="https://i.pravatar.cc/100" alt="User"/>
             <AvatarFallback>RB</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>

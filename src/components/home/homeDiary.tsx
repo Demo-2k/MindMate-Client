@@ -10,13 +10,21 @@ import { userDiaryContext } from "@/provider/userDiaryProvider";
 
 import { CoverImage } from "../toDo/coverImage";
 
+
+
 import { DairyText } from "../verseUi/diaryTextArea";
+
 import Loader from "../loading";
 import { UserContext } from "@/provider/userProvider";
 import Calendar from "../calendar/calendar";
 import { Month } from "../calendar/month";
 import SpotifyEmbed from "./music";
 import ProfileDropdown from "../profileDropdown";
+
+import { DairyText } from "../verseUi/diaryTextArea";
+import Clock from "./time";
+
+
 
 export default function HomeDiary() {
   const { userProvider } = useContext(UserContext);
@@ -107,31 +115,13 @@ export default function HomeDiary() {
         />
       </div>
       <ProfileDropdown />
+
+      <Clock />
       <SpotifyEmbed />
 
-      {/* <motion.div 
-        drag
-        dragElastic={0.2}
-        initial={{ opacity: 0, scale: 0.8, y: 100 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.8, y: 100 }}
-        className="fixed 
-                     rounded-2xl pt-8 cursor-grab 
-                     border border-white/10 flex flex-col"
-      >
-        <iframe
-          data-testid="embed-iframe"
-          style={{ borderRadius: "12px" }}
-          src="https://open.spotify.com/embed/playlist/1buR1viIOgrYIWWX4j14gL?utm_source=generator&theme=0"
-          width="400px"
-          height="652px"
-          frameBorder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          allowFullScreen
-          loading="lazy"
-        />
-      </motion.div> */}
+      <SpotifyEmbed />
 
+     
       <div className="backdrop-blur-md mt-15 py-3 px-7 border-none rounded-lg ">
         <BarSide />
       </div>
