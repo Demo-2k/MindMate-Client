@@ -1,8 +1,8 @@
 import { DialogTheme } from "../theme/theme";
-import { DialogUser } from "../userPen/user";
 import { Month } from "../calendar/month";
 import { CoverImage } from "../toDo/coverImage";
 import { TooltipProvider } from "../ui/tooltip";
+import { DialogBreath } from "../userPen/user";
 
 export const BarSide = () => {
   return (
@@ -11,7 +11,7 @@ export const BarSide = () => {
         <CoverImage/>
         <Month/>
         <DialogTheme />
-        <DialogUser />
+        <DialogBreath />
       </div>
     </TooltipProvider>
   );
