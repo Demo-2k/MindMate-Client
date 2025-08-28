@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import { CoverImage } from "./coverImage";
@@ -19,6 +19,18 @@ const data = {
 interface MoodBarProps {
   moodsFromBackend: string[]; // жишээ: ['ТАЙВАН','ТАЙВАН']
 }
+const images = [
+  "https://media.giphy.com/media/rwiOduiq2oatO/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ZDFqYWt2enBqMmhjM3RzeHIzMGtleTc3eWVwNDBseWJ0NG5tanhpdiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/bgHDlfCiHdsGoQl3vm/giphy.gif",
+  "https://media.giphy.com/media/xUOwFXZCw8yJUI7tEk/giphy.gif",
+  "https://media.giphy.com/media/inK3HQNIcecwF39Beb/giphy.gif",
+  "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExejZzMGs1bjhuN3hzcDQ3Z253YXd5amE3YTBiNXU1b3l2b21nOThlbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/l2JhBrGF8aUBwQpVe/giphy.gif",
+  "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHJlZHR5NnNxcnh5NDdiaXRudTJwcDdybDk2eG41dmNmNTJ1Z3JmZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Oj5I04j19PNJeV9g1R/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YXV5OXo4eWJoYW04cHhkaDZtamV0Ym5hb2gwYmRlNDRzOWRiMXc1byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/fWrorpy7Jrlvi/giphy.gif",
+  "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXZwYzdnMXRkY2MxYnhxN2VpYmVicDlnNnp1ZjlxYTZjNDIwYzhycCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MuEgKN1kAJDlFdqbVC/giphy.gif",
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3OHdjMXplaXh6YWdjNTV5MjJ1YXVxNnI5N2xobGhoOWtraGZ5ZXBnaSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4QZK21zlzVIyc/giphy.gif"
+];
+
 
 const moodMap: Record<string, { emoji: string; color: string }> = {
   БАЯРТАЙ: { emoji: "БАЯРТАЙ", color: "amber-500" },
@@ -57,6 +69,13 @@ const {userProvider} = useContext(UserContext)
     }
   }, []);
 
+   const dailyImage = useMemo(() => {
+    const today = new Date();
+    const dayNumber = today.getDate(); // 1-31
+    const index = dayNumber % images.length; // index-г array-д тааруулна
+    return images[index];
+  }, []);
+
   return (
     <div>
       <div className="bg-black text-white grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
@@ -70,7 +89,7 @@ const {userProvider} = useContext(UserContext)
               </div>
 
               <img
-                src="https://media.giphy.com/media/rwiOduiq2oatO/giphy.gif"
+                src={dailyImage}
                 alt="gif"
                 className="h-25 w-25 rounded-lg object-cover"
               />
