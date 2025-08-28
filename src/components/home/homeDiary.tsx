@@ -2,7 +2,6 @@
 
 import { useCallback, useContext, useMemo, useState } from "react";
 
-
 import { BarSide } from "./BarSide";
 import { motion } from "framer-motion";
 import axios from "axios";
@@ -11,14 +10,13 @@ import { userDiaryContext } from "@/provider/userDiaryProvider";
 
 import { CoverImage } from "../toDo/coverImage";
 
-
+import { DairyText } from "../verseUi/diaryTextArea";
 import Loader from "../loading";
 import { UserContext } from "@/provider/userProvider";
 import Calendar from "../calendar/calendar";
 import { Month } from "../calendar/month";
 import SpotifyEmbed from "./music";
 import ProfileDropdown from "../profileDropdown";
-import { DairyText } from "../verseUi/diaryTextArea";
 
 export default function HomeDiary() {
   const { userProvider } = useContext(UserContext);
@@ -108,8 +106,8 @@ export default function HomeDiary() {
           isOpen={showdiary}
         />
       </div>
-      <ProfileDropdown/>
-      <SpotifyEmbed/>
+      <ProfileDropdown />
+      <SpotifyEmbed />
 
       {/* <motion.div 
         drag

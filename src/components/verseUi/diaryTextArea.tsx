@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type diaryTextAreaProps = {
   handleDiarySave: () => void;
@@ -16,6 +16,7 @@ export const DairyText = ({
   setIsOpen,
   isOpen,
 }: diaryTextAreaProps) => {
+
   return (
     <div className="flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
       {/* Diary button */}
@@ -26,18 +27,16 @@ export const DairyText = ({
       >
         Өдрийн тэмдэглэл
       </button> */}
-      
+
       <motion.div
-        drag
-        dragElastic={0.2}
-        initial={{ opacity: 0, scale: 0.8, y: 100 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.8, y: 100 }}
-        className="fixed top-1/2 left-1/2 w-[900px] h-[700px] 
-                     -translate-x-1/2 -translate-y-1/2 
-                     bg-white/10 backdrop-blur-lg
-                     rounded-2xl shadow-2xl p-8 cursor-grab 
-                     border border-white/20 flex flex-col"
+        className="fixed top-1/2 left-1/2 
+    w-[90vw] max-w-[900px] 
+       h-[80vh] max-h-[700px] 
+    -translate-x-1/2 -translate-y-1/2 
+    bg-white/10 backdrop-blur-lg
+    rounded-2xl shadow-2xl p-6 cursor-grab 
+    border border-white/20 flex flex-col
+    md:w-[900px] md:h-[700px]"
       >
         <h2 className="text-2xl font-semibold mb-4 text-white">
           Өдрийн тэмдэглэл ✍️
@@ -76,7 +75,6 @@ export const DairyText = ({
           </button>
         </div>
       </motion.div>
-      
     </div>
   );
 };
