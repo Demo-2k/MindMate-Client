@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
 import UserDiaryProvider from "@/provider/userDiaryProvider";
 import { Toaster } from "sonner";
 import UserContextProvider from "@/provider/userProvider";
-import Sitebar from "@/components/sitebar";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,17 +33,7 @@ export default function RootLayout({
       >
         <UserContextProvider>
           <UserDiaryProvider>
-            <div className="flex min-h-screen">
-              <div className="z-50">
-              {/* <Sitebar /> */}
-              </div>
-              <div className="flex-1 flex flex-col min-h-screen pb-16 md:pb-0">
-                {/* <Header /> */}
-                <div className="flex flex-1">
-                  <main className="flex-1">{children}</main>
-                </div>
-              </div>
-            </div>
+            <main className="flex-1">{children}</main>
             <Toaster />
           </UserDiaryProvider>
         </UserContextProvider>
