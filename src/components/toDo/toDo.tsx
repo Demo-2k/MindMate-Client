@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import { CoverImage } from "./coverImage";
 import { Activity, Flame, Sparkles } from "lucide-react";
 import { DiaryNote } from "@/types";
+import { UserContext } from "@/provider/userProvider";
 
 const data = {
   mood: "happy",
@@ -35,7 +36,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
     "lastDiary?.aiinsight?.mood_caption",
     lastDiary?.aiInsight?.mood_caption
   );
-
+const {userProvider} = useContext(UserContext)
 
   const moodsFromBackend = lastDiary?.analysis?.emotions;
 
@@ -65,7 +66,7 @@ export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
             <div className="flex justify-between">
               <div>
                 <h2 className="text-sm text-gray-400">{greeting}</h2>
-                <h1 className="text-md font-bold">Zolomoloko</h1>
+                <h1 className="text-md font-bold">{userProvider.username}</h1>
               </div>
 
               <img

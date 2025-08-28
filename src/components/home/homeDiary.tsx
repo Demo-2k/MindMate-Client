@@ -17,6 +17,7 @@ import { UserContext } from "@/provider/userProvider";
 import Calendar from "../calendar/calendar";
 import { Month } from "../calendar/month";
 import SpotifyEmbed from "./music";
+import ProfileDropdown from "../profileDropdown";
 
 export default function HomeDiary() {
   const { userProvider } = useContext(UserContext);
@@ -106,10 +107,10 @@ export default function HomeDiary() {
           isOpen={showdiary}
         />
       </div>
-
+      <ProfileDropdown/>
       <SpotifyEmbed/>
 
-      {/* <motion.div
+      {/* <motion.div 
         drag
         dragElastic={0.2}
         initial={{ opacity: 0, scale: 0.8, y: 100 }}
