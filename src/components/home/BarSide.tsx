@@ -2,7 +2,7 @@ import { DialogTheme } from "../theme/theme";
 import { Month } from "../calendar/month";
 import { CoverImage } from "../toDo/coverImage";
 import { TooltipProvider } from "../ui/tooltip";
-import { DialogBreath } from "../userPen/user";
+import { DialogBreath } from "../userPen/breathingExercise";
 
 export const BarSide = () => {
   return (
