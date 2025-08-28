@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useContext, useMemo, useState } from "react";
-import { MusicPlayer } from "../musicplayer/player";
+
 
 import { BarSide } from "./BarSide";
 import { motion } from "framer-motion";

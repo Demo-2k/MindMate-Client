@@ -102,7 +102,7 @@ export function DialogTheme() {
         </TooltipContent>
       </Tooltip>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-full h-screen sm:h-auto sm:max-w-[600px] bg-black p-4 overflow-auto">
+        <DialogContent className="w-full h-[90vh] sm:h-auto sm:max-h-[80vh] sm:max-w-[600px] bg-black p-4 overflow-auto">
           <DialogHeader>
             <DialogTitle>Дэвсгэр зурагууд</DialogTitle>
             <DialogDescription>Сонгох дэвсгэр зурагууд</DialogDescription>
@@ -138,7 +138,7 @@ export function DialogTheme() {
             ))}
           </div>
 
-          <DialogFooter className="mt-4 sticky bottom-0 bg-black/80 flex justify-end gap-2">
+          <DialogFooter className="mt-4 sticky bottom-0  flex justify-end gap-2">
             <DialogClose asChild>
               <Button variant="outline">Гарах</Button>
             </DialogClose>
