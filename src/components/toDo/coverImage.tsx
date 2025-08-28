@@ -72,7 +72,7 @@ export function CoverImage() {
               className=" w-full mx-auto h-50  rounded-xl overflow-hidden shadow-lg"
               style={{
                 backgroundImage:
-                  "url('https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ankzeDZlNGRtNjU2ZnAzOGs1eWVwaHVkbTJxanZwd21zeXkwYmVvNSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/ckr4W2ppxPBeIF8dx4/giphy.gif')",
+                  "url('https://i.pinimg.com/originals/92/98/b8/9298b8aa90e9bc71a6162878ee24cbeb.gif')",
                 backgroundRepeat: "repeat",
               }}
             >

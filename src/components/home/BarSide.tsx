@@ -1,19 +1,10 @@
-import { Calendar, ChartNoAxesCombined, ListTodo } from "lucide-react";
-
 import { DialogTheme } from "../theme/theme";
-
 import { DialogUser } from "../userPen/user";
-import { Button } from "../ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@radix-ui/react-tooltip";
 import { Month } from "../calendar/month";
 import { CoverImage } from "../toDo/coverImage";
+import { TooltipProvider } from "../ui/tooltip";
 
-export const BarSide = ({ setCalendar, calendar, setTodo, todo }: any) => {
+export const BarSide = () => {
   return (
     <TooltipProvider>
       <div className="flex gap-4">
