@@ -26,7 +26,7 @@ export const DairyText = ({
       >
         Өдрийн тэмдэглэл
       </button> */}
-      (
+      
       <motion.div
         drag
         dragElastic={0.2}
@@ -76,7 +76,7 @@ export const DairyText = ({
           </button>
         </div>
       </motion.div>
-      )
+      
     </div>
   );
 };

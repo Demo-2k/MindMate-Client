@@ -31,7 +31,7 @@ const moodMap: Record<string, { emoji: string; color: string }> = {
 const allMoods = Object.values(moodMap);
 // console.log("allMood", moodMap[0].color);
 
-export function DialogToDo({ lastDiary }: { lastDiary: DiaryNote }) {
+export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
   console.log(
     "lastDiary?.aiinsight?.mood_caption",
     lastDiary?.aiInsight?.mood_caption

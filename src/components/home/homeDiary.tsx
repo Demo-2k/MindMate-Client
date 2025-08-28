@@ -11,13 +11,14 @@ import { userDiaryContext } from "@/provider/userDiaryProvider";
 
 import { CoverImage } from "../toDo/coverImage";
 
-import { DairyText } from "../verseUi/diaryTextArea";
+
 import Loader from "../loading";
 import { UserContext } from "@/provider/userProvider";
 import Calendar from "../calendar/calendar";
 import { Month } from "../calendar/month";
 import SpotifyEmbed from "./music";
 import ProfileDropdown from "../profileDropdown";
+import { DairyText } from "../verseUi/diaryTextArea";
 
 export default function HomeDiary() {
   const { userProvider } = useContext(UserContext);

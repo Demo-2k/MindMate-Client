@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { ListTodo, Sun, TextSelect } from "lucide-react";
 import { Button } from "../ui/button";
-import { DialogToDo } from "./toDo";
 import { Month } from "../calendar/month";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { Analysis } from "./analyze";
 
 const emojis = ["✨", "🌸", "🍀", "🫧", "🧸"];
 
@@ -95,7 +95,7 @@ export function CoverImage() {
                 </div>
               </div>
             </div>
-            <DialogToDo lastDiary={lastDiary} />
+            <Analysis lastDiary={lastDiary} />
           </div>
         </DialogContent>
       </Dialog>
