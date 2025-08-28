@@ -2,109 +2,103 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Pause, Play, RotateCcw, TreePalm } from "lucide-react";
+import { TreePalm } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 type Phase = "inhale" | "hold" | "exhale";
 
-interface BreathCycle {
-  phase: Phase;
-  duration: number;
-  instruction: string;
-  color: string;
-  scale: number;
-}
+const cycles = [
+  { phase: "inhale" as Phase, duration: 4, label: "Амьсгалаа авх" },
+  { phase: "hold" as Phase, duration: 4, label: "Барих" },
+  { phase: "exhale" as Phase, duration: 6, label: "Амьсгалаа гаргах" },
+];
 
 export function DialogBreath() {
   const [open, setOpen] = useState(false);
+
+  const totalRounds = 4; // how many full inhale-hold-exhale cycles until done
   const [isActive, setIsActive] = useState(false);
-  const [currentCycle, setCurrentCycle] = useState(0);
-  const [currentPhase, setCurrentPhase] = useState<Phase>("inhale");
-  const [timeLeft, setTimeLeft] = useState(4);
+  const [roundIndex, setRoundIndex] = useState(0); // 0..totalRounds-1
+  const [phaseIndex, setPhaseIndex] = useState(0); // 0..2 (inhale/hold/exhale)
+  const [timeLeft, setTimeLeft] = useState(cycles[0].duration);
 
-  const cycles: BreathCycle[] = [
-    {
-      phase: "inhale",
-      duration: 4,
-      instruction: "Breathe In",
-      color: "from-blue-400 to-blue-600",
-      scale: 1.4,
-    },
-    {
-      phase: "hold",
-      duration: 4,
-      instruction: "Hold",
-      color: "from-teal-400 to-teal-600",
-      scale: 1.4,
-    },
-    {
-      phase: "exhale",
-      duration: 6,
-      instruction: "Breathe Out",
-      color: "from-green-400 to-green-600",
-      scale: 0.7,
-    },
-  ];
+  const currentPhase = cycles[phaseIndex].phase;
+  const currentLabel = cycles[phaseIndex].label;
+  const currentDuration = cycles[phaseIndex].duration;
 
-  const totalCycles = 5;
-  const currentCycleData =
-    cycles.find((c) => c.phase === currentPhase) || cycles[0];
-
+  // timer
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    if (!isActive) return;
 
-    if (isActive && timeLeft > 0) {
-      interval = setInterval(() => {
-        setTimeLeft((time) => time - 1);
-      }, 1000);
-    } else if (isActive && timeLeft === 0) {
-      // Move to next phase
-      if (currentPhase === "inhale") {
-        setCurrentPhase("hold");
-        setTimeLeft(4);
-      } else if (currentPhase === "hold") {
-        setCurrentPhase("exhale");
-        setTimeLeft(6);
-      } else if (currentPhase === "exhale") {
-        if (currentCycle < totalCycles - 1) {
-          setCurrentCycle((prev) => prev + 1);
-          setCurrentPhase("inhale");
-          setTimeLeft(4);
+    if (timeLeft <= 0) {
+      // advance phase
+      if (phaseIndex < cycles.length - 1) {
+        setPhaseIndex((p) => p + 1);
+        setTimeLeft(cycles[phaseIndex + 1].duration);
+      } else {
+        // finished one full cycle
+        if (roundIndex < totalRounds - 1) {
+          setRoundIndex((r) => r + 1);
+          setPhaseIndex(0);
+          setTimeLeft(cycles[0].duration);
         } else {
-          // Session complete
+          // session complete
           setIsActive(false);
         }
       }
+      return;
     }
 
-    return () => clearInterval(interval);
-  }, [isActive, timeLeft, currentPhase, currentCycle]);
+    const t = setInterval(() => {
+      setTimeLeft((s) => s - 1);
+    }, 1000);
 
-  const toggleSession = () => {
+    return () => clearInterval(t);
+  }, [isActive, timeLeft, phaseIndex, roundIndex]);
+
+  const toggleStart = () => {
     if (isActive) {
       setIsActive(false);
     } else {
-      setIsActive(true);
-      if (currentCycle >= totalCycles) {
+      // if finished previously, reset
+      if (!isActive && roundIndex >= totalRounds) {
         reset();
       }
+      setIsActive(true);
     }
   };
 
   const reset = () => {
     setIsActive(false);
-    setCurrentCycle(0);
-    setCurrentPhase("inhale");
-    setTimeLeft(4);
+    setRoundIndex(0);
+    setPhaseIndex(0);
+    setTimeLeft(cycles[0].duration);
   };
 
-  const isComplete = currentCycle >= totalCycles && !isActive;
+  // visual scale mapping per phase (to match image vibe)
+  const scaleMap: Record<Phase, number> = {
+    inhale: 1.45,
+    hold: 1.35,
+    exhale: 0.75,
+  };
+
+  // gradient colors per phase (works with bg-gradient-to-br + Tailwind color tokens OR inline fallback)
+  const gradientMap: Record<Phase, string> = {
+    inhale: "from-cyan-400 to-blue-500", // bright cyan -> blue
+    hold: "from-violet-400 to-purple-600",
+    exhale: "from-pink-300 to-pink-500",
+  };
+
+  const outerRingColor: Record<Phase, string> = {
+    inhale: "bg-[rgba(139,92,246,0.14)]", // subtle purple halo
+    hold: "bg-[rgba(99,102,241,0.14)]",
+    exhale: "bg-[rgba(236,72,153,0.12)]",
+  };
+
+  // progress for dots (rounds)
+  const dots = Array.from({ length: totalRounds }).map((_, i) => i);
 
   return (
     <div>
@@ -119,213 +113,216 @@ export function DialogBreath() {
           </Button>
         </TooltipTrigger>
         <TooltipContent side="bottom">
-          <p>Breathing Exercise</p>
+          <p>Амьсгалын дасгал</p>
         </TooltipContent>
       </Tooltip>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="!max-w-7xl w-full h-[60vh] bg-black overflow-auto">
+        <DialogContent className="!max-w-7xl w-full h-[70vh] bg-black overflow-auto">
           <DialogTitle></DialogTitle>
 
-          <div className="bg-black rounded-2xl p-8  flex flex-col gap-6">
-            <div className="text-center mb-8">
-              <motion.h2
-                className="text-2xl font-bold text-gray-800 mb-2"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                Breath Game
-              </motion.h2>
-              <motion.p
-                className="text-gray-600"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                Follow the breathing pattern to relax and focus
-              </motion.p>
-              <motion.div
-                className="mt-4 bg-white px-4 py-2 rounded-full inline-block"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                <span className="text-sm font-medium text-gray-700">
-                  Session {currentCycle + 1}/{totalCycles}
-                </span>
-              </motion.div>
-            </div>
-
-            <div className="flex flex-col items-center mb-8 gap-5">
-              <AnimatePresence mode="wait">
-                {isActive && (
+          <div className=" flex items-center justify-center px-6">
+            <div className="w-full max-w-md text-center">
+              {/* big circle area */}
+              <div className="flex flex-col items-center gap-8">
+                <div className="relative w-[320px] h-[320px]">
+                  {/* outer soft ring */}
                   <motion.div
-                    className="mb-6 text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
+                    animate={{ scale: isActive ? 1 : 1 }}
+                    className={`absolute inset-0 rounded-full flex items-center justify-center ${outerRingColor[currentPhase]}`}
+                    style={{
+                      filter: "blur(8px)",
+                    }}
+                  />
+
+                  {/* large rotating subtle ring (to match the image swoosh) */}
+                  <motion.div
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: isActive ? 360 : 0 }}
+                    transition={{
+                      duration: isActive ? 8 : 0,
+                      repeat: Infinity, // 🔁 давтах
+                      ease: "linear", // жигд эргэлт
+                    }}
+                    className="absolute -inset-6 rounded-full pointer-events-none"
                   >
-                    <motion.h3
-                      className="text-xl font-semibold text-gray-700 mb-2"
-                      key={currentCycleData.instruction}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {currentCycleData.instruction}
-                    </motion.h3>
-                    <motion.div
-                      className="text-3xl font-bold text-blue-600"
-                      key={timeLeft}
-                      initial={{ scale: 1.2, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {timeLeft}
-                    </motion.div>
+                    <svg viewBox="0 0 200 200" className="w-full h-full">
+                      <defs>
+                        <linearGradient id="g1" x1="0" x2="1">
+                          <stop
+                            offset="0%"
+                            stopColor="#7c3aed"
+                            stopOpacity="0.12"
+                          />
+                          <stop
+                            offset="100%"
+                            stopColor="#60a5fa"
+                            stopOpacity="0.08"
+                          />
+                        </linearGradient>
+                      </defs>
+                      <circle
+                        cx="100"
+                        cy="100"
+                        r="92"
+                        fill="none"
+                        stroke="url(#g1)"
+                        strokeWidth="16"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                   </motion.div>
-                )}
-              </AnimatePresence>
 
-              <div className="relative mb-8">
-                <motion.div
-                  className={`w-32 h-32 rounded-full bg-gradient-to-br ${currentCycleData.color} shadow-lg`}
-                  animate={{
-                    scale: isActive ? currentCycleData.scale : 1,
-                    boxShadow: isActive
-                      ? `0 0 ${
-                          currentCycleData.scale * 30
-                        }px rgba(59, 130, 246, 0.4)`
-                      : "0 10px 25px rgba(0, 0, 0, 0.1)",
-                  }}
-                  transition={{
-                    duration: isActive ? currentCycleData.duration : 1,
-                    ease: currentPhase === "hold" ? "linear" : "easeInOut",
-                  }}
-                />
-
-                {/* Inner circles for depth */}
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  animate={{
-                    scale: isActive ? currentCycleData.scale * 0.8 : 1,
-                  }}
-                  transition={{
-                    duration: isActive ? currentCycleData.duration : 1,
-                    ease: currentPhase === "hold" ? "linear" : "easeInOut",
-                  }}
-                >
-                  <div className="w-24 h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                  {/* white ring */}
+                  <div className="absolute inset-[30px] rounded-full bg-white flex items-center justify-center">
+                    {/* inner pink bubble (animated) */}
                     <motion.div
-                      className="w-16 h-16 bg-white bg-opacity-30 rounded-full"
+                      className={`rounded-full shadow-2xl`}
+                      style={{
+                        width: 180,
+                        height: 180,
+                      }}
                       animate={{
-                        scale: isActive
-                          ? currentCycleData.scale > 1
-                            ? 1.2
-                            : 0.8
-                          : 1,
+                        scale: isActive ? scaleMap[currentPhase] : 1,
+                        boxShadow: isActive
+                          ? "0 30px 80px rgba(99,102,241,0.16)"
+                          : "0 10px 25px rgba(0,0,0,0.08)",
                       }}
                       transition={{
-                        duration: isActive ? currentCycleData.duration : 1,
+                        duration: isActive ? currentDuration : 0.6,
                         ease: currentPhase === "hold" ? "linear" : "easeInOut",
                       }}
-                    />
-                  </div>
-                </motion.div>
-
-                {/* Breathing guide ring */}
-                <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-white border-opacity-40"
-                  animate={{
-                    scale: isActive ? currentCycleData.scale * 1.1 : 1.05,
-                    opacity: isActive ? 0.6 : 0.3,
-                  }}
-                  transition={{
-                    duration: isActive ? currentCycleData.duration : 1,
-                    ease: currentPhase === "hold" ? "linear" : "easeInOut",
-                  }}
-                />
-              </div>
-
-              <AnimatePresence>
-                {isComplete && (
-                  <motion.div
-                    className="text-center mb-6 p-4 bg-green-100 rounded-xl border border-green-200"
-                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.8, y: -20 }}
-                    transition={{ duration: 0.5, type: "spring", bounce: 0.3 }}
-                  >
-                    <motion.div
-                      initial={{ rotate: 0 }}
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, delay: 0.2 }}
-                      className="text-2xl mb-2"
                     >
-                      🎉
+                      {/* gradient pink fill as inner */}
+                      <div
+                        className={`w-full h-full rounded-full overflow-hidden bg-gradient-to-br ${gradientMap[currentPhase]}`}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {/* small highlight */}
+                        <svg
+                          className="absolute w-[110px] h-[110px] -translate-y-3"
+                          viewBox="0 0 110 110"
+                        >
+                          <defs>
+                            <radialGradient id="rGrad" cx="30%" cy="25%">
+                              <stop
+                                offset="0%"
+                                stopColor="rgba(255,255,255,0.35)"
+                              />
+                              <stop
+                                offset="60%"
+                                stopColor="rgba(255,255,255,0.08)"
+                              />
+                              <stop
+                                offset="100%"
+                                stopColor="rgba(255,255,255,0)"
+                              />
+                            </radialGradient>
+                          </defs>
+                          <circle cx="55" cy="45" r="45" fill="url(#rGrad)" />
+                        </svg>
+
+                        {/* smiling face (centered) */}
+                        <div className="relative w-full h-full flex items-center justify-center">
+                          <img
+                            src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzV2Zm9uOTA1ZjB5Zzhzb2did3gwZGtnZ3VyaGZodnl1Z2J6NDdudSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/cefJOb0iuO040skF4y/giphy.gif"
+                            alt="emoji"
+                          />
+                        </div>
+                      </div>
                     </motion.div>
-                    <h3 className="text-lg font-semibold text-green-800 mb-1">
-                      Session Complete!
-                    </h3>
-                    <p className="text-green-700">
-                      Great job on completing your breathing exercise
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+                </div>
 
-              <div className="flex gap-4">
-                <Button
-                  onClick={toggleSession}
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-xl font-medium hover:bg-blue-600 transition-colors duration-200"
-                  variant="ghost"
-                >
-                  <motion.div>
-                    {isActive ? <Pause size={20} /> : <Play size={20} />}
-                  </motion.div>
-                  {isActive
-                    ? "Pause"
-                    : isComplete
-                    ? "Start New Session"
-                    : "Start"}
-                </Button>
+                {/* phase text */}
+                <div className="mt-6">
+                  <AnimatePresence mode="wait">
+                    <motion.h3
+                      key={currentLabel + isActive}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.25 }}
+                      className="text-2xl font-extrabold text-white tracking-tight"
+                    >
+                      {currentLabel}
+                    </motion.h3>
+                  </AnimatePresence>
+                  <div className="mt-3 flex items-center justify-center gap-3">
+                    {/* progress dots */}
+                    <div className="flex items-center gap-3">
+                      {dots.map((d) => {
+                        const active =
+                          d < roundIndex ||
+                          (d === roundIndex && isActive && phaseIndex > 0);
+                        const upcoming =
+                          d === roundIndex &&
+                          !isActive &&
+                          roundIndex === d &&
+                          roundIndex === 0 &&
+                          !isActive;
+                        return (
+                          <div
+                            key={d}
+                            className="w-3 h-3 rounded-full"
+                            style={{
+                              background: active
+                                ? "#fbcfe8"
+                                : "rgba(255,255,255,0.12)",
+                              boxShadow: active
+                                ? "0 6px 14px rgba(251,203,232,0.12)"
+                                : "none",
+                            }}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
 
-                <Button
-                  onClick={reset}
-                  className="flex items-center gap-2 px-6 py-3 bg-gray-500 text-white rounded-xl font-medium hover:bg-gray-600 transition-colors duration-200"
-                  variant="ghost"
-                >
-                  Reset
-                </Button>
+                {/* controls */}
+                <div className="mt-6 flex items-center justify-center gap-4">
+                  <button
+                    onClick={toggleStart}
+                    className={`px-6 py-2 rounded-full font-semibold shadow-md transition-transform transform active:scale-95 ${
+                      isActive
+                        ? "bg-yellow-400 text-black shadow-yellow-400/30"
+                        : "bg-emerald-500 text-white shadow-emerald-500/30"
+                    }`}
+                  >
+                    {isActive ? "Зогсоох" : "Эхлэх"}
+                  </button>
+
+                  <button
+                    onClick={reset}
+                    className="px-5 py-2 rounded-full bg-rose-500 text-white font-semibold shadow-rose-500/30 hover:bg-rose-600 transition-colors"
+                  >
+                    Дахин
+                  </button>
+                  <button
+                    onClick={() => setOpen(false)}
+                    className="px-5 py-2 rounded-full bg-blue-500 text-white font-semibold shadow-blue-500/30 hover:bg-blue-600 transition-colors"
+                  >
+                    Дуусгах
+                  </button>
+
+                  {/* timer small */}
+                  <div className="ml-2 text-sm text-white/80 px-3 py-2 rounded-full bg-white/6">
+                    {timeLeft}s
+                  </div>
+                </div>
+
+                {/* subtle footer hint */}
+                <p className="mt-4 text-xs text-white/70">
+                  Дараагийн фазын хугацаа: {currentDuration}s • Цикл{" "}
+                  {roundIndex + 1}/{totalRounds}
+                </p>
               </div>
             </div>
-
-            {/* Progress indicator */}
-            <motion.div
-              className="w-full bg-gray-200 rounded-full h-2 mt-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              <motion.div
-                className="bg-gradient-to-r from-blue-500 to-teal-500 h-2 rounded-full"
-                initial={{ width: 0 }}
-                animate={{
-                  width: `${
-                    ((currentCycle +
-                      (isActive
-                        ? (currentCycleData.duration - timeLeft) /
-                          currentCycleData.duration
-                        : 0)) /
-                      totalCycles) *
-                    100
-                  }%`,
-                }}
-                transition={{ duration: 0.5 }}
-              />
-            </motion.div>
           </div>
         </DialogContent>
       </Dialog>
