@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
-import { userDiaryContext } from "@/provider/userDiaryProvider";
+import { DiaryNote } from "@/types";
 
 dayjs.extend(isoWeek);
 interface CalendarProps {
@@ -9,11 +9,27 @@ interface CalendarProps {
   onSelectDate: (date: string) => void;
 }
 
-export default function Calendar1({ selectedDate, onSelectDate }: CalendarProps) {
+interface Calendar1Props extends CalendarProps {
+  diaries: DiaryNote[];
+}
+
+export default function Calendar1({
+  selectedDate,
+  onSelectDate,
+  diaries,
+}: Calendar1Props) {
+
+  const moods: Record<string, { color: string; label: string; emoji: string }> =
+    {
+      БАЯРТАЙ: { color: "bg-amber-500", label: "Баяртай", emoji: "😊" },
+      ТАЙВАН: { color: "bg-green-500", label: "Тайван", emoji: "😌" },
+      УУРТАЙ: { color: "bg-red-500", label: "Ууртай", emoji: "😡" },
+      ГУНИГТАЙ: { color: "bg-blue-500", label: "Гунигтай", emoji: "🥺" },
+      СТРЕССТЭЙ: { color: "bg-purple-600", label: "Стресстэй", emoji: "😨" },
+      UNKNOWN: { color: "bg-black border", label: "Mood алга", emoji: "❓" },
+    };
 
   const [currentMonth, setCurrentMonth] = useState(dayjs());
-
- 
 
   const daysInMonth = currentMonth.daysInMonth();
   const startDay = currentMonth.startOf("month").isoWeekday() - 1;
@@ -42,14 +58,24 @@ export default function Calendar1({ selectedDate, onSelectDate }: CalendarProps)
     return weeks;
   };
 
-  const specialDates: Record<string, string> = {
-    "2025-08-24": "pink",
-    "2025-08-25": "blue",
-  };
+const specialDates: Record<string, string> = {};
+
+if (Array.isArray(diaries)) {
+  diaries.forEach((diary) => {
+    const mood = diary.analysis?.emotions?.[0] || "UNKNOWN";
+    const dateStr = dayjs(diary.createdAt).format("YYYY-MM-DD");
+    specialDates[dateStr] = moods[mood]?.color || moods.UNKNOWN.color;
+  });
+}
+// const diaryForSelectedDate = diaries.find(
+//   (d) => dayjs(d.createdAt).format("YYYY-MM-DD") === dayjs(selectedDate).format("YYYY-MM-DD")
+// );
+
+
 
   return (
     <div className="flex flex-col items-center p-4 bg-black text-white rounded-2xl w-full max-w-3xl gap-5">
-      {/* Header */}
+      
       <div className="flex justify-between items-center w-full mb-4">
         <button
           onClick={prevMonth}
@@ -68,14 +94,14 @@ export default function Calendar1({ selectedDate, onSelectDate }: CalendarProps)
         </button>
       </div>
 
-      {/* Days of week */}
+     
       <div className="grid grid-cols-7 gap-1 sm:gap-2 w-full text-center text-gray-400 mb-2 text-xs sm:text-sm md:text-base">
         {"Mon Tue Wed Thu Fri Sat Sun".split(" ").map((d) => (
           <div key={d}>{d}</div>
         ))}
       </div>
 
-      {/* Calendar Grid */}
+  
       <div className="grid grid-cols-7 gap-1 sm:gap-2 w-full">
         {generateCalendar().map((week, i) => (
           <div key={i} className="contents">
@@ -94,12 +120,7 @@ export default function Calendar1({ selectedDate, onSelectDate }: CalendarProps)
                     text-xs sm:text-sm md:text-base
                     h-4 sm:h-12 md:h-16 lg:h-20 cursor-pointer transition-all duration-200
                     ${isToday ? "border-orange-400" : "border-transparent"}
-                    ${
-                      special === "pink"
-                        ? "bg-pink-500 shadow-[0_0_10px_#ff00ff]"
-                        : ""
-                    }
-                    ${special === "blue" ? "bg-blue-600 border-orange-400" : ""}
+                     ${special ? `${special}` : ""}
                     ${
                       selectedDate === dateStr
                         ? "border-yellow-200 shadow-[0_0_15px_#ffe600]"
@@ -116,74 +137,17 @@ export default function Calendar1({ selectedDate, onSelectDate }: CalendarProps)
         ))}
       </div>
 
-      <p>Давамгайлсан сэтгэл хөдлөл</p>
+      <p className="font-medium">сэтгэл хөдлөл</p>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-auto">
-        <div className="flex items-center gap-2">
-          <p className="h-3 w-3 rounded-2xl bg-amber-500 "></p>
-          <p>😊 Баяртай</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <p className="h-3 w-3 rounded-2xl bg-green-500 "></p>
-          <p>😌 Тайван</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <p className="h-3 w-3 rounded-2xl bg-red-500 "></p>
-          <p>😡 Ууртай</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <p className="h-3 w-3 rounded-2xl bg-blue-500 "></p>
-          <p>🥺 Гунигтай</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <p className="h-3 w-3 rounded-2xl bg-purple-600 "></p>
-          <p>😨 Стресстэй</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <p className="h-3 w-3 rounded-2xl bg-black border "></p>
-          <p>mood aahgui</p>
-        </div>
+        {Object.values(moods).map((mood, idx) => (
+          <div key={idx} className="flex items-center gap-2">
+            <p className={`h-3 w-3 rounded-2xl ${mood.color}`}></p>
+            <p>
+              {mood.emoji} {mood.label}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
-
-// const journals = [
-//   {
-//     date: "2024-07-32",
-//     journal: "GOy odr",
-//   },
-//   {
-//     date: "2024-07-32",
-//     journal: "GOy odr",
-//   },
-// ];
-
-// let selectedDateIndex = 0;
-
-// const onSelectJournal = (journalIndex) => {
-//   selectedDateIndex = journalIndex;
-// };
-
-// <div>{journals[selectedDateIndex]}</div>
-
-// const ParentComponent = () => {
-//   let selectedDateIndex = 0;
-//   const journals = [
-//   {
-//     date: "2024-07-32",
-//     journal: "GOy odr",
-//   },
-//   {
-//     date: "2024-07-32",
-//     journal: "GOy odr",
-//   },
-// ];
-
-// const selectedJournal = journals[selectedDateIndex]
-
-//   // return
-//   <div>
-//     {/* //child 1 journals  onSelectJournal */}
-//     {/* //child 2 selectedJournal */}
-//   </div>;
-// };

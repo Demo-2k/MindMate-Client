@@ -8,17 +8,17 @@ import { Activity, Flame, Sparkles } from "lucide-react";
 import { DiaryNote } from "@/types";
 import { UserContext } from "@/provider/userProvider";
 
+
 const data = {
   mood: "happy",
   streak: 3,
   progress: 60,
 };
 
-
-
 interface MoodBarProps {
   moodsFromBackend: string[]; // жишээ: ['ТАЙВАН','ТАЙВАН']
 }
+
 const images = [
   "https://media.giphy.com/media/rwiOduiq2oatO/giphy.gif",
   "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ZDFqYWt2enBqMmhjM3RzeHIzMGtleTc3eWVwNDBseWJ0NG5tanhpdiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/bgHDlfCiHdsGoQl3vm/giphy.gif",
@@ -28,29 +28,49 @@ const images = [
   "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHJlZHR5NnNxcnh5NDdiaXRudTJwcDdybDk2eG41dmNmNTJ1Z3JmZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Oj5I04j19PNJeV9g1R/giphy.gif",
   "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YXV5OXo4eWJoYW04cHhkaDZtamV0Ym5hb2gwYmRlNDRzOWRiMXc1byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/fWrorpy7Jrlvi/giphy.gif",
   "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXZwYzdnMXRkY2MxYnhxN2VpYmVicDlnNnp1ZjlxYTZjNDIwYzhycCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MuEgKN1kAJDlFdqbVC/giphy.gif",
-  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3OHdjMXplaXh6YWdjNTV5MjJ1YXVxNnI5N2xobGhoOWtraGZ5ZXBnaSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4QZK21zlzVIyc/giphy.gif"
+  "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3OHdjMXplaXh6YWdjNTV5MjJ1YXVxNnI5N2xobGhoOWtraGZ5ZXBnaSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4QZK21zlzVIyc/giphy.gif",
 ];
 
-
-const moodMap: Record<string, { emoji: string; color: string }> = {
-  БАЯРТАЙ: { emoji: "БАЯРТАЙ", color: "amber-500" },
-  ТАЙВАН: { emoji: "ТАЙВАН", color: "green-500" },
-  УУРТАЙ: { emoji: "УУРТАЙ", color: "red-500" },
-  ГУНИГТАЙ: { emoji: "ГУНИГТАЙ", color: "blue-500" },
-  СТРЕССТЭЙ: { emoji: "СТРЕССТЭЙ", color: "purple-600" },
+const moodMap: Record<
+  string,
+  { Icon: LucideIcon; textClass: string; bgClass: string }
+> = {
+  БАЯРТАЙ: {
+    Icon: Smile,
+    textClass: "text-amber-500",
+    bgClass: "bg-amber-100",
+  },
+  ТАЙВАН: { Icon: Leaf, textClass: "text-green-500", bgClass: "bg-green-100" },
+  УУРТАЙ: { Icon: Angry, textClass: "text-red-500", bgClass: "bg-red-100" },
+  ГУНИГТАЙ: { Icon: Frown, textClass: "text-blue-500", bgClass: "bg-blue-100" },
+  СТРЕССТЭЙ: {
+    Icon: AlertTriangle,
+    textClass: "text-purple-600",
+    bgClass: "bg-purple-100",
+  },
 };
 
 const allMoods = Object.values(moodMap);
-// console.log("allMood", moodMap[0].color);
+
+import {
+  type LucideIcon,
+  Smile,
+  Leaf,
+  Angry,
+  Frown,
+  AlertTriangle,
+  HelpCircle,
+} from "lucide-react";
 
 export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
   console.log(
     "lastDiary?.aiinsight?.mood_caption",
     lastDiary?.aiInsight?.mood_caption
   );
-const {userProvider} = useContext(UserContext)
+  const { userProvider } = useContext(UserContext);
 
   const moodsFromBackend = lastDiary?.analysis?.emotions;
+  console.log("bbbbbbbb", moodsFromBackend);
 
   const [progressValue, setProgressValue] = useState(data.progress);
   const [greeting, setGreeting] = useState("");
@@ -69,13 +89,12 @@ const {userProvider} = useContext(UserContext)
     }
   }, []);
 
-   const dailyImage = useMemo(() => {
+  const dailyImage = useMemo(() => {
     const today = new Date();
     const dayNumber = today.getDate(); // 1-31
     const index = dayNumber % images.length; // index-г array-д тааруулна
     return images[index];
   }, []);
-
   return (
     <div>
       <div className="bg-black text-white grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
@@ -96,41 +115,30 @@ const {userProvider} = useContext(UserContext)
             </div>
           </Card>
           <Card className="bg-black text-white p-6 border-white/20">
-            {allMoods.map((mood) => {
-              // moodsFromBackend-д байгаа эсэхийг шалгах
-              const isActive = moodsFromBackend?.includes(mood?.emoji);
+            {Object.entries(moodMap).map(([moodName, { Icon, textClass, bgClass }]) => {
+                const isActive = (moodsFromBackend ?? []).includes(moodName);
 
-              // Tailwind class-уудыг static хадгалах
-              const moodClasses: Record<string, string> = {
-                БАЯРТАЙ: "border-amber-500",
-                ТАЙВАН: "border-green-500",
-                УУРТАЙ: "border-red-500",
-                ГУНИГТАЙ: "border-blue-500",
-                СТРЕССТЭЙ: "border-purple-600",
-              };
-
-              return (
-                <div
-                  key={mood.emoji}
-                  className="flex flex-col gap-1 items-center"
-                >
-                  <p
-                    className={`text-2xl ${
-                      isActive ? "opacity-100" : "opacity-30"
-                    }`}
-                  >
-                    {mood.emoji}
-                  </p>
+                return (
                   <div
-                    className={`border-2 rounded-4xl w-4 h-1 ${
-                      isActive ? moodClasses[mood.emoji] : "border-gray-500"
-                    }`}
-                  ></div>
-                </div>
-              );
-            })}
+                    key={moodName}
+                    className="flex flex-col gap-1 items-center"
+                  >
+                    <Icon
+                      className={`h-8 w-8 ${
+                        isActive ? textClass : "opacity-30"
+                      }`}
+                    />
+                    <div
+                      className={`border-2 rounded-4xl w-4 h-1 ${
+                        isActive ? bgClass : "border-gray-500"
+                      }`}
+                    ></div>
+                    <span className="text-xs mt-1">{moodName}</span>
+                  </div>
+                );
+              }
+            )}
           </Card>
-       
         </div>
 
         {/* Journal Section */}
@@ -141,8 +149,6 @@ const {userProvider} = useContext(UserContext)
             </h2>
             <p className="mt-2 text-base">{lastDiary?.aiInsight?.tldr}</p>
           </Card>
-
-      
         </div>
 
         {/* Right Sidebar */}
