@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { Month } from "../calendar/month";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../ui/dialog";
 import { Analysis } from "./analyze";
 
 const emojis = ["✨", "🌸", "🍀", "🫧", "🧸"];
@@ -67,6 +67,7 @@ export function CoverImage() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!max-w-7xl w-full h-[80vh] bg-black overflow-auto">
           <DialogTitle></DialogTitle>
+          <DialogDescription></DialogDescription>
           <div className="bg-black flex flex-col gap-4 border-[#2a2a2a] rounded-lg w-full h-full ">
             <div
               className=" w-full mx-auto h-50  rounded-xl overflow-hidden shadow-lg"

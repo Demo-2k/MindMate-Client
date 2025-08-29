@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { TreePalm } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -119,7 +119,7 @@ export function DialogBreath() {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!max-w-7xl w-full h-[70vh] bg-black overflow-auto">
-          <DialogTitle></DialogTitle>
+          <DialogTitle></DialogTitle> <DialogDescription></DialogDescription>
 
           <div className=" flex items-center justify-center px-6">
             <div className="w-full max-w-md text-center">

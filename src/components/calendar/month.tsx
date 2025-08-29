@@ -5,8 +5,7 @@ import { userDiaryContext } from "@/provider/userDiaryProvider";
 import MoodJournal from "./moodJournal";
 import { Calendar } from "lucide-react";
 import { Button } from "../ui/button";
-
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import Calendar1 from "./calendar";
 
@@ -14,6 +13,7 @@ const emojis = ["✨", "🌸", "🍀", "🫧", "🧸"];
 
 export const Month = () => {
   const { diaries } = useContext(userDiaryContext);
+   const lastDiary = diaries;
 
   const today = new Date();
   const day = today.getDate();
@@ -75,7 +75,7 @@ export const Month = () => {
       </Tooltip>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!max-w-7xl w-full h-[90vh] bg-black  overflow-auto">
-          <DialogTitle></DialogTitle>
+          <DialogTitle></DialogTitle> <DialogDescription></DialogDescription>
           <div className="bg-black flex flex-col gap-4   border-[#2a2a2a] rounded-lg w-full h-full ">
             <div
               className=" w-full mx-auto h-50  rounded-xl overflow-hidden shadow-lg"
@@ -109,6 +109,7 @@ export const Month = () => {
               <Calendar1
                 selectedDate={selectedDate}
                 onSelectDate={setSelectedDate}
+                 diaries={diaries} 
               />
               <MoodJournal
                 note={diaryForSelectedDate?.note || ""}
