@@ -6,16 +6,23 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 type diaryTextAreaProps = {
   handleDiarySave: () => void;
   setText: Dispatch<SetStateAction<string>>;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  isOpen: boolean;
+  text: string;
 };
 
 export const DairyText = ({
   handleDiarySave,
   setText,
-  setIsOpen,
-  isOpen,
+  text,
 }: diaryTextAreaProps) => {
+  const [isDisabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (text.trim().length === 0) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [text]);
   return (
     <div className="flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
       {/* Diary button */}
@@ -52,23 +59,25 @@ export const DairyText = ({
         />
 
         <div className="flex justify-end mt-6 gap-3">
-          <button
-            onClick={() => setIsOpen(false)}
+          {/* <button
             className="px-5 py-2 rounded-lg 
              bg-gray-200 hover:bg-gray-300 
              text-gray-700 font-medium
              transition duration-200"
           >
             Болих
-          </button>
+          </button> */}
 
           <button
             onClick={handleDiarySave}
-            className="px-5 py-2 rounded-lg text-white font-medium
-             bg-gradient-to-r from-violet-500 to-sky-500
-             hover:from-violet-600 hover:to-sky-600
-             focus:ring-2 focus:ring-violet-300
-             transition duration-200 shadow-md"
+            disabled={isDisabled} // <-- идэвхгүй болгоно
+            className={`px-5 py-2 rounded-lg text-white font-medium
+              transition duration-200 shadow-md
+              ${
+                isDisabled
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-gradient-to-r from-violet-500 to-sky-500 hover:from-violet-600 hover:to-sky-600 focus:ring-2 focus:ring-violet-300"
+              }`}
           >
             Хадгалах
           </button>
