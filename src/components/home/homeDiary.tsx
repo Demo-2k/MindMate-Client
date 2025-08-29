@@ -58,7 +58,7 @@ export default function HomeDiary() {
     try {
       // Шинэ note үүсгэх
       const response = await axios.post(
-        `http://localhost:4001/ai/postDiary/${userProvider.id}`,
+        `http://localhost:4001/ai/postDiary/${userProvider?.id}`,
         { text: text }
       );
 

@@ -19,6 +19,7 @@ export default function ProfileDropdown() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
+
   const handeLogOut = () => {
     setLoading(true);
     localStorage.removeItem("token");
@@ -34,19 +35,39 @@ export default function ProfileDropdown() {
       </div>
     );
   }
+
+     if (!userProvider || Object.keys(userProvider).length === 0) {
+    return (
+      <div className="absolute top-4 left-4 flex items-center gap-3 z-50">
+        <Button
+          variant="outline"
+          onClick={() => router.push("/sign-up")}
+        >
+          Sign Up
+        </Button>
+        <Button
+          variant="default"
+          onClick={() => router.push("/sign-in")}
+        >
+          Login
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div className="absolute top-4 left-4 flex items-center gap-3 ">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="cursor-pointer">
-            <AvatarImage src="https://i.pravatar.cc/100" alt="User" />
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
             <AvatarFallback>RB</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className="w-40 mt-2 bg-black p-2 rounded-lg border border-yellow-400">
           <DropdownMenuItem
-            onClick={() => router.push("/profile")}
+            onClick={() => router.push("/")}
             className="group flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer hover:bg-transparent"
           >
             <User className="h-4 w-4 text-white group-hover:text-black" />

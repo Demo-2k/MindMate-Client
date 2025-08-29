@@ -18,10 +18,10 @@ export default function UserContextProvider({
   children: React.ReactNode;
 }) {
   const [userProvider, setUserProvider] = useState({} as User);
+  
  
   const getCurrentUserByAccessToken = async () => {
     const token = localStorage.getItem("token") as string;
-    
     
     try {
       const response = await axios.get(
