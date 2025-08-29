@@ -68,16 +68,16 @@ export default function SignIn() {
   const onSubmit = (values: z.infer<typeof formSchema>) => submitLogin(values.email, values.password);
 
   return (
-     <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-200 to-blue-400">
+     <div className="flex flex-col min-h-screen ">
       {/* Header */}
-      <header className="w-full bg-blue-200 p-4 flex items-center gap-3 justify-center shadow">
+      {/* <header className="w-full bg-blue-200 p-4 flex items-center gap-3 justify-center shadow">
         <MessageSquareHeart className="w-8 h-8 text-pink-500" />
         <div className="flex flex-col leading-tight">
           <span className="text-4xl font-bold text-black">MindMate</span>
           <span className="text-lg font-medium text-black">Your daily vibe check ✨</span>
         </div>
       </header>
-      
+       */}
     
       {/* Main content */}
       <main className="flex flex-1 items-center justify-center py-12">
