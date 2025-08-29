@@ -18,6 +18,7 @@ import ProfileDropdown from "../profileDropdown";
 import Clock from "./time";
 import { ShowAvatarHome } from "../avatar/homeShowAvatar";
 import { ChatBot } from "../chatBot/chatBot";
+// import { ChatBotBreathEx } from "../chatBot/chatBotBreath";
 
 export default function HomeDiary() {
   const { userProvider } = useContext(UserContext);
@@ -38,18 +39,18 @@ export default function HomeDiary() {
     try {
       // Шинэ note үүсгэх
 
-      // const response = await axios.post(
-      //   `http://localhost:4001/ai/postDiary/${userProvider.id}`,
+      const response = await axios.post(
+        `http://localhost:4001/ai/postDiary/${userProvider.id}`,
 
-      //   { text: text }
-      // );
-      // setCurrentDiaryId(response.data.id);
+        { text: text }
+      );
+      setCurrentDiaryId(response.data.id);
 
-      // console.log("responssee", response);
+      console.log("responssee", response);
 
-      // if (response.status === 200) {
-      //   toast.success("Амжилттай нэмэгдлээ");
-      // }
+      if (response.status === 200) {
+        toast.success("Амжилттай нэмэгдлээ");
+      }
       setShowAvatarQuestion(true);
     } catch (error) {
       toast.error("Error saving diary");
@@ -68,6 +69,16 @@ export default function HomeDiary() {
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
+      {/* <ChatBotBreathEx  /> */}
+      <div className="z-50">{showChatBotHome && <ChatBot />}</div>
+
+      <div className="absolute bottom-20 right-20 z-40">
+        <ShowAvatarHome
+          setShowChatBotHome={setShowChatBotHome}
+          showAvatarQuestion={showAvatarQuestion}
+        />
+      </div>
+
       <div className="h-[80%]">
         <DairyText
           setText={setText}
@@ -79,20 +90,10 @@ export default function HomeDiary() {
       <ProfileDropdown />
 
       <Clock />
-      <SpotifyEmbed />
 
       <SpotifyEmbed />
 
-      <div className="w-30 h-30 bg-pink-300 rounded-full absolute bottom-20 right-20 z-50 flex flex-col items-center text-white gap-1"></div>
-
-      {showChatBotHome && <ChatBot />}
-
-      <div className="absolute bottom-20 right-20 z-50">
-        <ShowAvatarHome
-          setShowChatBotHome={setShowChatBotHome}
-          showAvatarQuestion={showAvatarQuestion}
-        />
-      </div>
+      <div className="w-30 h-30 bg-pink-300 rounded-full absolute bottom-20 right-20 z-30 flex flex-col items-center text-white gap-1"></div>
 
       <div className="backdrop-blur-md mt-15 py-3 px-7 border-none rounded-lg ">
         <BarSide />
