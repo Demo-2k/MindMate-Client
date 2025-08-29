@@ -13,8 +13,7 @@ const emojis = ["✨", "🌸", "🍀", "🫧", "🧸"];
 
 export const Month = () => {
   const { diaries } = useContext(userDiaryContext);
-   const lastDiary = diaries;
-
+  
   const today = new Date();
   const day = today.getDate();
   const year = today.getFullYear();
