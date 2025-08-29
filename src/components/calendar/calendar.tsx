@@ -67,9 +67,6 @@ if (Array.isArray(diaries)) {
     specialDates[dateStr] = moods[mood]?.color || moods.UNKNOWN.color;
   });
 }
-// const diaryForSelectedDate = diaries.find(
-//   (d) => dayjs(d.createdAt).format("YYYY-MM-DD") === dayjs(selectedDate).format("YYYY-MM-DD")
-// );
 
 
 

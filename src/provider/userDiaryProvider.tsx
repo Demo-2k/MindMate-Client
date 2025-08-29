@@ -22,7 +22,7 @@ export default function UserDiaryProvider({
 }) {
   const [loading, setLoading] = useState(false);
   const [diaries, setDiaries] = useState<DiaryNote[]>([]);
-  const { userProvider } = useContext(UserContext);
+  const { userProvider, loading: userLoading } = useContext(UserContext);
 
   const fetchDiary = async () => {
     if (!userProvider?.id) return;
@@ -47,7 +47,7 @@ export default function UserDiaryProvider({
 
   useEffect(() => {
     fetchDiary();
-  }, [userProvider]);
+  }, [userProvider.id, userLoading]);
 
   if (loading) return <Loading />;
 
@@ -57,3 +57,13 @@ export default function UserDiaryProvider({
     </userDiaryContext.Provider>
   );
 }
+
+// const obj1 = {
+//   name: "bold",
+// };
+
+// const obj2 = {
+//   name: "bold",
+// };
+
+// [obj1, obj2]
