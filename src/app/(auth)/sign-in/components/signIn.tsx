@@ -8,7 +8,8 @@ import Link from "next/link";
 import axios from "axios";
 import { toast } from "sonner";
 import { MessageSquareHeart } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "@/provider/userProvider";
 
 const formSchema = z.object({
   email: z.string().min(1, { message: "Email is required" }).email({ message: "Please enter a valid email." }),
@@ -24,6 +25,8 @@ type UserType = {
 export default function SignIn() {
   const { push } = useRouter();
   const [user, setUser] = useState<UserType | null>(null);
+
+  const {getCurrentUserByAccessToken} = useContext(UserContext)
 
   // JWT-аас user state авах
   useEffect(() => {
@@ -54,6 +57,8 @@ export default function SignIn() {
       localStorage.setItem("token", res.data.accesstoken);
       setUser(res.data.user);
       toast.success("Login successful!");
+
+      await getCurrentUserByAccessToken();
       push("/");
     } catch {
       toast.error("Login failed");

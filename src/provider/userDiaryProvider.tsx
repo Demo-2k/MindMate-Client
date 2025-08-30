@@ -9,6 +9,7 @@ import { toast } from "sonner";
 
 type userDiariesProviderType = {
   diaries: DiaryNote[];
+  fetchDiary: () => Promise<void>;
 };
 
 export const userDiaryContext = createContext<userDiariesProviderType>(
@@ -52,7 +53,7 @@ export default function UserDiaryProvider({
   if (loading) return <Loading />;
 
   return (
-    <userDiaryContext.Provider value={{ diaries }}>
+    <userDiaryContext.Provider value={{ diaries, fetchDiary }}>
       {children}
     </userDiaryContext.Provider>
   );

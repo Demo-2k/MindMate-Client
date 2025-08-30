@@ -8,7 +8,6 @@ import { Activity, Flame, Sparkles } from "lucide-react";
 import { DiaryNote } from "@/types";
 import { UserContext } from "@/provider/userProvider";
 
-
 const data = {
   mood: "happy",
   streak: 3,
@@ -63,14 +62,9 @@ import {
 } from "lucide-react";
 
 export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
-  console.log(
-    "lastDiary?.aiinsight?.mood_caption",
-    lastDiary?.aiInsight?.mood_caption
-  );
   const { userProvider } = useContext(UserContext);
 
   const moodsFromBackend = lastDiary?.analysis?.emotions;
-  console.log("bbbbbbbb", moodsFromBackend);
 
   const [progressValue, setProgressValue] = useState(data.progress);
   const [greeting, setGreeting] = useState("");
@@ -115,7 +109,8 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
             </div>
           </Card>
           <Card className="bg-black text-white p-6 border-white/20">
-            {Object.entries(moodMap).map(([moodName, { Icon, textClass, bgClass }]) => {
+            {Object.entries(moodMap).map(
+              ([moodName, { Icon, textClass, bgClass }]) => {
                 const isActive = (moodsFromBackend ?? []).includes(moodName);
 
                 return (

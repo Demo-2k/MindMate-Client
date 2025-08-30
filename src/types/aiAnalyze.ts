@@ -31,7 +31,7 @@ export type AiInsight = {
   moodChallenge: moodChallengeType
 }
 
-type AchievementsType ={
+export type AchievementsType ={
     id :string,
     desc:string,
     title:string
