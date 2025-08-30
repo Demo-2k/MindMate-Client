@@ -4,15 +4,17 @@ import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type diaryTextAreaProps = {
-  handleDiarySave: () => void;
+  handleSaveButtonDiary: () => void;
   setText: Dispatch<SetStateAction<string>>;
   text: string;
+  setShowDiaryInput: Dispatch<SetStateAction<boolean>>;
 };
 
 export const DairyText = ({
-  handleDiarySave,
+  handleSaveButtonDiary,
   setText,
   text,
+  setShowDiaryInput,
 }: diaryTextAreaProps) => {
   const [isDisabled, setDisabled] = useState(true);
 
@@ -59,17 +61,18 @@ export const DairyText = ({
         />
 
         <div className="flex justify-end mt-6 gap-3">
-          {/* <button
+          <button
+            onClick={() => setShowDiaryInput(false)}
             className="px-5 py-2 rounded-lg 
              bg-gray-200 hover:bg-gray-300 
              text-gray-700 font-medium
              transition duration-200"
           >
             Болих
-          </button> */}
+          </button>
 
           <button
-            onClick={handleDiarySave}
+            onClick={handleSaveButtonDiary}
             disabled={isDisabled} // <-- идэвхгүй болгоно
             className={`px-5 py-2 rounded-lg text-white font-medium
               transition duration-200 shadow-md
