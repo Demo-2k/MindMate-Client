@@ -1,10 +1,8 @@
 "use client";
-
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
-import { CoverImage } from "./coverImage";
-import { Activity, Flame, Sparkles } from "lucide-react";
+import { Activity } from "lucide-react";
 import { DiaryNote } from "@/types";
 import { UserContext } from "@/provider/userProvider";
 
@@ -13,10 +11,6 @@ const data = {
   streak: 3,
   progress: 60,
 };
-
-interface MoodBarProps {
-  moodsFromBackend: string[]; // жишээ: ['ТАЙВАН','ТАЙВАН']
-}
 
 const images = [
   "https://media.giphy.com/media/rwiOduiq2oatO/giphy.gif",
@@ -29,27 +23,7 @@ const images = [
   "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXZwYzdnMXRkY2MxYnhxN2VpYmVicDlnNnp1ZjlxYTZjNDIwYzhycCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MuEgKN1kAJDlFdqbVC/giphy.gif",
   "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3OHdjMXplaXh6YWdjNTV5MjJ1YXVxNnI5N2xobGhoOWtraGZ5ZXBnaSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4QZK21zlzVIyc/giphy.gif",
 ];
-
-const moodMap: Record<
-  string,
-  { Icon: LucideIcon; textClass: string; bgClass: string }
-> = {
-  БАЯРТАЙ: {
-    Icon: Smile,
-    textClass: "text-amber-500",
-    bgClass: "bg-amber-100",
-  },
-  ТАЙВАН: { Icon: Leaf, textClass: "text-green-500", bgClass: "bg-green-100" },
-  УУРТАЙ: { Icon: Angry, textClass: "text-red-500", bgClass: "bg-red-100" },
-  ГУНИГТАЙ: { Icon: Frown, textClass: "text-blue-500", bgClass: "bg-blue-100" },
-  СТРЕССТЭЙ: {
-    Icon: AlertTriangle,
-    textClass: "text-purple-600",
-    bgClass: "bg-purple-100",
-  },
-};
-
-const allMoods = Object.values(moodMap);
+type EmotionCategory = "БАЯРТАЙ" | "ТАЙВАН" | "УУРТАЙ" | "ГУНИГТАЙ" | "СТРЕССТЭЙ";
 
 import {
   type LucideIcon,
@@ -58,20 +32,16 @@ import {
   Angry,
   Frown,
   AlertTriangle,
-  HelpCircle,
 } from "lucide-react";
 
 export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
   const { userProvider } = useContext(UserContext);
-
-  const moodsFromBackend = lastDiary?.analysis?.emotions;
-
   const [progressValue, setProgressValue] = useState(data.progress);
   const [greeting, setGreeting] = useState("");
+  const moodsFromBackend = lastDiary?.analysis?.emotions;
 
   useEffect(() => {
     const hour = new Date().getHours();
-
     if (hour >= 5 && hour < 12) {
       setGreeting("Өглөөний мэнд ☀️,");
     } else if (hour >= 12 && hour < 17) {
@@ -85,10 +55,22 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
 
   const dailyImage = useMemo(() => {
     const today = new Date();
-    const dayNumber = today.getDate(); // 1-31
-    const index = dayNumber % images.length; // index-г array-д тааруулна
+    const dayNumber = today.getDate(); 
+    const index = dayNumber % images.length; 
     return images[index];
   }, []);
+
+  const moodMap: Record<
+  EmotionCategory,
+  { Icon: LucideIcon; textClass: string; }
+> = {
+  БАЯРТАЙ: { Icon: Smile, textClass: "text-amber-300",  },
+  ТАЙВАН: { Icon: Leaf, textClass: "text-emerald-400", },
+  УУРТАЙ: { Icon: Angry, textClass: "text-rose-500",  },
+  ГУНИГТАЙ: { Icon: Frown, textClass: "text-sky-400",  },
+  СТРЕССТЭЙ: { Icon: AlertTriangle, textClass: "text-violet-400", },
+};
+
   return (
     <div>
       <div className="bg-black text-white grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
@@ -110,8 +92,8 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
           </Card>
           <Card className="bg-black text-white p-6 border-white/20">
             {Object.entries(moodMap).map(
-              ([moodName, { Icon, textClass, bgClass }]) => {
-                const isActive = (moodsFromBackend ?? []).includes(moodName);
+              ([moodName, { Icon, textClass }]) => {
+                const isActive = (moodsFromBackend ?? []).includes(moodName as EmotionCategory);
 
                 return (
                   <div
@@ -123,11 +105,6 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
                         isActive ? textClass : "opacity-30"
                       }`}
                     />
-                    <div
-                      className={`border-2 rounded-4xl w-4 h-1 ${
-                        isActive ? bgClass : "border-gray-500"
-                      }`}
-                    ></div>
                     <span className="text-xs mt-1">{moodName}</span>
                   </div>
                 );
@@ -149,7 +126,7 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
         {/* Right Sidebar */}
         <div className="flex flex-col gap-4">
           <Card className="bg-cover bg-center text-white border-white/20 p-6 bg-[url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWNhejU3dWw4aTUzenJmZjY0eTEwYmU4YnQ1dGJvcHg2eWZ4NGYzdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1zgzISaYrnMAYRJJEr/giphy.gif')]">
-            <p className="text-md font-extrabold"> Today's Prompt ✏️ </p>
+            <p className="text-md font-extrabold"> Today&apos;s Prompt ✏️ </p>
             <p> How can you ensure you stay positive and motivated today? </p>
           </Card>
           <Card className="bg-black text-white border-white/20 p-6">
