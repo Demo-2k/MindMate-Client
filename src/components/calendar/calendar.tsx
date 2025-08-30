@@ -19,29 +19,27 @@ export default function Calendar1({
   diaries,
 }: Calendar1Props) {
 
-  const moods: Record<string, { color: string; label: string; emoji: string }> =
-    {
-      БАЯРТАЙ: { color: "bg-amber-500", label: "Баяртай", emoji: "😊" },
-      ТАЙВАН: { color: "bg-green-500", label: "Тайван", emoji: "😌" },
-      УУРТАЙ: { color: "bg-red-500", label: "Ууртай", emoji: "😡" },
-      ГУНИГТАЙ: { color: "bg-blue-500", label: "Гунигтай", emoji: "🥺" },
-      СТРЕССТЭЙ: { color: "bg-purple-600", label: "Стресстэй", emoji: "😨" },
-      UNKNOWN: { color: "bg-black border", label: "Mood алга", emoji: "❓" },
-    };
-
   const [currentMonth, setCurrentMonth] = useState(dayjs());
-
   const daysInMonth = currentMonth.daysInMonth();
   const startDay = currentMonth.startOf("month").isoWeekday() - 1;
-
   const today = dayjs();
 
   const prevMonth = () => setCurrentMonth(currentMonth.subtract(1, "month"));
   const nextMonth = () => setCurrentMonth(currentMonth.add(1, "month"));
 
+    const moods: Record<string, { color: string; label: string; emoji: string }> =
+    {
+      БАЯРТАЙ: { color: "bg-amber-300", label: "Баяртай", emoji: "😊" },
+      ТАЙВАН: { color: "bg-emerald-400", label: "Тайван", emoji: "😌" },
+      УУРТАЙ: { color: "bg-rose-500", label: "Ууртай", emoji: "😡" },
+      ГУНИГТАЙ: { color: "bg-sky-400", label: "Гунигтай", emoji: "🥺" },
+      СТРЕССТЭЙ: { color: "bg-violet-400", label: "Стресстэй", emoji: "😨" },
+      UNKNOWN: { color: "bg-black border", label: "Mood алга", emoji: "❓" },
+    };
+
   const generateCalendar = () => {
     const weeks = [];
-    let days = [];
+    const days = [];
 
     for (let i = 0; i < startDay; i++) {
       days.push(null);
