@@ -131,7 +131,7 @@ export async function sendMessage(
       const initialPrompt = `
         Өдрийн тэмдэглэл: "${diaryData.note}"
         Энэ тэмдэглэлийг уншаад, энгийн, найз шиг үгээр хариулт өгөөрэй.
-        Хэрвээ тэмдэглэлд 'СТРЕССТЭЙ' эсвэл 'ГУНИГТАЙ' мэдрэмж илэрч байвал хариултынхаа төгсгөлд '[BREATHE_SUGGESTION]' гэсэн тэмдэг нэмэхээ мартуузай.
+        Хэрвээ тэмдэглэлд 'СТРЕССТЭЙ', 'УУРТАЙ' эсвэл 'ГУНИГТАЙ' мэдрэмж илэрч байвал хариултынхаа төгсгөлд '[BREATHE_SUGGESTION]' гэсэн тэмдэг нэмэхээ мартуузай.
       `;
       const result = await chat.sendMessage(initialPrompt);
       console.log("result, ", result);

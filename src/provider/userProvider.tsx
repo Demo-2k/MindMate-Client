@@ -7,6 +7,7 @@ import React, { createContext, useEffect, useState } from "react";
 type userContextType = {
   userProvider: User;
   loading: boolean;
+  getCurrentUserByAccessToken:()=>void
 };
 
 export const UserContext = createContext({} as userContextType);
@@ -19,7 +20,7 @@ export default function UserContextProvider({
   const [userProvider, setUserProvider] = useState({} as User);
   const [loading, setLoading] = useState(false);
 
-  const getCurrentUserByAccessToken = async () => {
+const getCurrentUserByAccessToken = async () => {
     const token = localStorage.getItem("token") as string;
 
     try {
@@ -44,7 +45,7 @@ export default function UserContextProvider({
   }, []);
 
   return (
-    <UserContext.Provider value={{ userProvider, loading }}>
+    <UserContext.Provider value={{ userProvider, loading, getCurrentUserByAccessToken }}>
       {children}
     </UserContext.Provider>
   );

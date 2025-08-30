@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { BarSide } from "./BarSide";
 
@@ -22,7 +22,7 @@ import { ChatBot } from "../chatBot/chatBot";
 
 export default function HomeDiary() {
   const { userProvider } = useContext(UserContext);
-  const { diaries } = useContext(userDiaryContext);
+  const { diaries, fetchDiary } = useContext(userDiaryContext);
   const [text, setText] = useState("");
 
   const [currenDiaryId, setCurrentDiaryId] = useState<number | null>(null);
@@ -32,34 +32,45 @@ export default function HomeDiary() {
   const [showChatBotHome, setShowChatBotHome] = useState(false);
   const [showAvatarQuestion, setShowAvatarQuestion] = useState(false);
 
-  const curenDiary = diaries.filter((item) => item.id === currenDiaryId);
-  console.log("current dauirrrrrr", curenDiary);
+  // const curenDiary = diaries.filter((item) => item.id === currenDiaryId);
+  // console.log("diaries", curenDiary);
+  console.log("dairies diaress all:", diaries);
+  
 
   const handleDiarySave = async () => {
+    setLoading(true);
     try {
-      // Шинэ note үүсгэх
-
       const response = await axios.post(
         `http://localhost:4001/ai/postDiary/${userProvider.id}`,
 
         { text: text }
       );
-      setCurrentDiaryId(response.data.id);
+      setShowAvatarQuestion(true);
+      console.log("1.showAvatarQuestion", showAvatarQuestion);
+      // await fetchDiary();
+      // setCurrentDiaryId(response.data.id);
 
       console.log("responssee", response);
 
       if (response.status === 200) {
         toast.success("Амжилттай нэмэгдлээ");
       }
-      setShowAvatarQuestion(true);
     } catch (error) {
       toast.error("Error saving diary");
 
       console.error(error);
     } finally {
       setLoading(false);
+
+      console.log("2.showAvatarQuestion", showAvatarQuestion);
     }
   };
+  
+  useEffect(() => {
+    console.log("showAvatarQuestion updated:", showAvatarQuestion);
+  }, [showAvatarQuestion]);
+
+  console.log("3.showAvatarQuestion", showAvatarQuestion);
 
   if (laoding) {
     return <Loader />;
@@ -70,7 +81,7 @@ export default function HomeDiary() {
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
       {/* <ChatBotBreathEx  /> */}
-      <div className="z-50">{showChatBotHome && <ChatBot />}</div>
+      <div className="z-50">{showChatBotHome && <ChatBot diaries={diaries} />}</div>
 
       <div className="absolute bottom-20 right-20 z-40">
         <ShowAvatarHome

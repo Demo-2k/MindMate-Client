@@ -173,6 +173,7 @@ import { sendMessage } from "../action";
 import { DiaryNote } from "@/types";
 import { AchievementsType } from "@/types/aiAnalyze";
 import { ChatDialogBreath } from "./chatBotBreath";
+import axios from "axios";
 
 type analysisType = {
   summary: string;
@@ -192,29 +193,31 @@ type chatBotType = {
   diaries: DiaryNote;
 };
 
-export const ChatBot = () => {
+export const ChatBot = ({ diaries }: { diaries: DiaryNote[] }) => {
+  const setCurrentDiary = diaries[0];
+
+  const diaryData = {
+    id: setCurrentDiary.id,
+    userId: setCurrentDiary.userId,
+    note: setCurrentDiary.note,
+    analysis: {
+      summary: setCurrentDiary.analysis?.summary || "",
+      emotions: setCurrentDiary.analysis?.emotions || [],
+      needs: setCurrentDiary.aiInsight?.achievements || [],
+    },
+  };
+
   // const diaryData = {
-  //   id: diaries.id,
-  //   userId: diaries.userId,
-  //   note: diaries.note,
+  //   id: 325,
+  //   userId: 1,
+  //   note: "Мэдэхгүй төслөөс болоод хэд хоног бүр аймар муухай стрессдээд. Багийнхантай ч ойлгоцож чадахгүй хүн болгон намайг муулаад зүхээдч байгаа юм шиг тийм л мэдрэмж төрөөд байна",
   //   analysis: {
-  //     summary: diaries.analysis?.summary || "",
-  //     emotions: diaries.analysis?.emotions || [],
-  //     needs: diaries.aiInsight?.achievements || [],
+  //     summary:
+  //       "Төслийн учир нь гайгүй ойлгогдож байгаа ч хангалтгүй мэдрэмж төрөөд, өөрийгөө байнга дутуу үнэлээд байгаа бололтой. Хичээгээд ч хангалттай биш санагдаад байгаа юм шиг байна.",
+  //     emotions: ["ГУНИГТАЙ", "СТРЕССТЭЙ"],
+  //     needs: ["encouragement", "focus"],
   //   },
   // };
-
-    const diaryData = {
-      id: 325,
-      userId: 1,
-      note: "Мэдэхгүй төслөөс болоод хэд хоног бүр аймар муухай стрессдээд. Багийнхантай ч ойлгоцож чадахгүй хүн болгон намайг муулаад зүхээдч байгаа юм шиг тийм л мэдрэмж төрөөд байна",
-      analysis: {
-        summary:
-          "Төслийн учир нь гайгүй ойлгогдож байгаа ч хангалтгүй мэдрэмж төрөөд, өөрийгөө байнга дутуу үнэлээд байгаа бололтой. Хичээгээд ч хангалттай биш санагдаад байгаа юм шиг байна.",
-        emotions: ["ГУНИГТАЙ", "СТРЕССТЭЙ"],
-        needs: ["encouragement", "focus"],
-      },
-    };
 
   const [showBreathing, setShowBreathing] = useState(false);
 
@@ -306,6 +309,12 @@ export const ChatBot = () => {
       // API руу шинэ мессеж болон хөрвүүлсэн түүхийг дамжуулах
       console.log("too::", userMessage);
 
+      // const response = await axios.post(`http://localhost:4001/api/chat`, {
+      //   userMessage,
+      //   chatHistory,
+      //   diaryData,
+      // });
+      // const aiReply = response.data;
       const aiReply = await sendMessage(
         userMessage.text,
         chatHistory,
