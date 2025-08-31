@@ -24,49 +24,63 @@ import NotebookCoverCard from "./note";
 export default function HomeDiary() {
   const { userProvider } = useContext(UserContext);
   const { diaries, fetchDiary } = useContext(userDiaryContext);
-  const [text, setText] = useState("");
+  const [text, setText] = useState<null | string>(null);
   const [showdiaryInput, setShowDiaryInput] = useState(false);
 
-  const [currenDiaryId, setCurrentDiaryId] = useState<number | null>(null);
+  // const [currenDiaryId, setCurrentDiaryId] = useState<number | null>(null);
   const [laoding, setLoading] = useState(false);
+  console.log("diaries", diaries[0]?.id);
 
   //SET SHOW AVATAR
   const [showChatBotHome, setShowChatBotHome] = useState(false);
   const [showAvatarQuestion, setShowAvatarQuestion] = useState(false);
 
-  // const curenDiary = diaries.filter((item) => item.id === currenDiaryId);
-  // console.log("diaries", curenDiary);
   console.log("dairies diaress all:", diaries);
+
+  // const getTodayDiary = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:4001/ai/getTodayDiary/${userProvider.id}`
+  //     );
+  //     console.log("today note ", response);
+
+  //     if (response.data?.note) {
+  //       setText(response.data.note); // Өдөрт бичсэн бүх entry-г харуулна
+  //     } else {
+  //       setText(""); // Өнөөдрийн бичлэг байхгүй бол хоосон
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     setText("");
+  //   }
+  // };
 
   const handleDiarySave = async () => {
     setLoading(true);
     try {
-      // const response = await axios.post(
-      //   `http://localhost:4001/ai/postDiary/${userProvider.id}`,
+      const response = await axios.post(
+        `http://localhost:4001/ai/postDiary/${userProvider.id}`,
 
-      //   { text: text }
-      // );
-      // setShowAvatarQuestion(true);
-      // console.log("1.showAvatarQuestion", showAvatarQuestion);
-      // // await fetchDiary();
-      // // setCurrentDiaryId(response.data.id);
-
-      // console.log("responssee", response);
-
-      // if (response.status === 200) {
-      //   toast.success("Амжилттай нэмэгдлээ");
-      // }
-
-      toast.success("Амжилттай нэмэгдлээ");
+        { text: text }
+      );
+      // setText(response.data.note);
       setShowAvatarQuestion(true);
+
+      console.log("response response", response);
+
+      await fetchDiary();
+      // setCurrentDiaryId(response.data.id);
+      if (response.status === 200) {
+        toast.success("Амжилттай нэмэгдлээ");
+      }
+
+      // setShowAvatarQuestion(true);
     } catch (error) {
       toast.error("Error saving diary");
 
       console.error(error);
     } finally {
       setLoading(false);
-
-      console.log("2.showAvatarQuestion", showAvatarQuestion);
     }
   };
 
@@ -75,9 +89,13 @@ export default function HomeDiary() {
     handleDiarySave();
   };
 
-  useEffect(() => {
-    console.log("showAvatarQuestion updated:", showAvatarQuestion);
-  }, [showAvatarQuestion]);
+  // useEffect(() => {
+  //   // if (diaries.length > 0) {
+  //   //   getTodayDiary();
+  //   // }
+  //   if(!diaries) return;
+  //   getTodayDiary();
+  // }, [diaries]);
 
   console.log("3.showAvatarQuestion", showAvatarQuestion);
 
@@ -85,6 +103,7 @@ export default function HomeDiary() {
     return <Loader />;
   }
 
+  console.log("text text:", text);
   console.log("showChatBotHome:", showChatBotHome);
 
   return (
@@ -92,7 +111,7 @@ export default function HomeDiary() {
       {/* <ChatBotBreathEx  /> */}
       {/* <div className="z-50">{showChatBotHome && <ChatBot diaries={diaries} />}</div> */}
 
-      <div className="z-50">{showChatBotHome && <ChatBot />}</div>
+      <div className="z-50">{showChatBotHome && <ChatBot setShowChatBotHome={setShowChatBotHome}/>}</div>
 
       <div className="absolute bottom-20 right-20 z-40">
         <ShowAvatarHome setShowChatBotHome={setShowChatBotHome} />
@@ -103,6 +122,12 @@ export default function HomeDiary() {
           <NotebookCoverCard />
         </div>
       )}
+      <ProfileDropdown />
+
+      <Clock />
+
+      <SpotifyEmbed />
+
 
       {showdiaryInput && (
         <div className="h-[80%]">
@@ -114,13 +139,8 @@ export default function HomeDiary() {
           />
         </div>
       )}
-      <ProfileDropdown />
 
-      <Clock />
-
-      <SpotifyEmbed />
-
-      <div className="backdrop-blur-md mt-15 py-3 px-7 border-none rounded-lg ">
+      <div className="backdrop-blur-md py-3 px-7 border-none rounded-lg absolute bottom-15">
         <BarSide />
       </div>
     </div>

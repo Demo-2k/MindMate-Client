@@ -69,7 +69,7 @@ export const Month = () => {
           </Button>
         </TooltipTrigger>
         <TooltipContent side="bottom">
-          <p>чигий түүх</p>
+          <p>чиний түүх</p>
         </TooltipContent>
       </Tooltip>
       <Dialog open={open} onOpenChange={setOpen}>

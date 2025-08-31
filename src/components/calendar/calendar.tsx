@@ -67,7 +67,6 @@ if (Array.isArray(diaries)) {
 }
 
 
-
   return (
     <div className="flex flex-col items-center p-4 bg-black text-white rounded-2xl w-full max-w-3xl gap-5">
       

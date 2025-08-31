@@ -4,12 +4,18 @@
 
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
 import ReactMarkdown from "react-markdown";
 import { sendMessage } from "../action";
 import { ChatDialogBreath } from "./chatBotBreath";
+import { ShowAvatarHome } from "../avatar/homeShowAvatar";
+import { motion } from "framer-motion";
 
-export const ChatBot = () => {
+type ChatBotHomeType = {
+  setShowChatBotHome: Dispatch<SetStateAction<boolean>>;
+};
+
+export const ChatBot = ({ setShowChatBotHome }: ChatBotHomeType) => {
   const [messages, setMessages] = useState<{ role: string; text: string }[]>(
     []
   );
@@ -111,50 +117,62 @@ export const ChatBot = () => {
   return (
     <div>
       <main className="flex flex-col items-center justify-between p-4 bg-gray-100 absolute bottom-0 right-0">
-        <div className="flex flex-col h-[400px] w-[400px] bg-white rounded-lg shadow-xl overflow-hidden">
-          <div className="flex-1 p-6 overflow-y-auto">
-            {messages.length === 0 && (
+        <div className="absolute bottom-16 right-16 z-50 flex flex-col h-[450px] w-[360px] bg-gradient-to-b from-gray-900 to-gray-950 rounded-3xl shadow-2xl overflow-hidden">
+          <button
+            onClick={() => setShowChatBotHome(false)}
+            className="absolute top-3 right-3 text-gray-400 hover:text-white transition text-lg font-bold"
+          >
+            ×
+          </button>
+          {/* Messages */}
+          <div className="flex-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900 space-y-3">
+            {messages.length === 0 ? (
               <div className="flex items-center justify-center h-full text-center text-gray-500">
-                <p>Сайн уу, би танд туслахад бэлэн байна.</p>
+                <p>Сайн уу, би туслахад бэлэн байна.</p>
               </div>
+            ) : (
+              messages.map((msg, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className={`p-3 rounded-2xl max-w-[75%] break-words shadow-sm ${
+                    msg.role === "user"
+                      ? "bg-gradient-to-r from-blue-600/90 to-blue-500/90 text-white ml-auto"
+                      : "bg-gray-800/80 text-white mr-auto"
+                  }`}
+                >
+                  <ReactMarkdown>{msg.text}</ReactMarkdown>
+                </motion.div>
+              ))
             )}
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`mb-4 p-3 rounded-lg max-w-[80%] ${
-                  msg.role === "user"
-                    ? "bg-blue-500 text-white ml-auto"
-                    : "bg-gray-200 text-gray-800 mr-auto"
-                }`}
-              >
-                <ReactMarkdown>{msg.text}</ReactMarkdown>
-              </div>
-            ))}
             <div ref={messagesEndRef} />
           </div>
 
+          {/* Input */}
           <form
             onSubmit={handleSendMessage}
-            className="p-4 border-t border-gray-200 bg-white"
+            className="p-4 border-t border-gray-800 bg-gray-950 flex items-center gap-3"
           >
-            <div className="flex">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Мессеж бичнэ үү..."
-                className="flex-1 p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-                disabled={isLoadingChat}
-              />
-              <button
-                type="submit"
-                className="p-2 px-4 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 transition-colors duration-200"
-                disabled={isLoadingChat}
-              >
-                {isLoadingChat ? "Илгээж байна..." : "Илгээх"}
-              </button>
-            </div>
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Мессеж бичнэ үү..."
+              className="flex-1 p-3 rounded-full bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              disabled={isLoadingChat}
+            />
+            <button
+              type="submit"
+              className="p-3 bg-blue-500 rounded-full text-white hover:bg-blue-600 transition"
+              disabled={isLoadingChat}
+            >
+              →
+            </button>
           </form>
+
+          {/* Floating Avatar */}
         </div>
       </main>
 
@@ -182,6 +200,8 @@ export const ChatBot = () => {
 // import { Dispatch, SetStateAction, useRef, useState } from "react";
 // import ReactMarkdown from "react-markdown";
 // import { sendMessage } from "../action";
+
+// import { motion } from "framer-motion";
 
 // import { DiaryNote } from "@/types";
 // import { AchievementsType } from "@/types/aiAnalyze";
@@ -412,50 +432,56 @@ export const ChatBot = () => {
 //   return (
 //     <div>
 //       <main className="flex flex-col items-center justify-between p-4 bg-gray-100 absolute bottom-0 right-0">
-//         <div className="flex flex-col h-[400px] w-[400px] bg-white rounded-lg shadow-xl overflow-hidden">
-//           <div className="flex-1 p-6 overflow-y-auto">
-//             {messages.length === 0 && (
+//         <div className="absolute bottom-16 right-16 z-50 flex flex-col h-[450px] w-[360px] bg-gradient-to-b from-gray-900 to-gray-950 rounded-3xl shadow-2xl overflow-hidden">
+//           {/* Messages */}
+//           <div className="flex-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900 space-y-3">
+//             {messages.length === 0 ? (
 //               <div className="flex items-center justify-center h-full text-center text-gray-500">
-//                 <p>Сайн уу, би танд туслахад бэлэн байна.</p>
+//                 <p>Сайн уу, би туслахад бэлэн байна.</p>
 //               </div>
+//             ) : (
+//               messages.map((msg, index) => (
+//                 <motion.div
+//                   key={index}
+//                   initial={{ opacity: 0, y: 10 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   transition={{ duration: 0.2 }}
+//                   className={`p-3 rounded-2xl max-w-[75%] break-words shadow-sm ${
+//                     msg.role === "user"
+//                       ? "bg-gradient-to-r from-blue-600/90 to-blue-500/90 text-white ml-auto"
+//                       : "bg-gray-800/80 text-white mr-auto"
+//                   }`}
+//                 >
+//                   <ReactMarkdown>{msg.text}</ReactMarkdown>
+//                 </motion.div>
+//               ))
 //             )}
-//             {messages.map((msg, index) => (
-//               <div
-//                 key={index}
-//                 className={`mb-4 p-3 rounded-lg max-w-[80%] ${
-//                   msg.role === "user"
-//                     ? "bg-blue-500 text-white ml-auto"
-//                     : "bg-gray-200 text-gray-800 mr-auto"
-//                 }`}
-//               >
-//                 <ReactMarkdown>{msg.text}</ReactMarkdown>
-//               </div>
-//             ))}
 //             <div ref={messagesEndRef} />
 //           </div>
 
+//           {/* Input */}
 //           <form
 //             onSubmit={handleSendMessage}
-//             className="p-4 border-t border-gray-200 bg-white"
+//             className="p-4 border-t border-gray-800 bg-gray-950 flex items-center gap-3"
 //           >
-//             <div className="flex">
-//               <input
-//                 type="text"
-//                 value={input}
-//                 onChange={(e) => setInput(e.target.value)}
-//                 placeholder="Мессеж бичнэ үү..."
-//                 className="flex-1 p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-//                 disabled={isLoadingChat}
-//               />
-//               <button
-//                 type="submit"
-//                 className="p-2 px-4 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 transition-colors duration-200"
-//                 disabled={isLoadingChat}
-//               >
-//                 {isLoadingChat ? "Илгээж байна..." : "Илгээх"}
-//               </button>
-//             </div>
+//             <input
+//               type="text"
+//               value={input}
+//               onChange={(e) => setInput(e.target.value)}
+//               placeholder="Мессеж бичнэ үү..."
+//               className="flex-1 p-3 rounded-full bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+//               disabled={isLoadingChat}
+//             />
+//             <button
+//               type="submit"
+//               className="p-3 bg-blue-500 rounded-full text-white hover:bg-blue-600 transition"
+//               disabled={isLoadingChat}
+//             >
+//               →
+//             </button>
 //           </form>
+
+//           {/* Floating Avatar */}
 //         </div>
 //       </main>
 
