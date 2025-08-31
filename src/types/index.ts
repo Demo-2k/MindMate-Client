@@ -28,6 +28,7 @@ export type User = {
 
   diaryNotes: DiaryNote[];
   progress?: Progress;
+  achievements: AchievementType[];
 
   createdAt: Date;
   updatedAt: Date;
@@ -39,7 +40,7 @@ export type DiaryNote = {
   user: User;
   note: string;
   analysis?: AiAnalysis;
-  aiInsight?:AiInsight;
+  aiInsight?: AiInsight;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -54,6 +55,15 @@ export type Progress = {
   updatedAt: Date;
 };
 
+export type AchievementType = {
+  id: number;
+  achId: string;
+  title: string;
+  desc: string;
+  userId: number;
+  createdAt: Date;
+};
+
 export type Diary = {
   id: number;
   userId: number;
@@ -61,12 +71,3 @@ export type Diary = {
   createdAt: string;
   updatedAt: string;
 };
-
-
-//  "createDiary": {
-//         "id": 47,
-//         "userId": 1,
-//         "note": "Хажуунаас ямар нэгэн санаа гаргаад алдаа дутагдал засах юу байна сайжруулах юм байна гээд санал хүсэлт хэлэх хүн байхгүй болохоор бүр хийж байгаа юмандаа эргэлзээд бүр нэг л бишээ. Сүүлдээ бүр хэтэрхий их бодоод хаанаас яаж эхэлхээч мэдэхээ байлаа бүр",
-//         "createdAt": "2025-08-22T08:53:05.736Z",
-//         "updatedAt": "2025-08-22T08:53:05.736Z"
-//     }

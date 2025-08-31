@@ -1,4 +1,4 @@
-// app/actions.ts
+
 "use server";
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -80,7 +80,7 @@ export async function sendMessage(userMessage: string, history: Content[]) {
   }
 }
 
-// app/actions.ts
+
 // "use server";
 
 // import { GoogleGenerativeAI } from "@google/generative-ai";

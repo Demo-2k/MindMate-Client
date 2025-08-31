@@ -5,8 +5,8 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type diaryTextAreaProps = {
   handleSaveButtonDiary: () => void;
-  setText: Dispatch<SetStateAction<string>>;
-  text: string;
+  setText: Dispatch<SetStateAction<string | null>>;
+  text: string | null;
   setShowDiaryInput: Dispatch<SetStateAction<boolean>>;
 };
 
@@ -19,7 +19,7 @@ export const DairyText = ({
   const [isDisabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    if (text.trim().length === 0) {
+    if (text?.trim().length === 0) {
       setDisabled(true);
     } else {
       setDisabled(false);
@@ -51,6 +51,7 @@ export const DairyText = ({
         </h2>
 
         <textarea
+        value={text || ""}
           onChange={(e) => setText(e.target.value)}
           placeholder="Өнөөдөр юу болсон бэ..."
           className="flex-1 w-full p-4 rounded-lg 

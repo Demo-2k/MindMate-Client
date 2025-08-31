@@ -32,7 +32,7 @@ export default function SignIn() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const tokenFromQuery = params.get("token");
-    let token = tokenFromQuery ? decodeURIComponent(tokenFromQuery) : localStorage.getItem("token");
+    const token = tokenFromQuery ? decodeURIComponent(tokenFromQuery) : localStorage.getItem("token");
 
     if (!token) return;
 

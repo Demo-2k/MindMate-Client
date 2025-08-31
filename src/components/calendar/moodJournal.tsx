@@ -23,7 +23,7 @@ export default function MoodJournal({ note, date }: MoodJournalProps) {
           {/* Entries */}
           <div className="relative z-10 flex flex-col gap-4 p-4">
             <h2 className="text-white font-bold">{date || "Өнөөдөр"}</h2>
-            <p>{note || "Энэ өдрийн тэмдэглэл хоосон байна..."}</p>
+            <p className="whitespace-pre-line ">{note || "Энэ өдрийн тэмдэглэл хоосон байна..."}</p>
           </div>
         </div>
       </div>
