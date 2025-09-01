@@ -7,9 +7,8 @@ export const ShowAvatarHome = ({
 }) => {
   return (
     <div className="relative w-[220px] h-[280px] flex flex-col items-center gap-3">
-      
       {/* Avatar GIF */}
-      <div className="w-[200px] h-[200px] rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform">
+      <div className="w-[200px] h-[200px] rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform border border-[#fec195]/40">
         <img
           src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHkxbWM4OGlhNXNuNG9jd244YmxpZGtqYWlnMnB1bDZrbGZyaHFobyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/q4DfyP2n7JyAyNRsSn/giphy.gif"
           alt="Pink&Ven"
@@ -19,12 +18,12 @@ export const ShowAvatarHome = ({
 
       {/* Action buttons */}
       <div className="flex gap-2">
-        <button className="bg-pink-400/90 text-white px-4 py-2 rounded-full shadow hover:bg-pink-500 transition">
+        <button className="bg-[#fec195] text-gray-900 px-4 py-2 rounded-full shadow-lg hover:bg-[#f7b973] transition">
           Анализ
         </button>
 
         <button
-          className="bg-pink-400/90 text-white px-4 py-2 rounded-full shadow hover:bg-pink-500 transition"
+          className="bg-[#fec195] text-gray-900 px-4 py-2 rounded-full shadow-lg hover:bg-[#f7b973] transition"
           onClick={() => setShowChatBotHome(true)}
         >
           Ярилцах
@@ -33,4 +32,3 @@ export const ShowAvatarHome = ({
     </div>
   );
 };
-
