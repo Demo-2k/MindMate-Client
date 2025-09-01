@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Maximize2, Minimize2, X } from "lucide-react";
-
-// Wonderspace-style Spotify embed card (refined)
-// Usage: <SpotifyEmbed playlistUrl="https://open.spotify.com/embed/playlist/..." />
-// Dependencies: framer-motion, tailwindcss, lucide-react
+interface SpotifyEmbedProps {
+  urlMusic: string | null;
+  width?: number;
+  height?: number;
+  defaultUrl?: string;
+}
 
 export default function SpotifyEmbed({
-  playlistUrl = "https://open.spotify.com/embed/playlist/1buR1viIOgrYIWWX4j14gL?utm_source=generator&theme=0",
   width = 350,
   height = 152,
-}) {
+  urlMusic,
+  defaultUrl = "https://open.spotify.com/embed/playlist/1buR1viIOgrYIWWX4j14gL?utm_source=generator&theme=0",
+}: SpotifyEmbedProps) {
+
+  console.log("urlMusic",urlMusic);
+  
   const [isExpanded, setIsExpanded] = useState(false);
   const w = isExpanded
     ? "350px"
@@ -22,6 +28,8 @@ export default function SpotifyEmbed({
     : typeof height === "number"
     ? `${height}px`
     : height;
+
+    
 
   return (
     <motion.div
@@ -67,7 +75,7 @@ export default function SpotifyEmbed({
             <iframe
               id="spotify-embed-card"
               title="spotify-embed"
-              src={playlistUrl}
+              src={urlMusic ?? defaultUrl}
               style={{ borderRadius: 12 }}
               width="100%"
               height={h}
@@ -77,8 +85,6 @@ export default function SpotifyEmbed({
               loading="lazy"
             />
           </div>
-
-         
         </div>
       </div>
     </motion.div>
