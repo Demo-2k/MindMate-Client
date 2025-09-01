@@ -50,26 +50,6 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
 
   const [showPoints, setShowPoints] = useState(false);
 
-  const [streak, setStreak] = useState(0);
-  const [points, setPoints] = useState(0);
-
-  useEffect(() => {
-    const fetchStreaks = async () => {
-      try {
-        const { data } = await axios.get(
-          `http://localhost:4001/progress/getStreaksById/${userProvider.id}`
-        );
-        setStreak(data?.streakCount);
-        setPoints(data?.points);
-      } catch (error) {
-        console.error("Failed to fetch streak/points", error);
-      }
-    };
-
-    if (userProvider?.id) {
-      fetchStreaks();
-    }
-  }, [userProvider?.id]);
 
   useEffect(() => {
     const hour = new Date().getHours();
