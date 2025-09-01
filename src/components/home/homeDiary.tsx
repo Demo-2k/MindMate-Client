@@ -1,24 +1,21 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-
 import { BarSide } from "./BarSide";
-
 import axios from "axios";
 import { toast } from "sonner";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
-
 import { DairyText } from "../verseUi/diaryTextArea";
 import Loader from "../loading";
 import { UserContext } from "@/provider/userProvider";
-
-import SpotifyEmbed from "./music";
 import ProfileDropdown from "../profileDropdown";
 import Clock from "./time";
 import { ShowAvatarHome } from "../avatar/homeShowAvatar";
 import { ChatBot } from "../chatBot/chatBot";
 import NotebookCoverCard from "./note";
+import SpotifyEmbed from "./music";
 import { stat } from "node:fs";
+
 // import { ChatBotBreathEx } from "../chatBot/chatBotBreath";
 
 export default function HomeDiary() {
@@ -42,6 +39,10 @@ export default function HomeDiary() {
   //SET SHOW AVATAR
   const [showChatBotHome, setShowChatBotHome] = useState(false);
   const [showAvatarQuestion, setShowAvatarQuestion] = useState(false);
+
+
+  //show music
+  const [urlMusic, setUrlMusic] = useState<string | null>(null)
 
   console.log("dairies diaress all:", diaries);
 
@@ -175,7 +176,7 @@ export default function HomeDiary() {
 
       <Clock />
 
-      <SpotifyEmbed />
+      <SpotifyEmbed urlMusic={urlMusic} />
 
       {showdiaryInput && (
         <div className="h-[80%]">
@@ -189,7 +190,7 @@ export default function HomeDiary() {
       )}
 
       <div className="backdrop-blur-md py-3 px-7 border-none rounded-lg absolute bottom-15">
-        <BarSide />
+        <BarSide setUrlMusic = {setUrlMusic}/>
       </div>
     </div>
   );
