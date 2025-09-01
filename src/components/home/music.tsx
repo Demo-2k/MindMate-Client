@@ -35,9 +35,9 @@ export default function SpotifyEmbed({
     >
       {/* Gradient frame */}
       <div className="rounded-2xl ">
-        <div className="rounded-2xl overflow-hidden bg-black/60 backdrop-blur-md border border-white/10">
+        <div className="rounded-2xl overflow-hidden bg-black/5 backdrop-blur-md border border-white/10">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+          <div className="flex items-center justify-between px-4 py-1 border-b border-white/10">
             <div className="flex items-center gap-2 text-white/80 text-sm font-medium">
               <span className="tracking-wide">Spotify</span>
             </div>
