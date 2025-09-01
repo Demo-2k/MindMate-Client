@@ -1,4 +1,3 @@
-
 "use server";
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -80,7 +79,6 @@ export async function sendMessage(userMessage: string, history: Content[]) {
   }
 }
 
-
 // "use server";
 
 // import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -99,10 +97,10 @@ export async function sendMessage(userMessage: string, history: Content[]) {
 //     Заримдаа богино асуулт асуу, эсвэл дэмжлэгийн мессеж үлдээ.
 //     Ярианы өнгө дулаан, энгийн, найз шиг байх ёстой.
 //     Хүүхдийг айдасгүй, тайван, эргэцүүлж бодоход тусал.
-    
+
 //     // Дасгалыг санал болгох зааварчилгаа:
 //     // Хэрвээ ярианы явцад хүүхэд 'СТРЕССТЭЙ' эсвэл 'ГУНИГТАЙ' байгаа нь илэрвэл хариултынхаа төгсгөлд '[BREATHE_SUGGESTION]' гэсэн тэмдэг нэмээрэй.
-    
+
 //     // Шинэ зааварчилгаа:
 //     // Яриаг үргэлжлүүлэхийн тулд үргэлж асуулт асуух шаардлагагүй.
 //     // Харин ч зөвлөгөө, дэмжлэг, эсвэл нэмэлт мэдээлэл өгч яриаг чиглүүл.
@@ -116,6 +114,7 @@ export async function sendMessage(userMessage: string, history: Content[]) {
 //   text: string;
 //   triggerExercise?: boolean;
 //   diaryData?: diaryTypemock;
+//   endChat?: boolean;
 // }
 
 // export async function sendMessage(
@@ -142,7 +141,7 @@ export async function sendMessage(userMessage: string, history: Content[]) {
 //       if (text.includes("[BREATHE_SUGGESTION]")) {
 //         const cleanedText = text.replace("[BREATHE_SUGGESTION]", "").trim();
 //         return {
-//           text: cleanedText + " Эсвэл амьсгалын дасгал хийж үзэх үү?",
+//           text: cleanedText + ` Эсвэл амьсгалын дасгал хийж үзэх үү? Тийм бол <b>дасгал хийе</b> гэж бичнэ үү `,
 //           triggerExercise: false, // Энд шууд дасгал эхлүүлэхгүй, харин санал болгож байгаа.
 //         };
 //       } else {
@@ -151,6 +150,16 @@ export async function sendMessage(userMessage: string, history: Content[]) {
 //           triggerExercise: false,
 //         };
 //       }
+//     }
+
+//     if (
+//       userMessage.toLowerCase().includes("баярлалаа") ||
+//       userMessage.toLowerCase().includes("дуусгая")
+//     ) {
+//       return {
+//         text: "Ярьсанд баярлалаа. Би дараагийн удаа туслахад бэлэн байна шүү.",
+//         endChat: true,
+//       };
 //     }
 
 //     // Хэрэглэгч дасгал хийхийг зөвшөөрөхөд

@@ -1,7 +1,3 @@
-// export const ChatBot = () =>{
-//     return <div>Hi</div>
-// }
-
 "use client";
 
 import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
