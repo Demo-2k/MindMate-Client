@@ -12,7 +12,7 @@ import { DoneBreathExercise } from "../avatar/DoneAvatar";
 
 type Phase = "inhale" | "hold" | "exhale";
 const cycles = [
-  { phase: "inhale" as Phase, duration: 4, label: "Амьсгалаа авх" },
+  { phase: "inhale" as Phase, duration: 4, label: "Амьсгалаа авах" },
   { phase: "hold" as Phase, duration: 4, label: "Барих" },
   { phase: "exhale" as Phase, duration: 6, label: "Амьсгалаа гаргах" },
 ];
@@ -265,12 +265,12 @@ export function ChatDialogBreath({
 
                           {/* smiling face (centered) */}
 
-                          <div className="relative w-full h-full flex items-center justify-center">
+                          {/* <div className="relative w-full h-full flex items-center justify-center">
                             <img
                               src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzV2Zm9uOTA1ZjB5Zzhzb2did3gwZGtnZ3VyaGZodnl1Z2J6NDdudSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/cefJOb0iuO040skF4y/giphy.gif"
                               alt="emoji"
                             />
-                          </div>
+                          </div> */}
                         </div>
                       </motion.div>
                     </div>
