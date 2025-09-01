@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { sendMessage } from "../action";
 import { ChatDialogBreath } from "./chatBotBreath";
 import { ShowAvatarHome } from "../avatar/homeShowAvatar";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 type ChatBotHomeType = {
   setShowChatBotHome: Dispatch<SetStateAction<boolean>>;
@@ -112,19 +112,20 @@ export const ChatBot = ({ setShowChatBotHome }: ChatBotHomeType) => {
 
   return (
     <div>
-      <main className="flex flex-col items-center justify-between p-4 bg-gray-100 absolute bottom-0 right-0">
-        <div className="absolute bottom-16 right-16 z-50 flex flex-col h-[450px] w-[360px] bg-gradient-to-b from-gray-900 to-gray-950 rounded-3xl shadow-2xl overflow-hidden">
+      <main className="flex flex-col items-center justify-between p-4 bg-black absolute bottom-0 right-0 p-10">
+        <div className="absolute bottom-16 right-16 z-50 flex flex-col h-[450px] w-[360px] bg-neutral-900 rounded-3xl shadow-2xl border border-neutral-800 overflow-hidden">
           <button
             onClick={() => setShowChatBotHome(false)}
-            className="absolute top-3 right-3 text-gray-400 hover:text-white transition text-lg font-bold"
+            className="absolute top-3 right-3 text-gray-400 hover:text-gray-200 transition text-lg font-bold"
           >
             ×
           </button>
+
           {/* Messages */}
-          <div className="flex-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900 space-y-3">
+          <div className="flex-1 p-6 overflow-y-auto scrollbar-thin scrollbar-thumb-[#fec195] scrollbar-track-neutral-900 space-y-3">
             {messages.length === 0 ? (
               <div className="flex items-center justify-center h-full text-center text-gray-500">
-                <p>Сайн уу, би туслахад бэлэн байна.</p>
+                <p>Сайн уу, би чамд туслахад бэлэн байна.</p>
               </div>
             ) : (
               messages.map((msg, index) => (
@@ -135,8 +136,8 @@ export const ChatBot = ({ setShowChatBotHome }: ChatBotHomeType) => {
                   transition={{ duration: 0.2 }}
                   className={`p-3 rounded-2xl max-w-[75%] break-words shadow-sm ${
                     msg.role === "user"
-                      ? "bg-gradient-to-r from-blue-600/90 to-blue-500/90 text-white ml-auto"
-                      : "bg-gray-800/80 text-white mr-auto"
+                      ? "bg-[#fec195] text-black ml-auto"
+                      : "bg-neutral-800 text-gray-100 mr-auto"
                   }`}
                 >
                   <ReactMarkdown>{msg.text}</ReactMarkdown>
@@ -149,39 +150,46 @@ export const ChatBot = ({ setShowChatBotHome }: ChatBotHomeType) => {
           {/* Input */}
           <form
             onSubmit={handleSendMessage}
-            className="p-4 border-t border-gray-800 bg-gray-950 flex items-center gap-3"
+            className="p-4 border-t border-neutral-800 bg-neutral-900 flex items-center gap-3"
           >
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Мессеж бичнэ үү..."
-              className="flex-1 p-3 rounded-full bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="flex-1 p-3 rounded-full bg-neutral-800 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#fec195] transition"
               disabled={isLoadingChat}
             />
             <button
               type="submit"
-              className="p-3 bg-blue-500 rounded-full text-white hover:bg-blue-600 transition"
+              className="p-3 bg-[#fec195] hover:bg-[#f7b973] rounded-full text-black font-bold transition"
               disabled={isLoadingChat}
             >
               →
             </button>
           </form>
-
-          {/* Floating Avatar */}
         </div>
       </main>
 
       {/* <button onClick={handleBreathingExerciseDone}>DAGAL HIITY</button> */}
-      {showBreathing && !done && (
-        <ChatDialogBreath
-          //   setDone={setDone}
-          done={done}
-          setOpen={setShowBreathing}
-          open={showBreathing}
-          onDone={handleBreathingExerciseDone}
-        />
-      )}
+      <AnimatePresence>
+        {showBreathing && !done && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+          >
+            <ChatDialogBreath
+              done={done}
+              setOpen={setShowBreathing}
+              open={showBreathing}
+              onDone={handleBreathingExerciseDone}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* {done && !showBreathing && (
         <DoneBreathExercise onDone={handleBreathingExerciseDone} />

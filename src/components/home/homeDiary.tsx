@@ -8,13 +8,19 @@ import { userDiaryContext } from "@/provider/userDiaryProvider";
 import { DairyText } from "../verseUi/diaryTextArea";
 import Loader from "../loading";
 import { UserContext } from "@/provider/userProvider";
+
+import { motion } from "framer-motion";
+
+import SpotifyEmbed from "./music";
+
 import ProfileDropdown from "../profileDropdown";
 import Clock from "./time";
 import { ShowAvatarHome } from "../avatar/homeShowAvatar";
 import { ChatBot } from "../chatBot/chatBot";
 import NotebookCoverCard from "./note";
-import SpotifyEmbed from "./music";
+
 import { stat } from "node:fs";
+
 
 // import { ChatBotBreathEx } from "../chatBot/chatBotBreath";
 
@@ -39,6 +45,7 @@ export default function HomeDiary() {
   //SET SHOW AVATAR
   const [showChatBotHome, setShowChatBotHome] = useState(false);
   const [showAvatarQuestion, setShowAvatarQuestion] = useState(false);
+  // const [isSaved, setIsSaved] = useState(false);
 
 
   //show music
@@ -69,21 +76,15 @@ export default function HomeDiary() {
     try {
       const response = await axios.post(
         `http://localhost:4001/ai/postDiary/${userProvider.id}`,
-
         { text: text }
       );
       // setText(response.data.note);
-      setShowAvatarQuestion(true);
-
       console.log("response response", response);
-
       await fetchDiary();
       // setCurrentDiaryId(response.data.id);
       if (response.status === 200) {
         toast.success("Амжилттай нэмэгдлээ");
       }
-
-      // setShowAvatarQuestion(true);
     } catch (error) {
       toast.error("Error saving diary");
 
@@ -94,8 +95,9 @@ export default function HomeDiary() {
   };
 
   const handleSaveButtonDiary = () => {
-    setShowDiaryInput(false);
+    // setShowDiaryInput(false);
     handleDiarySave();
+    // setIsSaved(true), setTimeout(() => setIsSaved(false), 2000);
   };
 
   // useEffect(() => {
@@ -146,20 +148,29 @@ export default function HomeDiary() {
         {showChatBotHome && <ChatBot setShowChatBotHome={setShowChatBotHome} />}
       </div>
 
+      {/* <div className="absolute bottom-20 right-20 z-40">
+        <motion.div
+          animate={{ scale: isSaved ? 1.2 : 1 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          <ShowAvatarHome setShowChatBotHome={setShowChatBotHome} />
+        </motion.div>
+      </div> */}
       <div className="absolute bottom-20 right-20 z-40">
         <ShowAvatarHome setShowChatBotHome={setShowChatBotHome} />
       </div>
 
       <div className="flex gap-3 absolute top-5 right-60 z-40">
         <div className="flex items-center gap-1">
-          <img src="/cent.png" alt="streks" className="w-[24px] h-[24px]" />
+          <img src="/passion.png" alt="fire" className="w-[24px] h-[24px]" />
           <p className="text-[24px] font-semibold text-white">
             {stats.streaks !== null ? stats.streaks : "…"}
           </p>
         </div>
 
         <div className="flex items-center gap-1">
-          <img src="/passion.png" alt="fire" className="w-[24px] h-[24px]" />
+          <img src="/cent.png" alt="streks" className="w-[24px] h-[24px]" />
+
           <p className="text-[24px] font-semibold text-white">
             {stats.points !== null ? stats.points : "…"}
           </p>
@@ -177,6 +188,8 @@ export default function HomeDiary() {
       <Clock />
 
       <SpotifyEmbed urlMusic={urlMusic} />
+
+      {/* <DoneBreathExercise /> */}
 
       {showdiaryInput && (
         <div className="h-[80%]">

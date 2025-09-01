@@ -51,7 +51,7 @@ export const DairyText = ({
         </h2>
 
         <textarea
-        value={text || ""}
+          value={text || ""}
           onChange={(e) => setText(e.target.value)}
           placeholder="Өнөөдөр юу болсон бэ..."
           className="flex-1 w-full p-4 rounded-lg 
@@ -65,23 +65,21 @@ export const DairyText = ({
           <button
             onClick={() => setShowDiaryInput(false)}
             className="px-5 py-2 rounded-lg 
-             bg-gray-200 hover:bg-gray-300 
-             text-gray-700 font-medium
-             transition duration-200"
+    bg-black border border-[#fec195] text-[#fec195] 
+    font-medium transition duration-200 shadow-md transform hover:scale-110 focus:ring-2 focus:ring-yellow-300"
           >
             Болих
           </button>
 
           <button
             onClick={handleSaveButtonDiary}
-            disabled={isDisabled} // <-- идэвхгүй болгоно
-            className={`px-5 py-2 rounded-lg text-white font-medium
-              transition duration-200 shadow-md
-              ${
-                isDisabled
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-violet-500 to-sky-500 hover:from-violet-600 hover:to-sky-600 focus:ring-2 focus:ring-violet-300"
-              }`}
+            disabled={isDisabled}
+            className={`px-5 py-2 rounded-lg font-medium transition duration-200 shadow-md transform
+    ${
+      isDisabled
+        ? "bg-gray-400 text-white cursor-not-allowed"
+        : "bg-[#fec195] border border-[#fec195] text-black hover:scale-110 focus:ring-2 focus:ring-yellow-300"
+    }`}
           >
             Хадгалах
           </button>
