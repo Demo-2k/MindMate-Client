@@ -41,9 +41,9 @@ export const DairyText = ({
     w-[90vw] max-w-[900px] 
        h-[80vh] max-h-[700px] 
     -translate-x-1/2 -translate-y-1/2 
-    bg-white/10 backdrop-blur-lg
+    bg-black/5 backdrop-blur-lg
     rounded-2xl shadow-2xl p-6 cursor-grab 
-    border border-white/20 flex flex-col
+    border border-white/10 flex flex-col
     md:w-[900px] md:h-[700px]"
       >
         <h2 className="text-2xl font-semibold mb-4 text-white">
@@ -55,10 +55,10 @@ export const DairyText = ({
           onChange={(e) => setText(e.target.value)}
           placeholder="Өнөөдөр юу болсон бэ..."
           className="flex-1 w-full p-4 rounded-lg 
-                       bg-white/5 border border-white/20
+                       bg-black/5 
                        text-white caret-[#c0a16b]
                        focus:outline-none focus:ring-2 focus:ring-[#c0a16b] 
-                       resize-none shadow-inner"
+                       resize-none shadow-inner inset-0 bg-grid-paper"
         />
 
         <div className="flex justify-end mt-6 gap-3">
