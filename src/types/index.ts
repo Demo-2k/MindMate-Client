@@ -25,6 +25,7 @@ export type User = {
   password: string;
   username: string;
   birthday?: Date;
+  themeUrl:  string,
 
   diaryNotes: DiaryNote[];
   progress?: Progress;
