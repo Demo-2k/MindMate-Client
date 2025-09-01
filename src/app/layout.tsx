@@ -4,6 +4,7 @@ import "./globals.css";
 import UserDiaryProvider from "@/provider/userDiaryProvider";
 import { Toaster } from "sonner";
 import UserContextProvider from "@/provider/userProvider";
+import { ThemeInitializer } from "@/provider/ThemeInitializer";
 
 
 const geistSans = Geist({
@@ -33,7 +34,8 @@ export default function RootLayout({
       >
         <UserContextProvider>
           <UserDiaryProvider>
-            <main className="flex-1">{children}</main>
+            <ThemeInitializer/>
+            <main>{children}</main>
             <Toaster />
           </UserDiaryProvider>
         </UserContextProvider>

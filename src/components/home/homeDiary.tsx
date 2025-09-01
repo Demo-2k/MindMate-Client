@@ -1,25 +1,21 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-
 import { BarSide } from "./BarSide";
-
 import axios from "axios";
 import { toast } from "sonner";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
-
 import { DairyText } from "../verseUi/diaryTextArea";
-
 import Loader from "../loading";
 import { UserContext } from "@/provider/userProvider";
-
-
 import ProfileDropdown from "../profileDropdown";
 import Clock from "./time";
 import { ShowAvatarHome } from "../avatar/homeShowAvatar";
 import { ChatBot } from "../chatBot/chatBot";
 import NotebookCoverCard from "./note";
 import SpotifyEmbed from "./music";
+import { stat } from "node:fs";
+
 // import { ChatBotBreathEx } from "../chatBot/chatBotBreath";
 
 export default function HomeDiary() {
@@ -27,6 +23,14 @@ export default function HomeDiary() {
   const { diaries, fetchDiary } = useContext(userDiaryContext);
   const [text, setText] = useState<null | string>(null);
   const [showdiaryInput, setShowDiaryInput] = useState(false);
+
+  const [stats, setStats] = useState<{
+    points: number | null;
+    streaks: number | null;
+  }>({
+    points: null,
+    streaks: null,
+  });
 
   // const [currenDiaryId, setCurrentDiaryId] = useState<number | null>(null);
   const [laoding, setLoading] = useState(false);
@@ -102,6 +106,26 @@ export default function HomeDiary() {
   //   getTodayDiary();
   // }, [diaries]);
 
+  useEffect(() => {
+    if (!userProvider?.id) return;
+    const allProgress = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4001/progress/getStreaks/${userProvider?.id}`
+        );
+        console.log("all response", response.data.summary.points);
+        setStats({
+          points: response.data.summary.points,
+          streaks: response.data.summary.streaks,
+        });
+      } catch (error) {
+        toast.error("streaks error");
+      }
+    };
+
+    allProgress();
+  }, [userProvider?.id]);
+
   console.log("3.showAvatarQuestion", showAvatarQuestion);
 
   if (laoding) {
@@ -114,12 +138,32 @@ export default function HomeDiary() {
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
       {/* <ChatBotBreathEx  /> */}
-      {/* <div className="z-50">{showChatBotHome && <ChatBot diaries={diaries} />}</div> */}
+      {/* <div className="z-50">
+        {showChatBotHome && <ChatBot diaries={diaries} />}
+      </div> */}
 
-      <div className="z-50">{showChatBotHome && <ChatBot setShowChatBotHome={setShowChatBotHome}/>}</div>
+      <div className="z-50">
+        {showChatBotHome && <ChatBot setShowChatBotHome={setShowChatBotHome} />}
+      </div>
 
       <div className="absolute bottom-20 right-20 z-40">
         <ShowAvatarHome setShowChatBotHome={setShowChatBotHome} />
+      </div>
+
+      <div className="flex gap-3 absolute top-5 right-60 z-40">
+        <div className="flex items-center gap-1">
+          <img src="/cent.png" alt="streks" className="w-[24px] h-[24px]" />
+          <p className="text-[24px] font-semibold text-white">
+            {stats.streaks !== null ? stats.streaks : "…"}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-1">
+          <img src="/passion.png" alt="fire" className="w-[24px] h-[24px]" />
+          <p className="text-[24px] font-semibold text-white">
+            {stats.points !== null ? stats.points : "…"}
+          </p>
+        </div>
       </div>
 
       {!showdiaryInput && (
@@ -127,12 +171,12 @@ export default function HomeDiary() {
           <NotebookCoverCard />
         </div>
       )}
+
       <ProfileDropdown />
 
       <Clock />
 
       <SpotifyEmbed urlMusic={urlMusic} />
-
 
       {showdiaryInput && (
         <div className="h-[80%]">
