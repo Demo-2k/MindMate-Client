@@ -34,9 +34,9 @@ export default function Clock() {
   }, []);
 
   return (
-    <div className="absolute top-4 right-4 z-50 flex flex-col items-center text-white gap-1">
-      <div className="text-3xl font-medium">{timeString}</div>
-      <div className="text-sm">{dateString}</div>
+    <div className="absolute top-2 right-0 md:top-4 md:right-4 z-50 flex flex-col items-center text-white md:gap-1">
+      <div className="text-md md:text-3xl font-medium">{timeString}</div>
+      <div className="text-[12px] md:text-sm">{dateString}</div>
     </div>
   );
 }

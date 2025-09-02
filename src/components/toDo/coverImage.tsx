@@ -54,17 +54,17 @@ export function CoverImage() {
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            className="hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
+            className="h-8 w-8 md:h-[42px] md:w-[42px] hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
             onClick={() => setOpen(true)}
           >
-            <TextSelect />
+            <TextSelect className=""/>
           </Button>
         </TooltipTrigger>
         <TooltipContent side="bottom">
           <p>анализ</p>
         </TooltipContent>
       </Tooltip>
-      
+
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!max-w-7xl w-full h-[80vh] bg-black overflow-auto">
           <DialogTitle></DialogTitle>

@@ -36,11 +36,15 @@ export default function ProfileDropdown() {
     );
   }
   return (
-    <div className="absolute top-4 left-4 flex items-center gap-3 ">
+    <div className="absolute top-2 md:top-4 left-2 md:left-4 flex items-center gap-2 md:gap-3">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="cursor-pointer">
-            <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+            <AvatarImage
+              className="w-[28px] h-[28px] md:w-[36px] md:h-[36px]"
+              src="https://github.com/shadcn.png"
+              alt="User"
+            />
             <AvatarFallback>RB</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
@@ -58,8 +62,9 @@ export default function ProfileDropdown() {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <div className="text-white">
-        <p className="font-semibold text-white">{userProvider?.username}</p>
+      {/* username зөвхөн md-с дээш харагдана */}
+      <div className=" md:block text-white text-sm">
+        <p className="font-semibold">{userProvider?.username}</p>
       </div>
     </div>
   );

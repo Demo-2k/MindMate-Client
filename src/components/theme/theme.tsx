@@ -73,7 +73,7 @@ export function DialogTheme() {
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            className="hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
+            className="h-8 w-8 md:h-[42px] md:w-[42px] hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
             onClick={() => setOpen(true)}
           >
             <Images />

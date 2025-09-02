@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { TreePalm } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -106,7 +111,7 @@ export function DialogBreath() {
         <TooltipTrigger asChild>
           <Button
             variant="outline"
-            className="hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
+            className="h-8 w-8 md:h-[42px] md:w-[42px] hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
             onClick={() => setOpen(true)}
           >
             <TreePalm />
@@ -118,9 +123,8 @@ export function DialogBreath() {
       </Tooltip>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="!max-w-7xl w-full h-[70vh] bg-black overflow-auto">
+        <DialogContent className="!max-w-7xl w-full h-[70vh] bg-black overflow-auto flex flex-col ">
           <DialogTitle></DialogTitle> <DialogDescription></DialogDescription>
-
           <div className=" flex items-center justify-center px-6">
             <div className="w-full max-w-md text-center">
               {/* big circle area */}
