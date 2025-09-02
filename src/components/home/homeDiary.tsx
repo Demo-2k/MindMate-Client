@@ -116,6 +116,7 @@ export default function HomeDiary() {
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
+      
       <div className="z-50">
         {showChatBotHome && (
           <ChatBot diaries={diaries} setShowChatBotHome={setShowChatBotHome} />
@@ -135,14 +136,18 @@ export default function HomeDiary() {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-20 right-20 z-40">
+      <div className="absolute right-5 bottom-24 md:bottom-20 md:right-20 z-40 ">
         <ShowAvatarHome setShowChatBotHome={setShowChatBotHome} />
       </div>
 
       <div className="flex gap-3 absolute top-5 right-60 z-40">
         <div className="flex items-center gap-1">
-          <img src="/passion.png" alt="fire" className="w-[24px] h-[24px]" />
-          <p className="text-[24px] font-semibold text-white">
+          <img
+            src="/passion.png"
+            alt="fire"
+            className="w-[12px] h-[12px]  md:w-[24px] md:h-[24px]"
+          />
+          <p className="text-[14px] md:text-[24px] font-semibold text-white">
             {/* {stats.streaks !== null ? stats.streaks : "…"} */}
             {userProvider?.totalStreaks}
           </p>
@@ -151,7 +156,7 @@ export default function HomeDiary() {
         <div className="flex items-center gap-1">
           <img src="/cent.png" alt="streks" className="w-[24px] h-[24px]" />
 
-          <p className="text-[24px] font-semibold text-white">
+          <p className="text-[14px] md:text-[24px] font-semibold text-white">
             {userProvider?.totalPoints}
             {/* {stats.points !== null ? stats.points : "…"} */}
           </p>
@@ -170,10 +175,9 @@ export default function HomeDiary() {
 
       <SpotifyEmbed urlMusic={urlMusic} />
 
-      {/* <DoneBreathExercise /> */}
 
       {showdiaryInput && (
-        <div className="h-[80%]">
+        <div className="h-[80%] absolute z-50">
           <DairyText
             setText={setText}
             handleSaveButtonDiary={handleSaveButtonDiary}

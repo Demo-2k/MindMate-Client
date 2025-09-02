@@ -156,7 +156,7 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
                   transition={{ duration: 0.6 }}
                   className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 text-4xl font-extrabold text-green-400 drop-shadow-lg"
                 >
-                  +1 🔥 +10 ⭐
+                  +1 🔥 +5 ⭐
                 </motion.div>
               )}
             </AnimatePresence>
@@ -164,7 +164,7 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
             {(lastDiary?.aiInsight?.achievements?.length ?? 0) > 0 ? (
               <div className="streak-points flex justify-between items-center mb-4 text-white">
                 <p>🔥 Streak: 1</p>
-                <p>⭐ Points: 10</p>
+                <p>⭐ Points: 5</p>
               </div>
             ) : (
               <div className="streak-points flex justify-between items-center mb-4 text-white">
@@ -218,10 +218,10 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
           <Card className="bg-black text-white border-white/20 p-6">
             <CardContent>
               <p className="text-[13px] font-semibold text-[#a1a1aa]">
-                Онцлох үг:
+                Mood action:
               </p>
               <img src="/CatPlaying.gif" alt="" className="rounded-lg" />
-              <p className="mt-2">Залхуутай л өдөр байлаа</p>
+              <p className="mt-2 text-lg">{lastDiary?.analysis?.moodAction}</p>
             </CardContent>
           </Card>
 

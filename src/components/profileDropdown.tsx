@@ -58,6 +58,7 @@ export default function ProfileDropdown() {
         </DropdownMenuContent>
       </DropdownMenu>
 
+      {/* username зөвхөн md-с дээш харагдана */}
       <div className="text-white">
         <p className="font-semibold text-white">{userProvider?.username}</p>
       </div>

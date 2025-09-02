@@ -433,8 +433,8 @@ export const ChatBot = ({ diaries,setShowChatBotHome }: chatBotType) => {
 
   return (
     <div>
-      <main className="flex flex-col items-center justify-between p-4 bg-black absolute bottom-0 right-0 p-10">
-        <div className="absolute bottom-16 right-16 z-50 flex flex-col h-[450px] w-[360px] bg-neutral-900 rounded-3xl shadow-2xl border border-neutral-800 overflow-hidden">
+      <main className="flex flex-col items-center justify-between bg-black absolute bottom-0 right-0 ">
+        <div className="absolute bottom-20 right-3 md:bottom-16 md:right-16 z-50 flex flex-col w-[340px] h-[450px] md:w-[360px] bg-neutral-900 rounded-3xl shadow-2xl border border-neutral-800 overflow-hidden">
           <button
             onClick={() => setShowChatBotHome(false)}
             className="absolute top-3 right-3 text-gray-400 hover:text-gray-200 transition text-lg font-bold"
