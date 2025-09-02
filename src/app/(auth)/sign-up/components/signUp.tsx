@@ -107,9 +107,9 @@ export const SignUpEmailPassword = () => {
           </div>
         </div>
 
-        <h1 className="text-xl font-semibold mb-6">Welcome</h1>
+        <h1 className="text-xl font-semibold mb-6">Тавтай морилно уу</h1>
         <p className="text-gray-600 mb-6 text-sm">
-          Sign in or create an account to continue
+        Үргэлжлүүлэхийн тулд нэвтрэх эсвэл шинэ аккаунт үүсгэнэ үү
         </p>
 
         {/* Google */}
@@ -125,7 +125,7 @@ export const SignUpEmailPassword = () => {
         {/* OR */}
         <div className="flex items-center my-5">
           <div className="flex-1 h-px bg-gray-300"></div>
-          <span className="px-3 text-gray-500 text-sm">OR</span>
+          <span className="px-3 text-gray-500 text-sm">Эсвэл</span>
           <div className="flex-1 h-px bg-gray-300"></div>
         </div>
 
@@ -193,17 +193,17 @@ export const SignUpEmailPassword = () => {
             disabled={isSubmitting}
             className="w-full bg-black text-white py-2 rounded-lg font-medium hover:opacity-90 transition"
           >
-            {isSubmitting ? "Loading..." : "Start writing with Email"}
+            {isSubmitting ? "Loading..." : "Бүртгүүлэх"}
           </button>
 
                {/* Sign up link */}
         <p className="text-sm text-gray-500 mt-4">
-          Already have an account?{" "}
+          Бүртгэлтэй юу?{" "}
           <Link
             href="/sign-in"
             className="text-blue-500 hover:underline font-medium"
           >
-            Log in
+            Нэвтрэх
           </Link>
         </p>
         </form>
