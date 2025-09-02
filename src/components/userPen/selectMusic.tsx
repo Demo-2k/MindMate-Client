@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
@@ -10,10 +10,23 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import { Music } from "lucide-react";
+import { toast } from "sonner";
+import axios from "axios";
+import { UserContext } from "@/provider/userProvider";
 
 interface SelectMusicProps {
   setUrlMusic: (url: string) => void;
+
 }
+
+type SongType = {
+  title: string;
+  artist?: string;
+  url: string;
+  cover: string;
+  locked: boolean;
+  price: number;
+};
 
 const songs = [
   {
@@ -21,6 +34,8 @@ const songs = [
     artist: "LoFi Tokyo",
     url: "https://open.spotify.com/embed/album/7yxqlNe4tMuxJXS6MSjmbw?utm_source=generator",
     cover: "/tokyo.png",
+    locked: false,
+    price: 0,
   },
   {
     title: "Legend",
@@ -28,50 +43,95 @@ const songs = [
     url: "https://open.spotify.com/embed/album/28GiIRNu9nEugqnUci3aIC?utm_source=generator",
     cover:
       "https://i.pinimg.com/736x/3f/84/f4/3f84f4913612406a92b79524bd00e865.jpg",
+    locked: true,
+    price: 10,
   },
   {
     title: "Emotions",
     artist: "Tony Ann",
     url: "https://open.spotify.com/embed/album/4f7MbVewxBC2kMIj9nM7lU?utm_source=generator",
-    cover: "https://i.pinimg.com/1200x/2f/3a/dd/2f3add78882ac9faa927abafd652eed9.jpg",
+    cover:
+      "https://i.pinimg.com/1200x/2f/3a/dd/2f3add78882ac9faa927abafd652eed9.jpg",
+    locked: true,
+    price: 20,
   },
   {
     title: "One Life",
     artist: "Crazy JaZz",
     url: "https://open.spotify.com/embed/album/6Ek8XECwopxbCoNp9eOEo7?utm_source=generator",
     cover: "/jazz.png",
+    locked: true,
+    price: 30,
   },
   {
     title: "Chill PlayList",
     url: "https://open.spotify.com/embed/playlist/3EY0v9dXaP1wkUYRKQ5B4E?utm_source=generator",
-    cover: "https://i.pinimg.com/736x/c0/47/79/c0477913310db066811bd78ad72b47e5.jpg",
+    cover:
+      "https://i.pinimg.com/736x/c0/47/79/c0477913310db066811bd78ad72b47e5.jpg",
+    locked: true,
+    price: 45,
   },
   {
     title: "Trending Moods",
     url: "https://open.spotify.com/embed/playlist/37i9dQZF1DX16doZpno3Aw?utm_source=generator",
-    cover: "https://i.pinimg.com/736x/0e/a5/c2/0ea5c2cb4ae34db192ead4fe97142bca.jpg",
+    cover:
+      "https://i.pinimg.com/736x/0e/a5/c2/0ea5c2cb4ae34db192ead4fe97142bca.jpg",
+    locked: true,
+    price: 60,
   },
   {
     title: "Oriental Lofi",
     url: "https://open.spotify.com/embed/playlist/37i9dQZF1DWTdBIyTaKDBw?utm_source=generator",
-    cover: "https://i.pinimg.com/736x/e6/bb/3e/e6bb3ed4cd40c710b9f9b6953665e807.jpg",
+    cover:
+      "https://i.pinimg.com/736x/e6/bb/3e/e6bb3ed4cd40c710b9f9b6953665e807.jpg",
+    locked: true,
+    price: 80,
   },
   {
     title: "After Hours",
     artist: "The Weeknd",
     url: "https://open.spotify.com/embed/album/4yP0hdKOZPNshxUOjY0cZj?utm_source=generator",
-    cover: "https://i.pinimg.com/736x/f6/66/12/f66612351e98a1e260221cdcba336ab1.jpg",
+    cover:
+      "https://i.pinimg.com/736x/f6/66/12/f66612351e98a1e260221cdcba336ab1.jpg",
+    locked: true,
+    price: 100,
   },
   {
     title: "Chill Mix",
     url: "https://open.spotify.com/embed/playlist/37i9dQZF1EVHGWrwldPRtj?utm_source=generator",
-    cover: "https://i.pinimg.com/736x/c1/9a/96/c19a9667056d1c63cdb28697abb8de56.jpg",
+    cover:
+      "https://i.pinimg.com/736x/c1/9a/96/c19a9667056d1c63cdb28697abb8de56.jpg",
+    locked: true,
+    price: 130,
   },
 ];
 
-export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
+export default function SelectMusic({ setUrlMusic}: SelectMusicProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+  const [songList, setSongList] = useState(songs);
+
+  const { userProvider } = useContext(UserContext);
+
+  const UnlockSongs = async (song: SongType) => {
+    if (!userProvider?.totalPoints) return;
+
+    if (!confirm(`${song?.price}-р unlock хийх үү?`)) return;
+
+    const response = await axios.post(
+      `http://localhost:4001/progress/UnlockSongs/${userProvider?.id}`
+    );
+
+    console.log("reponse unlock songs", response);
+    
+
+    try {
+    } catch (error) {
+      toast.message("Алдаа гарлаа");
+    }
+  };
+
+
 
   return (
     <div>
@@ -94,15 +154,33 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
           <DialogTitle className="text-white">Дуу сонгох</DialogTitle>
           <DialogDescription></DialogDescription>
           <div className="grid grid-cols-3 gap-5 ">
-            {songs.map((song) => (
+            {songList.map((song) => (
               <div
                 key={song.title}
                 onClick={() => {
-                  setSelected(song.url);
-                  setOpen(false); // dialog хаах
-                  setUrlMusic(song.url);
+                  if (song?.locked) {
+                    if ((userProvider?.totalPoints ?? 0) >= song?.price) {
+                      UnlockSongs(song);
+                      //   if (confirm(`${song?.price}-р unlock хийх үү?`)) {
+                      //     setSongList((prev) =>
+                      //       prev.map((s) =>
+                      //         s.title === song.title ? { ...s, locked: false } : s
+                      //       )
+                      //     );
+                      //     // setPoints(stats?.points - song.price);
+                      //   }
+                    } else {
+                      toast.message(
+                        `Оноо хүрэхгүй байна! (${song.price} points хэрэгтэй)`
+                      );
+                    }
+                  } else {
+                    setSelected(song.url);
+                    setOpen(false); // dialog хаах
+                    setUrlMusic(song.url);
+                  }
                 }}
-                className="cursor-pointer group  rounded-lg  hover:scale-105 transition-transform"
+                className="cursor-pointer group  rounded-lg  hover:scale-105 transition-transform group relative"
               >
                 <img
                   src={song.cover}
@@ -117,6 +195,20 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
                     {song.artist}
                   </p>
                 </div>
+
+                {song.locked && (
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-xs flex flex-col items-center justify-center rounded-lg shadow-inner border border-black/50">
+                    <span className="text-white font-extrabold text-2xl mb-2 animate-pulse drop-shadow-lg">
+                      🔒
+                    </span>
+                    <span className="text-white font-semibold text-sm">
+                      {song.price} оноо
+                    </span>
+                    <span className="text-gray-300 text-xs mt-1">
+                      Тоглохын тулд нээх
+                    </span>
+                  </div>
+                )}
               </div>
             ))}
           </div>
