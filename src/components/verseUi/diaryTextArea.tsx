@@ -8,6 +8,7 @@ type diaryTextAreaProps = {
   setText: Dispatch<SetStateAction<string | null>>;
   text: string | null;
   setShowDiaryInput: Dispatch<SetStateAction<boolean>>;
+  saving: boolean;
 };
 
 export const DairyText = ({
@@ -15,6 +16,7 @@ export const DairyText = ({
   setText,
   text,
   setShowDiaryInput,
+  saving
 }: diaryTextAreaProps) => {
   const isDisabled = !text || text.trim().length === 0;
 
@@ -66,15 +68,15 @@ export const DairyText = ({
 
           <button
             onClick={handleSaveButtonDiary}
-            disabled={isDisabled}
+            disabled={isDisabled || saving}
             className={`px-5 py-2 rounded-lg font-medium transition duration-200 shadow-md transform
     ${
-      isDisabled
+      isDisabled || saving
         ? "bg-gray-400 text-white cursor-not-allowed"
         : "bg-[#fec195] border border-[#fec195] text-black hover:scale-110 focus:ring-2 focus:ring-yellow-300"
     }`}
           >
-            Хадгалах
+            {saving ? "Хадгалж байна..." : "Хадгалах"}
           </button>
         </div>
       </motion.div>

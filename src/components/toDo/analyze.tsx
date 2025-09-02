@@ -44,6 +44,7 @@ import axios from "axios";
 
 export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
   const { userProvider } = useContext(UserContext);
+
   const [progressValue, setProgressValue] = useState(data.progress);
   const [greeting, setGreeting] = useState("");
   const moodsFromBackend = lastDiary?.analysis?.emotions;
@@ -57,7 +58,7 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
     const fetchStreaks = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:4001/progress/getStreaksById/${userProvider?.id}`
+          `http://localhost:4001/progress/getTodayStreaksById/${userProvider?.id}`
         );
         setStreak(data?.streakCount);
         setPoints(data?.points);

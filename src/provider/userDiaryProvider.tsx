@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 type userDiariesProviderType = {
   diaries: DiaryNote[];
-  fetchDiary: () => Promise<void>;
+  fetchDiary: (showLoading?: boolean) => Promise<void>;
 };
 
 export const userDiaryContext = createContext<userDiariesProviderType>(
@@ -25,24 +25,20 @@ export default function UserDiaryProvider({
   const [diaries, setDiaries] = useState<DiaryNote[]>([]);
   const { userProvider, loading: userLoading } = useContext(UserContext);
 
-  const fetchDiary = async () => {
+  const fetchDiary = async (showLoading = true) => {
     if (!userProvider?.id) return;
 
-    setLoading(true);
+    if (showLoading) setLoading(true); // ✅ зөвхөн showLoading үед асаана
     try {
       const response = await axios.get<DiaryNote[]>(
         `http://localhost:4001/ai/getAllDiaryNotes/${userProvider?.id}`
       );
-      console.log("res:", response);
       setDiaries(response.data);
     } catch (error) {
       toast.error("Error fetching diary notes");
       console.error(error);
     } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-      //
+      if (showLoading) setLoading(false); // ✅ зөвхөн showLoading үед унтраана
     }
   };
 

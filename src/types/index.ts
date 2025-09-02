@@ -31,6 +31,9 @@ export type User = {
   progress?: Progress;
   achievements: AchievementType[];
 
+   totalStreaks:number;
+  totalPoints:number;
+
   createdAt: Date;
   updatedAt: Date;
 };

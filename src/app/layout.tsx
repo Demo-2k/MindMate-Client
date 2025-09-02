@@ -6,7 +6,6 @@ import { Toaster } from "sonner";
 import UserContextProvider from "@/provider/userProvider";
 import { ThemeInitializer } from "@/provider/ThemeInitializer";
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,9 +33,15 @@ export default function RootLayout({
       >
         <UserContextProvider>
           <UserDiaryProvider>
-            <ThemeInitializer/>
+            <ThemeInitializer />
             <main>{children}</main>
-            <Toaster />
+            <Toaster
+              richColors
+              position="top-center"
+              toastOptions={{
+                style: { zIndex: 99999 },
+              }}
+            />
           </UserDiaryProvider>
         </UserContextProvider>
       </body>

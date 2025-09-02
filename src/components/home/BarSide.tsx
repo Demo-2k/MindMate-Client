@@ -8,14 +8,14 @@ import SelectMusic from "../userPen/selectMusic";
 interface BarSideProps {
   setUrlMusic: (url: string) => void;
 }
-export const BarSide = ({setUrlMusic}: BarSideProps) => {
+export const BarSide = ({ setUrlMusic }: BarSideProps) => {
   return (
     <TooltipProvider>
       <div className="flex gap-4">
-        <CoverImage/>
-        <Month/>
+        <CoverImage />
+        <Month />
         <DialogTheme />
-        <SelectMusic setUrlMusic={setUrlMusic}/>
+        <SelectMusic setUrlMusic={setUrlMusic} />
         <DialogBreath />
       </div>
     </TooltipProvider>
