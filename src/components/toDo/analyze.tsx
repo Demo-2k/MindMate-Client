@@ -57,7 +57,7 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
     const fetchStreaks = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:4001/progress/getStreaksById/${userProvider.id}`
+          `http://localhost:4001/progress/getStreaksById/${userProvider?.id}`
         );
         setStreak(data?.streakCount);
         setPoints(data?.points);
@@ -118,7 +118,7 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
             <div className="flex justify-between">
               <div>
                 <h2 className="text-sm text-gray-400">{greeting}</h2>
-                <h1 className="text-md font-bold">{userProvider.username}</h1>
+                <h1 className="text-md font-bold">{userProvider?.username}</h1>
               </div>
 
               <img

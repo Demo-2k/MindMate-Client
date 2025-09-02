@@ -1,28 +1,29 @@
 "use client";
-
+ 
 import { User } from "@/types";
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
-
+ 
 type userContextType = {
-  userProvider: User;
+  userProvider: User | null;
   loading: boolean;
-  getCurrentUserByAccessToken:()=>void
+  getCurrentUserByAccessToken: () => void;
 };
-
+ 
 export const UserContext = createContext({} as userContextType);
-
+ 
 export default function UserContextProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [userProvider, setUserProvider] = useState({} as User);
-  const [loading, setLoading] = useState(false);
-
-const getCurrentUserByAccessToken = async () => {
+  const [userProvider, setUserProvider] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+ 
+  const getCurrentUserByAccessToken = async () => {
     const token = localStorage.getItem("token") as string;
-
+ 
+    setLoading(true); 
     try {
       const response = await axios.get(
         `http://localhost:4001/auth/get-current-user`,
@@ -32,20 +33,24 @@ const getCurrentUserByAccessToken = async () => {
           },
         }
       );
-      console.log("responsee", response.data);
-
-      setUserProvider(response?.data?.user);
+ 
+      setUserProvider(response?.data?.user || null);
     } catch (error) {
       console.log(error);
+      setUserProvider(null); 
+    } finally {
+      setLoading(false); 
     }
   };
-
+ 
   useEffect(() => {
     getCurrentUserByAccessToken();
   }, []);
-
+ 
   return (
-    <UserContext.Provider value={{ userProvider, loading, getCurrentUserByAccessToken }}>
+    <UserContext.Provider
+      value={{ userProvider, loading, getCurrentUserByAccessToken }}
+    >
       {children}
     </UserContext.Provider>
   );

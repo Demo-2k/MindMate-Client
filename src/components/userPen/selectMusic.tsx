@@ -90,7 +90,7 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
         </TooltipContent>
       </Tooltip>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="!max-w-2xl w-full h-[70vh] bg-black flex flex-col ">
+        <DialogContent className="!max-w-2xl w-full h-[80vh] bg-black flex flex-col ">
           <DialogTitle className="text-white">Дуу сонгох</DialogTitle>
           <DialogDescription></DialogDescription>
           <div className="grid grid-cols-3 gap-5 ">
