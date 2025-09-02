@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Maximize2, Minimize2, X } from "lucide-react";
 interface SpotifyEmbedProps {
@@ -14,10 +14,28 @@ export default function SpotifyEmbed({
   urlMusic,
   defaultUrl = "https://open.spotify.com/embed/playlist/1buR1viIOgrYIWWX4j14gL?utm_source=generator&theme=0",
 }: SpotifyEmbedProps) {
+  console.log("urlMusic", urlMusic);
 
-  console.log("urlMusic",urlMusic);
-  
   const [isExpanded, setIsExpanded] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState<string>(defaultUrl);
+
+  useEffect(() => {
+    // Refresh хийсэн ч сүүлд сонгосон дууг хадгалах
+    const savedUrl = localStorage.getItem("currentUrlMusic");
+    if (savedUrl) {
+      setCurrentUrl(savedUrl);
+    } else if (urlMusic) {
+      setCurrentUrl(urlMusic);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (urlMusic) {
+      setCurrentUrl(urlMusic);
+      localStorage.setItem("currentUrlMusic", urlMusic);
+    }
+  }, [urlMusic]);
+
   const w = isExpanded
     ? "350px"
     : typeof width === "number"
@@ -28,8 +46,6 @@ export default function SpotifyEmbed({
     : typeof height === "number"
     ? `${height}px`
     : height;
-
-    
 
   return (
     <motion.div
@@ -58,7 +74,6 @@ export default function SpotifyEmbed({
               >
                 {isExpanded ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
               </button>
-           
             </div>
           </div>
 
@@ -75,7 +90,7 @@ export default function SpotifyEmbed({
             <iframe
               id="spotify-embed-card"
               title="spotify-embed"
-              src={urlMusic ?? defaultUrl}
+              src={currentUrl}
               style={{ borderRadius: 12 }}
               width="100%"
               height={h}

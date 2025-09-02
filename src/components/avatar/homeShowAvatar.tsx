@@ -1,10 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { ChatBotaAnalyze } from "../chatBot/chatBotAnalyze";
 
 export const ShowAvatarHome = ({
   setShowChatBotHome,
 }: {
   setShowChatBotHome: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const [analyze, setAnalyze] = useState(false);
+
+
+  console.log("analyze", analyze);
+  
   return (
     <div className="relative w-[220px] h-[280px] flex flex-col items-center gap-3">
       {/* Avatar GIF */}
@@ -18,7 +24,10 @@ export const ShowAvatarHome = ({
 
       {/* Action buttons */}
       <div className="flex gap-2">
-        <button className="bg-[#fec195] text-gray-900 px-4 py-2 rounded-full shadow-lg hover:bg-[#f7b973] transition">
+        <button
+          className="bg-[#fec195] text-gray-900 px-4 py-2 rounded-full shadow-lg hover:bg-[#f7b973] transition"
+          onClick={() => setAnalyze(true)}
+        >
           Анализ
         </button>
 
@@ -29,6 +38,8 @@ export const ShowAvatarHome = ({
           Ярилцах
         </button>
       </div>
+
+      {analyze && <ChatBotaAnalyze setOpen={setAnalyze} open={analyze}/>}
     </div>
   );
 };

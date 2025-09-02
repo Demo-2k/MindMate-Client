@@ -1,17 +1,22 @@
-import { useContext, useState } from "react";
-import { ListTodo, Sun, TextSelect } from "lucide-react";
-import { Button } from "../ui/button";
-import { Month } from "../calendar/month";
+"use client";
+
+import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { Analysis } from "../toDo/analyze";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "../ui/dialog";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../ui/dialog";
-import { Analysis } from "./analyze";
 
-const emojis = ["✨", "🌸", "🍀", "🫧", "🧸"];
 
-export function CoverImage() {
+
+export const ChatBotaAnalyze = ({setOpen, open}:{setOpen: Dispatch<SetStateAction<boolean>>,open:boolean }) => {
   const { diaries } = useContext(userDiaryContext);
   const lastDiary = diaries[0];
+
+  const emojis = ["✨", "🌸", "🍀", "🫧", "🧸"];
 
   const today = new Date();
   const day = today.getDate();
@@ -46,25 +51,10 @@ export function CoverImage() {
   const weekday = weekdaysMn[today.getDay()];
 
   const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-  const [open, setOpen] = useState(false);
+//   const [open, setOpen] = useState(false);
 
   return (
     <div>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            className="hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
-            onClick={() => setOpen(true)}
-          >
-            <TextSelect />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">
-          <p>анализ</p>
-        </TooltipContent>
-      </Tooltip>
-      
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!max-w-7xl w-full h-[80vh] bg-black overflow-auto">
           <DialogTitle></DialogTitle>
@@ -78,8 +68,6 @@ export function CoverImage() {
                 backgroundRepeat: "repeat",
               }}
             >
-             
-
               <div className=" p-4 pt-30 flex items-center justify-between text-white">
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-3 text-3xl">
@@ -103,4 +91,4 @@ export function CoverImage() {
       </Dialog>
     </div>
   );
-}
+};
