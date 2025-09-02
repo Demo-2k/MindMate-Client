@@ -31,7 +31,7 @@ export default function UserDiaryProvider({
     setLoading(true);
     try {
       const response = await axios.get<DiaryNote[]>(
-        `http://localhost:4001/ai/getAllDiaryNotes/${userProvider.id}`
+        `http://localhost:4001/ai/getAllDiaryNotes/${userProvider?.id}`
       );
       console.log("res:", response);
       setDiaries(response.data);
@@ -48,7 +48,7 @@ export default function UserDiaryProvider({
 
   useEffect(() => {
     fetchDiary();
-  }, [userProvider.id, userLoading]);
+  }, [userProvider?.id, userLoading]);
 
   if (loading) return <Loading />;
 

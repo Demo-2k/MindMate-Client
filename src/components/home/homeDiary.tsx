@@ -75,7 +75,7 @@ export default function HomeDiary() {
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:4001/ai/postDiary/${userProvider.id}`,
+        `http://localhost:4001/ai/postDiary/${userProvider?.id}`,
         { text: text }
       );
       // setText(response.data.note);
