@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
@@ -16,7 +16,6 @@ import { UserContext } from "@/provider/userProvider";
 
 interface SelectMusicProps {
   setUrlMusic: (url: string) => void;
-
 }
 
 type SongType = {
@@ -44,7 +43,7 @@ const songs = [
     cover:
       "https://i.pinimg.com/736x/3f/84/f4/3f84f4913612406a92b79524bd00e865.jpg",
     locked: true,
-    price: 10,
+    price: 5,
   },
   {
     title: "Emotions",
@@ -106,32 +105,71 @@ const songs = [
   },
 ];
 
-export default function SelectMusic({ setUrlMusic}: SelectMusicProps) {
+export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [songList, setSongList] = useState(songs);
 
-  const { userProvider } = useContext(UserContext);
+  const { userProvider, setUserProvider } = useContext(UserContext);
+
+  useEffect(() => {
+    const unlocked = JSON.parse(localStorage.getItem("unlockedSongs") || "[]");
+
+    // Хамгийн эхний дууг unlock хийсэн гэж нэмэх
+    if (!unlocked.includes(songs[0].title)) {
+      unlocked.push(songs[0].title);
+      localStorage.setItem("unlockedSongs", JSON.stringify(unlocked));
+    }
+
+    setSongList(
+      songs.map((song) => ({
+        ...song,
+        locked: !unlocked.includes(song.title),
+      }))
+    );
+  }, []);
 
   const UnlockSongs = async (song: SongType) => {
     if (!userProvider?.totalPoints) return;
-
     if (!confirm(`${song?.price}-р unlock хийх үү?`)) return;
 
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/UnlockSongs/${userProvider?.id}`
-    );
-
-    console.log("reponse unlock songs", response);
-    
-
     try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/UnlockSongs/${userProvider?.id}`,
+        { songPrice: song?.price }
+      );
+
+      // Song list update
+      setSongList((prev) =>
+        prev.map((s) => (s.title === song.title ? { ...s, locked: false } : s))
+      );
+
+      // LocalStorage update
+      const unlocked = JSON.parse(
+        localStorage.getItem("unlockedSongs") || "[]"
+      );
+      localStorage.setItem(
+        "unlockedSongs",
+        JSON.stringify([...unlocked, song.title])
+      );
+
+      // **Frontend-д оноо update**
+      setUserProvider({
+        ...userProvider,
+        totalPoints: response?.data?.totalPoints, // backend-с ирсэн шинэ оноо
+      });
+
+      toast.message(`"${song.title}" unlock боллоо!`);
     } catch (error) {
       toast.message("Алдаа гарлаа");
     }
   };
 
-
+  // useEffect(() => {
+  //   if (userProvider?.id) {
+  //     fetchUnlockedSongs();
+  //   }
+  // }, [userProvider?.id]);
 
   return (
     <div>

@@ -18,6 +18,7 @@ import Clock from "./time";
 import { ShowAvatarHome } from "../avatar/homeShowAvatar";
 import NotebookCoverCard from "./note";
 import { toast } from "sonner";
+import { ChatBot } from "../chatBot/chatBot";
 
 // import { ChatBotBreathEx } from "../chatBot/chatBotBreath";
 
@@ -115,6 +116,12 @@ export default function HomeDiary() {
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
+      <div className="z-50">
+        {showChatBotHome && (
+          <ChatBot diaries={diaries} setShowChatBotHome={setShowChatBotHome} />
+        )}
+      </div>
+
       {/* <div className="z-50">
         {showChatBotHome && <ChatBot setShowChatBotHome={setShowChatBotHome} />}
       </div> */}
