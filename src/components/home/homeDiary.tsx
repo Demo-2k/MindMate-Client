@@ -116,36 +116,22 @@ export default function HomeDiary() {
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
-      
       <div className="z-50">
         {showChatBotHome && (
           <ChatBot diaries={diaries} setShowChatBotHome={setShowChatBotHome} />
         )}
       </div>
 
-      {/* <div className="z-50">
-        {showChatBotHome && <ChatBot setShowChatBotHome={setShowChatBotHome} />}
-      </div> */}
-
-      <div className="absolute bottom-20 right-20 z-40">
-        <motion.div
-          animate={{ scale: isSaved ? 1.2 : 1 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <ShowAvatarHome setShowChatBotHome={setShowChatBotHome} />
-        </motion.div>
-      </div>
-
       <div className="absolute right-5 bottom-24 md:bottom-20 md:right-20 z-40 ">
         <ShowAvatarHome setShowChatBotHome={setShowChatBotHome} />
       </div>
 
-      <div className="flex gap-3 absolute top-5 right-60 z-40">
+      <div className="flex gap-1 md:gap-3 absolute top-2 md:top-5  md:right-60 z-40">
         <div className="flex items-center gap-1">
           <img
             src="/passion.png"
             alt="fire"
-            className="w-[12px] h-[12px]  md:w-[24px] md:h-[24px]"
+            className="w-[14px] h-[14px]  md:w-[24px] md:h-[24px]"
           />
           <p className="text-[14px] md:text-[24px] font-semibold text-white">
             {/* {stats.streaks !== null ? stats.streaks : "…"} */}
@@ -154,7 +140,11 @@ export default function HomeDiary() {
         </div>
 
         <div className="flex items-center gap-1">
-          <img src="/cent.png" alt="streks" className="w-[24px] h-[24px]" />
+          <img
+            src="/cent.png"
+            alt="streks"
+            className="w-[14px] h-[14px]  md:w-[24px] md:h-[24px]"
+          />
 
           <p className="text-[14px] md:text-[24px] font-semibold text-white">
             {userProvider?.totalPoints}
@@ -175,7 +165,6 @@ export default function HomeDiary() {
 
       <SpotifyEmbed urlMusic={urlMusic} />
 
-
       {showdiaryInput && (
         <div className="h-[80%] absolute z-50">
           <DairyText
@@ -188,7 +177,7 @@ export default function HomeDiary() {
         </div>
       )}
 
-      <div className="backdrop-blur-md py-3 px-7 border-none rounded-lg absolute bottom-15">
+      <div className="backdrop-blur-md py-3 px-3 md:px-7 border-none rounded-lg absolute bottom-6 md:bottom-15">
         <BarSide setUrlMusic={setUrlMusic} />
       </div>
     </div>

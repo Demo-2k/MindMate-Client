@@ -4,7 +4,12 @@ import { Button } from "../ui/button";
 import { Month } from "../calendar/month";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "../ui/dialog";
 import { Analysis } from "./analyze";
 
 const emojis = ["✨", "🌸", "🍀", "🫧", "🧸"];
@@ -54,7 +59,7 @@ export function CoverImage() {
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            className="hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
+            className=" h-8 w-8 md:h-[42px] md:w-[42px] hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
             onClick={() => setOpen(true)}
           >
             <TextSelect />
@@ -64,7 +69,7 @@ export function CoverImage() {
           <p>анализ</p>
         </TooltipContent>
       </Tooltip>
-      
+
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!max-w-7xl w-full h-[80vh] bg-black overflow-auto">
           <DialogTitle></DialogTitle>
@@ -78,8 +83,6 @@ export function CoverImage() {
                 backgroundRepeat: "repeat",
               }}
             >
-             
-
               <div className=" p-4 pt-30 flex items-center justify-between text-white">
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-3 text-3xl">

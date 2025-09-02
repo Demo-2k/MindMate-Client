@@ -162,7 +162,7 @@ export default function NotebookCoverCard() {
   );
 }
 const StyledWrapper = styled.div`
-  button {
+ button {
     position: relative;
     padding: 12px 35px;
     background: #000000;
@@ -174,6 +174,32 @@ const StyledWrapper = styled.div`
     box-shadow: 0 0 0 #fec1958c;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+  }
+
+  /* Mobile (≤ 480px) */
+  @media (max-width: 480px) {
+    button {
+      padding: 10px 20px;
+      font-size: 14px;
+      border:1px solid #fec195
+    }
+  }
+
+  /* Tablet (481px – 768px) */
+  @media (min-width: 481px) and (max-width: 768px) {
+    button {
+      padding: 12px 28px;
+      font-size: 15px;
+      border: 2px solid #fec195
+    }
+  }
+
+  /* Desktop (≥ 769px) */
+  @media (min-width: 769px) {
+    button {
+      padding: 14px 40px;
+      font-size: 18px;
+    }
   }
 
   .star-1 {
