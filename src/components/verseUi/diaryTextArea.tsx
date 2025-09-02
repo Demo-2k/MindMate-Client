@@ -16,15 +16,8 @@ export const DairyText = ({
   text,
   setShowDiaryInput,
 }: diaryTextAreaProps) => {
-  const [isDisabled, setDisabled] = useState(true);
+  const isDisabled = !text || text.trim().length === 0;
 
-  useEffect(() => {
-    if (text?.trim().length === 0) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
-    }
-  }, [text]);
   return (
     <div className="flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
       {/* Diary button */}
