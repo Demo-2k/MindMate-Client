@@ -30,13 +30,13 @@ export default function ProfileDropdown() {
   };
   if (loading) {
     return (
-      <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex justify-center items-center">
+      <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex justify-center items-center ">
         <Loader />
       </div>
     );
   }
   return (
-    <div className="absolute top-4 left-4 flex items-center gap-3 ">
+    <div className="absolute top-2 md:top-5  left-4 flex items-center gap-3 ">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="cursor-pointer">
@@ -58,6 +58,7 @@ export default function ProfileDropdown() {
         </DropdownMenuContent>
       </DropdownMenu>
 
+      {/* username зөвхөн md-с дээш харагдана */}
       <div className="text-white">
         <p className="font-semibold text-white">{userProvider?.username}</p>
       </div>

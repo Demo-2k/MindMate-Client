@@ -1,7 +1,4 @@
 export const DoneBreathExercise = ({ onDone }: { onDone: () => void }) => {
-  // const handleDoneClick = () => {
-  //   onDone();
-  // };
 
   return (
     <div className="absolute inset-0 flex items-center justify-center z-50">

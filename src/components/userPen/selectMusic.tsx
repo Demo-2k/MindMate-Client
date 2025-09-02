@@ -177,7 +177,7 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
         <TooltipTrigger asChild>
           <Button
             variant="outline"
-            className="hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
+            className="h-8 w-8 md:h-[42px] md:w-[42px] hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
             onClick={() => setOpen(true)}
           >
             <Music />
@@ -191,7 +191,7 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
         <DialogContent className="!max-w-2xl w-full h-[80vh] bg-black flex flex-col ">
           <DialogTitle className="text-white">Дуу сонгох</DialogTitle>
           <DialogDescription></DialogDescription>
-          <div className="grid grid-cols-3 gap-5 ">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 overflow-y-auto">
             {songList.map((song) => (
               <div
                 key={song.title}

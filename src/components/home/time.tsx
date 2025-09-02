@@ -19,9 +19,30 @@ export default function Clock() {
       setTimeString(time);
 
       // өдөр
-      const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+      const weekdays = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
       const day = weekdays[now.getDay()];
-      const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
       const date = now.getDate();
       const month = months[now.getMonth()];
       const year = now.getFullYear().toString().slice(-2);
@@ -34,9 +55,9 @@ export default function Clock() {
   }, []);
 
   return (
-    <div className="absolute top-4 right-4 z-50 flex flex-col items-center text-white gap-1">
-      <div className="text-3xl font-medium">{timeString}</div>
-      <div className="text-sm">{dateString}</div>
+    <div className="absolute top-2 md:top-5  right-4 z-50 flex flex-col items-center text-white gap-1">
+      <div className=" md:text-3xl font-medium">{timeString}</div>
+      <div className="text-[13px] md:text-sm">{dateString}</div>
     </div>
   );
 }
