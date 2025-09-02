@@ -16,6 +16,7 @@ import Loader from "./loading";
 
 export default function ProfileDropdown() {
   const { userProvider } = useContext(UserContext);
+  console.log("userProvider", userProvider);
   
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -47,7 +48,7 @@ export default function ProfileDropdown() {
 
         <DropdownMenuContent className="w-40 mt-2 bg-black p-2 rounded-lg border border-yellow-400">
           <DropdownMenuItem
-            onClick={() => router.push("/")}
+            // onClick={() => router.push("/")}
             className="group flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer hover:bg-transparent"
           >
             <User className="h-4 w-4 text-white group-hover:text-black" />
