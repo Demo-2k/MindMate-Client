@@ -119,7 +119,7 @@ export default function SelectMusic({ setUrlMusic}: SelectMusicProps) {
     if (!confirm(`${song?.price}-р unlock хийх үү?`)) return;
 
     const response = await axios.post(
-      `http://localhost:4001/progress/UnlockSongs/${userProvider?.id}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/UnlockSongs/${userProvider?.id}`
     );
 
     console.log("reponse unlock songs", response);

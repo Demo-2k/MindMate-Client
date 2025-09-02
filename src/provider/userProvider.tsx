@@ -26,7 +26,7 @@ export default function UserContextProvider({
     setLoading(true); 
     try {
       const response = await axios.get(
-        `http://localhost:4001/auth/get-current-user`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/get-current-user`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

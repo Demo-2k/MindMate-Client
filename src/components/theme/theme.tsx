@@ -54,7 +54,7 @@ export function DialogTheme() {
     if (selectedTheme && userProvider?.id) {
       try {
         await axios.patch(
-          `http://localhost:4001/user/${userProvider.id}/theme`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userProvider.id}/theme`,
           { themeUrl: selectedTheme }
         );
 

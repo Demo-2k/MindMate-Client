@@ -53,7 +53,7 @@ export default function HomeDiary() {
     setSaving(true);
     try {
       const response = await axios.post(
-        `http://localhost:4001/ai/postDiary/${userProvider?.id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/ai/postDiary/${userProvider?.id}`,
         { text: text }
       );
       // setText(response.data.note);
@@ -89,7 +89,7 @@ export default function HomeDiary() {
     const processTodayDiary = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4001/progress/processDiary/${userProvider?.id}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/processDiary/${userProvider?.id}`
         );
         console.log("all response", response.data);
       } catch (error) {
@@ -99,7 +99,7 @@ export default function HomeDiary() {
     const allProgress = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4001/progress/getStreaks/${userProvider?.id}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/getStreaks/${userProvider?.id}`
         );
         console.log("all response", response.data.summary.points);
       } catch (error) {

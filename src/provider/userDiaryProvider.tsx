@@ -31,7 +31,7 @@ export default function UserDiaryProvider({
     if (showLoading) setLoading(true); // ✅ зөвхөн showLoading үед асаана
     try {
       const response = await axios.get<DiaryNote[]>(
-        `http://localhost:4001/ai/getAllDiaryNotes/${userProvider?.id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/ai/getAllDiaryNotes/${userProvider?.id}`
       );
       setDiaries(response.data);
     } catch (error) {

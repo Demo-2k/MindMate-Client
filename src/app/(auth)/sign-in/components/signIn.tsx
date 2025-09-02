@@ -53,7 +53,8 @@ export default function SignIn() {
 
   const submitLogin = async (email: string, password: string) => {
     try {
-      const res = await axios.post("http://localhost:4001/auth/sign-in", { email, password });
+      
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/sign-in`, { email, password });
       localStorage.setItem("token", res.data.accesstoken);
       setUser(res.data.user);
       toast.success("Login successful!");
@@ -104,7 +105,7 @@ export default function SignIn() {
           <button
             type="button"
             className="w-full flex items-center justify-center gap-2 border py-2 rounded-lg font-medium hover:bg-gray-50 transition"
-            onClick={() => (window.location.href = "http://localhost:4001/auth/google")}
+            onClick={() => (window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`)}
           >
             <img
               src="https://www.svgrepo.com/show/355037/google.svg"
