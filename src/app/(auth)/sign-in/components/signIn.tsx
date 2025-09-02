@@ -95,9 +95,9 @@ export default function SignIn() {
           </div>
         </div>
 
-        <h1 className="text-xl font-semibold mb-6">Welcome</h1>
+        <h1 className="text-xl font-semibold mb-6">Тавтай морилно уу</h1>
         <p className="text-gray-600 mb-6 text-sm">
-          Sign in or create an account to continue
+         Үргэлжлүүлэхийн тулд нэвтрэх эсвэл шинэ аккаунт үүсгэнэ үү
         </p>
 
           {/* Google login */}
@@ -117,7 +117,7 @@ export default function SignIn() {
           {/* OR divider */}
           <div className="flex items-center my-5">
             <div className="flex-1 h-px bg-gray-300"></div>
-            <span className="px-3 text-gray-500 text-sm">OR</span>
+            <span className="px-3 text-gray-500 text-sm">Эсвэл</span>
             <div className="flex-1 h-px bg-gray-300"></div>
           </div>
 
@@ -162,18 +162,18 @@ export default function SignIn() {
               disabled={isSubmitting}
               className="w-full bg-black text-white py-2 rounded-lg font-medium hover:opacity-90 transition"
             >
-              {isSubmitting ? "Loading..." : "Continue with Email"}
+              {isSubmitting ? "Loading..." : "Нэвтрэх"}
             </button>
           </form>
 
           {/* Signup link */}
           <p className="text-sm text-gray-500 mt-4 text-center">
-            Don&apos;t have an account?{" "}
+          Шинэ аккаунт үүсгэх үү?{" "}
             <Link
               href="/sign-up"
               className="text-blue-500 hover:underline font-medium"
             >
-              Sign up
+              Бүртгэл үүсгэх
             </Link>
           </p>
 
