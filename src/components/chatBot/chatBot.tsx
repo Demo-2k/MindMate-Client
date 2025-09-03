@@ -223,12 +223,12 @@ export type diaryTypemock = {
 };
 
 type chatBotType = {
-
   diaries: DiaryNote[];
   setShowChatBotHome: Dispatch<SetStateAction<boolean>>;
 };
 
-export const ChatBot = ({ diaries,setShowChatBotHome }: chatBotType) => {
+export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
+  if (!diaries[0] || !diaries) return;
   const setCurrentDiary = diaries[0];
 
   const diaryData = {
@@ -433,11 +433,11 @@ export const ChatBot = ({ diaries,setShowChatBotHome }: chatBotType) => {
 
   return (
     <div>
-      <main className="flex flex-col items-center justify-between bg-black absolute bottom-0 right-0 ">
+      <main className="flex flex-col items-center justify-between bg-black absolute bottom-0 right-0 z-45">
         <div className="absolute bottom-20 right-3 md:bottom-16 md:right-16 z-50 flex flex-col w-[340px] h-[450px] md:w-[360px] bg-neutral-900 rounded-3xl shadow-2xl border border-neutral-800 overflow-hidden">
           <button
             onClick={() => setShowChatBotHome(false)}
-            className="absolute top-3 right-3 text-gray-400 hover:text-gray-200 transition text-lg font-bold"
+            className="absolute top-3 right-3 text-gray-400 hover:text-gray-200 transition text-3xl font-bold"
           >
             ×
           </button>

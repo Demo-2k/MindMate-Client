@@ -40,7 +40,6 @@ export function DialogTheme() {
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const { userProvider, getCurrentUserByAccessToken } = useContext(UserContext);
-  console.log("user", userProvider);
   
 
   

@@ -71,7 +71,7 @@ export function CoverImage() {
       </Tooltip>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="!max-w-7xl w-full h-[80vh] bg-black overflow-auto">
+        <DialogContent className="!max-w-7xl w-full h-[80vh] bg-black overflow-auto flex flex-col">
           <DialogTitle></DialogTitle>
           <DialogDescription></DialogDescription>
           <div className="bg-black flex flex-col gap-4 border-[#2a2a2a] rounded-lg w-full h-full ">

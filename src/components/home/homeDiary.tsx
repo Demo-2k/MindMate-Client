@@ -28,6 +28,8 @@ export default function HomeDiary() {
   const [text, setText] = useState<null | string>(null);
   const [showdiaryInput, setShowDiaryInput] = useState(false);
 
+  const [allPoints, setAllPoints] = useState<number | null>(null);
+
   // const [stats, setStats] = useState<{
   //   points: number | null;
   //   streaks: number | null;
@@ -38,7 +40,6 @@ export default function HomeDiary() {
 
   // const [currenDiaryId, setCurrentDiaryId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
-  console.log("diaries", diaries[0]?.id);
 
   //SET SHOW AVATAR
   const [showChatBotHome, setShowChatBotHome] = useState(false);
@@ -47,8 +48,6 @@ export default function HomeDiary() {
 
   //show music
   const [urlMusic, setUrlMusic] = useState<string | null>(null);
-
-  console.log("dairies diaress all:", diaries);
 
   const handleDiarySave = async () => {
     setSaving(true);
@@ -85,34 +84,54 @@ export default function HomeDiary() {
   console.log("user provideerrr:", userProvider);
 
   useEffect(() => {
-    if (!userProvider?.id) return;
+    if (!userProvider?.id || !diaries[0]) return;
 
     const processTodayDiary = async () => {
       try {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/processDiary/${userProvider?.id}`
         );
-        console.log("all response", response.data);
-      } catch (error) {
-        toast.error("streaks error");
-      }
-    };
-    const allProgress = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/getStreaks/${userProvider?.id}`
+        console.log(
+          "all process diary",
+          response.data.success.finalProgress.points
         );
-        console.log("all response", response.data.summary.points);
+        setAllPoints(response?.data?.success?.finalProgress?.points);
       } catch (error) {
-        toast.error("streaks error");
+        // toast.error("streaks error");
+        console.log(error);
       }
     };
-    processTodayDiary();
-    allProgress();
-  }, []);
+    // const allProgress = async () => {
+    //   try {
+    //     const response = await axios.get(
+    //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/getStreaks/${userProvider?.id}`
+    //     );
+    //     console.log("all getStreaks", response);
+    //     console.log("diaries:", diaries);
+    //     console.log(
+    //       "response?.data?.finalProgress?.points",
+    //       response?.data?.finalProgress?.points
+    //     );
 
-  console.log("text text:", text);
-  console.log("showChatBotHome:", showChatBotHome);
+    //     // setAllPoints(response?.data?.finalProgress?.points);
+
+    //     // setAllStreaks(response?.data?.updateUserPoints?.totalStreaks);
+    //   } catch (error) {
+    //     // toast.error("streaks error");
+    //   }
+    // };
+    processTodayDiary();
+    // allProgress();
+  }, [userProvider?.id]);
+
+  const handleChatBotClick = () => {
+    if (!diaries || diaries.length === 0) {
+      toast.error("Эхлээд өдрийн тэмдэглэлээ бичнэ үү");
+      return;
+    }
+
+    setShowChatBotHome(true);
+  };
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
@@ -123,33 +142,27 @@ export default function HomeDiary() {
       </div>
 
       <div className="absolute right-5 bottom-24 md:bottom-20 md:right-20 z-40 ">
-        <ShowAvatarHome setShowChatBotHome={setShowChatBotHome} />
+        <ShowAvatarHome setShowChatBotHome={handleChatBotClick} />
       </div>
 
       <div className="flex gap-1 md:gap-3 absolute top-2 md:top-5  md:right-60 z-40">
-        <div className="flex items-center gap-1">
+        {/* <div className="flex items-center gap-1">
           <img
             src="/passion.png"
             alt="fire"
             className="w-[14px] h-[14px]  md:w-[24px] md:h-[24px]"
           />
           <p className="text-[14px] md:text-[24px] font-semibold text-white">
-            {/* {stats.streaks !== null ? stats.streaks : "…"} */}
+            {stats.streaks !== null ? stats.streaks : "…"}
             {userProvider?.totalStreaks}
           </p>
-        </div>
+        </div> */}
 
-        <div className="flex items-center gap-1">
-          <img
-            src="/cent.png"
-            alt="streks"
-            className="w-[14px] h-[14px]  md:w-[24px] md:h-[24px]"
-          />
-
-          <p className="text-[14px] md:text-[24px] font-semibold text-white">
-            {userProvider?.totalPoints}
-            {/* {stats.points !== null ? stats.points : "…"} */}
-          </p>
+        <div className="flex items-center justify-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full shadow-md">
+          <span className="text-[14px] md:text-2xl">⭐</span>
+          <span className="text-[14px] md:text-2xl font-semibold text-white">
+            {allPoints ?? "…"}
+          </span>
         </div>
       </div>
 

@@ -40,7 +40,6 @@ export const SignUpEmailPassword = () => {
  
   const handleBudaa = async (username: string, email: string, password: string) => {
   try {
-    console.log("process.env.NEXT_PUBLIC_BACKEND_URL", process.env.NEXT_PUBLIC_BACKEND_URL);
     
     const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/sign-up`, {
       username, 

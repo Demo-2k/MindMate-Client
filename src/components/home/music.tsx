@@ -14,7 +14,6 @@ export default function SpotifyEmbed({
   urlMusic,
   defaultUrl = "https://open.spotify.com/embed/playlist/1buR1viIOgrYIWWX4j14gL?utm_source=generator&theme=0",
 }: SpotifyEmbedProps) {
-  console.log("urlMusic", urlMusic);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentUrl, setCurrentUrl] = useState<string>(defaultUrl);
