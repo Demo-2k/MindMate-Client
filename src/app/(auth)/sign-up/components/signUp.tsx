@@ -96,12 +96,12 @@ export const SignUpEmailPassword = () => {
     <div className="flex flex-col items-center justify-center h-full w-full">
       <div className="h-screen w-screen flex items-center justify-center">
         <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-sm text-center">
-          {/* Logo */}
-          <div className="flex items-center justify-center mb-4">
-            <div className="bg-gray-800 text-white rounded-full p-3">
-              <span className="text-lg font-bold">AI</span>
-            </div>
-          </div>
+            {/* Logo */}
+      <div className="flex items-center justify-center mb-4">
+        <div className=" text-white rounded-full p-2">
+          <img src="logo2.png" className="w-20 h-20 object-cover rounded-full" alt="Logo" />
+        </div>
+      </div>
 
           <h1 className="text-xl font-semibold mb-6">Тавтай морилно уу</h1>
           <p className="text-gray-600 mb-6 text-sm">
