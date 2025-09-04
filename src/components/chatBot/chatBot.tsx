@@ -267,60 +267,22 @@ export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  //   const handleSendMessage = async (e: React.FormEvent) => {
-  //     e.preventDefault();
-  //     if (!input.trim() || isLoadingChat) return;
 
-  //     const userMessage = { role: "user", text: input };
 
-  //     setMessages((prev) => [...prev, userMessage]);
-  //     setInput("");
-  //     setIsLoadingChat(true);
-
-  //     try {
-  //       // Chat history-ийг зөв формат руу хөрвүүлэх
-  //       const chatHistory = messages.map((msg) => ({
-  //         role: msg.role === "user" ? "user" : "model",
-  //         parts: [{ text: msg.text }],
-  //       }));
-
-  //       console.log("chat history", chatHistory);
-
-  //       // API руу шинэ мессеж болон хөрвүүлсэн түүхийг дамжуулах
-  //       console.log("too::", userMessage);
-
-  //       const aiReply = await sendMessage(
-  //         userMessage.text
-  //         //   chatHistory,
-  //         //   diaryData
-  //       );
-  //       //   const aiReply = akk;
-
-  //       console.log("ai Reply", aiReply);
-
-  //       if (typeof aiReply === "string") {
-  //         const aiMessage = { role: "ai", text: aiReply };
-  //         setMessages((prev) => [...prev, aiMessage]);
-  //       } else {
-  //         const aiMessage = { role: "ai", text: aiReply.text };
-  //         setMessages((prev) => [...prev, aiMessage]);
-
-  //         // if (aiReply?.triggerExercise) {
-  //         //   setShowBreathing(true);
-  //         // } else if (aiReply?.endChat) {
-  //         //   handleEndChat();
-  //         // } else {
-  //         //   setShowBreathing(false);
-  //         // }
-  //       }
-  //     } catch (error) {
-  //       console.error("Чатбот алдаа:", error);
-  //       const errorMessage = { role: "ai", text: "Уучлаарай, алдаа гарлаа." };
-  //       setMessages((prev) => [...prev, errorMessage]);
-  //     } finally {
-  //       setIsLoadingChat(false);
-  //     }
-  //   };
+    const handleEndChat = () => {
+    console.log("handleEndCHat ajilj baigaag shalgaj baina:");
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "ai",
+        text: "Ярьсанд баярлалаа. Би дараагийн удаа туслахад бэлэн байна шүү.",
+      },
+    ]);
+    setTimeout(() => {
+      setShowChatBotHome(false);
+      setMessages([]); // чат бүр мөсөн хаахдаа л хоослоно
+    }, 2000); // 2 секунд харуулаад хаана
+  };
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -366,9 +328,9 @@ export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
         setMessages((prev) => [...prev, aiMessage]);
 
         if (aiReply?.triggerExercise) {
-          console.log("show breathing ajilaj baina");
-
           setShowBreathing(true);
+        } else if (aiReply?.endChat) {
+          handleEndChat();
         } else {
           setShowBreathing(false);
         }
@@ -433,7 +395,7 @@ export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
 
   return (
     <div>
-      <main className="flex flex-col items-center justify-between bg-black absolute bottom-0 right-0 z-45">
+      <main className="flex flex-col items-center justify-between bg-black absolute bottom-0 right-0 z-50">
         <div className="absolute bottom-20 right-3 md:bottom-16 md:right-16 z-50 flex flex-col w-[340px] h-[450px] md:w-[360px] bg-neutral-900 rounded-3xl shadow-2xl border border-neutral-800 overflow-hidden">
           <button
             onClick={() => setShowChatBotHome(false)}

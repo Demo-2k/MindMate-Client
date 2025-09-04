@@ -135,7 +135,7 @@ export default function HomeDiary() {
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
-      <div className="z-50">
+      <div className="absolute absolute bottom-0 right-0 z-50">
         {showChatBotHome && (
           <ChatBot diaries={diaries} setShowChatBotHome={setShowChatBotHome} />
         )}
@@ -161,7 +161,7 @@ export default function HomeDiary() {
         <div className="flex items-center justify-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full shadow-md">
           <span className="text-[14px] md:text-2xl">⭐</span>
           <span className="text-[14px] md:text-2xl font-semibold text-white">
-            {allPoints ?? "…"}
+            {allPoints ?? userProvider?.totalPoints}
           </span>
         </div>
       </div>
