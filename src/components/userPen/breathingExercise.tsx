@@ -118,7 +118,7 @@ export function DialogBreath() {
       </Tooltip>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="!max-w-6xl w-full h-[60vh] bg-black overflow-auto">
+        <DialogContent className="!max-w-6xl w-full h-[60vh] text-white bg-black overflow-auto">
           <DialogTitle></DialogTitle> <DialogDescription></DialogDescription>
 
           <div className=" flex items-center justify-center px-3 sm:px-4 md:px-6">
