@@ -73,7 +73,7 @@ export const Month = () => {
         </TooltipContent>
       </Tooltip>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="!max-w-7xl w-full h-[90vh] bg-black  overflow-auto">
+        <DialogContent className="!max-w-7xl w-full h-[90vh] bg-black text-white overflow-auto">
           <DialogTitle></DialogTitle> <DialogDescription></DialogDescription>
           <div className="bg-black flex flex-col gap-4   border-[#2a2a2a] rounded-lg w-full h-full ">
             <div

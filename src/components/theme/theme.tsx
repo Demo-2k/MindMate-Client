@@ -85,9 +85,9 @@ export function DialogTheme() {
       </Tooltip>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-full h-[90vh] sm:h-auto sm:max-h-[80vh] sm:max-w-[600px] bg-black p-4 overflow-auto">
+        <DialogContent className="w-full h-[90vh] sm:h-auto sm:max-h-[80vh] sm:max-w-[600px] text-white bg-black p-4 overflow-auto">
           <DialogHeader>
-            <DialogTitle>Дэвсгэр зурагууд</DialogTitle>
+            <DialogTitle></DialogTitle>
             <DialogDescription>Сонгох дэвсгэр зурагууд</DialogDescription>
           </DialogHeader>
 
@@ -114,7 +114,7 @@ export function DialogTheme() {
 
           <DialogFooter className="mt-4 sticky bottom-0 flex justify-end gap-2">
             <DialogClose asChild>
-              <Button variant="outline">Гарах</Button>
+              <Button variant="outline" className="text-black">Гарах</Button>
             </DialogClose>
             <Button onClick={handleSave} disabled={!selectedTheme}>
               Хадгалах
