@@ -303,10 +303,7 @@ export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
         parts: [{ text: msg.text }],
       }));
 
-      console.log("chat history", chatHistory);
-
       // API руу шинэ мессеж болон хөрвүүлсэн түүхийг дамжуулах
-      console.log("too::", userMessage);
 
       // const response = await axios.post(`http://localhost:4001/api/chat`, {
       //   userMessage,
@@ -319,8 +316,6 @@ export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
         chatHistory,
         diaryData
       );
-
-      console.log("ai Reply", aiReply);
 
       if (typeof aiReply === "string") {
         const aiMessage = { role: "ai", text: aiReply };
@@ -392,8 +387,6 @@ export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
   };
 
   //   handleBreathingExerciseDone()
-
-  console.log("done", done);
 
   return (
     <div>
