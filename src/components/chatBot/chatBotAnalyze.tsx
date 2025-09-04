@@ -61,7 +61,7 @@ export const ChatBotaAnalyze = ({setOpen, open}:{setOpen: Dispatch<SetStateActio
           <DialogDescription></DialogDescription>
           <div className="bg-black flex flex-col gap-4 border-[#2a2a2a] rounded-lg w-full h-full ">
             <div
-              className=" w-full mx-auto h-50  rounded-xl overflow-hidden shadow-lg"
+              className=" w-full mx-auto h-50  rounded-xl shadow-lg"
               style={{
                 backgroundImage:
                   "url('https://i.pinimg.com/originals/92/98/b8/9298b8aa90e9bc71a6162878ee24cbeb.gif')",

@@ -22,20 +22,12 @@ export const DoneBreathExercise = ({ onDone }: { onDone: () => void }) => {
         <div className="w-10 h-[2px] bg-[#fec195]/50 rounded-full"></div>
 
         {/* Image */}
-        <motion.img
-          src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTFkeGJvbWNqNjBqY2RxaWgxODd0M2tkcjVyaXB4YW5pbDc3MjU3bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/1w019F86H4vfpkZoRz/giphy.gif"
-          alt="Relaxing GIF"
-          className="w-full rounded-xl shadow-md"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3 }}
-        />
 
-          <img
-            src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnY4dWJ5MzloYjVhMXcxbnlvOGo2bTYxZDYydnB5MTByaG5tMzJiOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xSuZSyJDe3JvpAWV47/giphy.gif"
-            alt="Relaxing GIF"
-            className="w-40 sm:w-52 md:w-72 lg:w-full rounded-xl shadow-md"
-          />
+        <img
+          src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnY4dWJ5MzloYjVhMXcxbnlvOGo2bTYxZDYydnB5MTByaG5tMzJiOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xSuZSyJDe3JvpAWV47/giphy.gif"
+          alt="Relaxing GIF"
+          className="w-40 sm:w-52 md:w-72 lg:w-full rounded-xl shadow-md"
+        />
 
         {/* Button */}
         <motion.button

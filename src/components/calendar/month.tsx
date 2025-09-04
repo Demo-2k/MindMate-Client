@@ -77,7 +77,7 @@ export const Month = () => {
           <DialogTitle></DialogTitle> <DialogDescription></DialogDescription>
           <div className="bg-black flex flex-col gap-4   border-[#2a2a2a] rounded-lg w-full h-full ">
             <div
-              className=" w-full mx-auto h-50  rounded-xl overflow-hidden shadow-lg"
+              className=" w-full mx-auto h-50  rounded-xl shadow-lg"
               style={{
                 backgroundImage:
                   "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXZvbGZnMjZtMGE4aTBia2Rwc2t1bGphMHFxZHVtczIxYnp5Y3J1MCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/pVGsAWjzvXcZW4ZBTE/giphy.gif')",
