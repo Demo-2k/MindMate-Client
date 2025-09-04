@@ -16,9 +16,9 @@ export const DoneBreathExercise = ({ onDone }: { onDone: () => void }) => {
           </p>
 
           <img
-            src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTFkeGJvbWNqNjBqY2RxaWgxODd0M2tkcjVyaXB4YW5pbDc3MjU3bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/1w019F86H4vfpkZoRz/giphy.gif"
+            src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnY4dWJ5MzloYjVhMXcxbnlvOGo2bTYxZDYydnB5MTByaG5tMzJiOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xSuZSyJDe3JvpAWV47/giphy.gif"
             alt="Relaxing GIF"
-            className="w-full rounded-xl shadow-md"
+            className="w-40 sm:w-52 md:w-72 lg:w-full rounded-xl shadow-md"
           />
 
           <button onClick={onDone} className="mt-2 w-full bg-black border border-[#fec195] text-white py-2 rounded-xl hover:bg-[#fec195] hover:text-black transition-colors">
