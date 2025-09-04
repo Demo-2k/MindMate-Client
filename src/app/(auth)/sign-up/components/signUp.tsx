@@ -38,41 +38,34 @@ export const SignUpEmailPassword = () => {
     mode: "all",
   });
 
-  const handleBudaa = async (
-    username: string,
-    email: string,
-    password: string
-  ) => {
-    try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/sign-up`,
-        {
-          username,
-          email,
-          password,
-        }
-      );
 
-      localStorage.setItem(
-        "token",
-        response?.data?.signUpUserAccessToken
-      );
+ 
+  const handleBudaa = async (username: string, email: string, password: string) => {
+  try {
+    
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/sign-up`, {
+      username, 
+      email,
+      password,
+    });
 
-      return true;
-    } catch (error) {
-      const axiosError = error as AxiosError;
+    // Токен localStorage-д хадгалах
+    localStorage.setItem("token", response?.data?.signUpUserAccessToken);
 
-      if (axiosError.response) {
-        const errorMessage = (
-          axiosError.response.data as { message: string }
-        ).message;
+    return true;
+  } catch (error) {
+    const axiosError = error as AxiosError;
 
-        if (errorMessage === "User profile already created") {
-          return false;
-        } else {
-          alert(`error: ${errorMessage}`);
-          return false;
-        }
+    if (axiosError.response) {
+      const errorMessage = (axiosError.response.data as { message: string })
+        .message;
+      console.log("error message:", errorMessage);
+
+      if (errorMessage === "User profile already created") {
+        return false;
+      } else {
+        alert(`error: ${errorMessage}`);
+        return false;
       }
       return false;
     }

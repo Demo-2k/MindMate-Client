@@ -106,6 +106,11 @@ const model = genAI.getGenerativeModel({
     // Харин ч зөвлөгөө, дэмжлэг, эсвэл нэмэлт мэдээлэл өгч яриаг чиглүүл.
     // Хэрэв асуулт асуух шаардлагатай бол, богино, энгийн байх ёстой.
     `,
+  generationConfig: {
+    maxOutputTokens: 150, // 2–3 өгүүлбэрээ бүрэн багтаахад хангалттай
+    temperature: 0.3, // тогтвортой, хэт нуршуу биш
+    stopSequences: ["\n"], // мөр шинэчлэгдэхэд таслах
+  },
 });
 
 // Хүүхдийн өдрийн тэмдэглэл болон JSON анализ
@@ -141,7 +146,9 @@ export async function sendMessage(
       if (text.includes("[BREATHE_SUGGESTION]")) {
         const cleanedText = text.replace("[BREATHE_SUGGESTION]", "").trim();
         return {
-          text: cleanedText + ` Эсвэл амьсгалын дасгал хийж үзэх үү? Тийм бол 'дасгал хийе' гэж бичнэ үү `,
+          text:
+            cleanedText +
+            ` Эсвэл амьсгалын дасгал хийж үзэх үү? Тийм бол 'дасгал хийе' гэж бичнэ үү `,
           triggerExercise: false, // Энд шууд дасгал эхлүүлэхгүй, харин санал болгож байгаа.
         };
       } else {

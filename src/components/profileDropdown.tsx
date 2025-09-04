@@ -15,7 +15,6 @@ import Loader from "./loading";
 
 export default function ProfileDropdown() {
   const { userProvider } = useContext(UserContext);
-  console.log("userProvider", userProvider);
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -25,7 +24,7 @@ export default function ProfileDropdown() {
     localStorage.removeItem("token");
 
     setTimeout(() => {
-      router.push("/sign-up");
+      router.push("/sign-in");
     }, 1000);
   };
   if (loading) {
