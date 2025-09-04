@@ -153,19 +153,17 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
                   transition={{ duration: 0.6 }}
                   className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 text-4xl font-extrabold text-green-400 drop-shadow-lg"
                 >
-                  +1 🔥 +5 ⭐
+                  +5 ⭐
                 </motion.div>
               )}
             </AnimatePresence>
 
             {(lastDiary?.aiInsight?.achievements?.length ?? 0) > 0 ? (
               <div className="streak-points flex justify-between items-center mb-4 text-white">
-                <p>🔥 Streak: 1</p>
                 <p>⭐ Points: 5</p>
               </div>
             ) : (
               <div className="streak-points flex justify-between items-center mb-4 text-white">
-                <p>🔥 Streak: 0</p>
                 <p>⭐ Points: 0</p>
               </div>
             )}
@@ -214,7 +212,7 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
             </CardContent>
           </Card>
 
-          <Card className="bg-black text-white border border-white/20 p-6">
+          {/* <Card className="bg-black text-white border border-white/20 p-6">
             <CardContent>
               <h3 className="text-lg font-semibold flex items-center gap-2">
                 <Activity size={20} /> Өдрийн зорилго
@@ -225,7 +223,7 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
               />
               <p className="mt-2 text-sm">{progressValue}% complete</p>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </div>

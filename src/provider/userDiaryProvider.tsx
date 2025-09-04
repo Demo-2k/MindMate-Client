@@ -1,11 +1,11 @@
 "use client";
 
-import Loading from "@/components/loading";
 import { DiaryNote } from "@/types";
 import axios from "axios";
 import { UserContext } from "@/provider/userProvider";
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
+import Loader from "@/components/loading";
 
 type userDiariesProviderType = {
   diaries: DiaryNote[];
@@ -46,7 +46,7 @@ export default function UserDiaryProvider({
     fetchDiary();
   }, [userProvider?.id, userLoading]);
 
-  if (loading) return <Loading />;
+  if (loading) return <Loader />;
 
   return (
     <userDiaryContext.Provider value={{ diaries, fetchDiary }}>

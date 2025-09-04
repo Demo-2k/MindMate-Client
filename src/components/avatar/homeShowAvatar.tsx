@@ -8,8 +8,6 @@ export const ShowAvatarHome = ({
 }) => {
   const [analyze, setAnalyze] = useState(false);
 
-
-  
   return (
     <div className="relative md:w-[220px] md:h-[280px] flex flex-col items-center gap-3">
 
@@ -33,15 +31,12 @@ export const ShowAvatarHome = ({
       </div>
 
       <div
-        className="w-[90px] h-[90px]  md:w-[150px] md:h-[150px] rounded-full 
-  bg-gradient-to-br from-yellow-300 via-orange-400 to-amber-300
-  flex items-center justify-center overflow-hidden shadow-2xl 
-  transform hover:scale-105 transition-transform border border-[#fec195]/30"
+        className="w-[90px] h-[90px]  md:w-[150px] md:h-[150px] "
       >
         <div className="relative">
           {/* Main Orb */}
-          <div className="magical-orb text-5xl md:text-8xl select-none rounded-full">
-            🔮
+          <div className="">
+            <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjluMDJkN3BjYXJ1Y2Njczg0aWpjank2bjZpY2dhMDRrdWl6Z2tibiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gmz5GZZU6rEGrIJ3zw/giphy.gif" alt="" />
           </div>
 
           {/* Subtle ambient glow with blur */}

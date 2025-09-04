@@ -78,6 +78,7 @@ export function DialogTheme() {
   const [open, setOpen] = useState(false);
   const { userProvider, getCurrentUserByAccessToken } = useContext(UserContext);
 
+
   useEffect(() => {
     const themeToUse =
       userProvider?.themeUrl ||
