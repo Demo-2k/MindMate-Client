@@ -31,8 +31,11 @@ export const DoneBreathExercise = ({ onDone }: { onDone: () => void }) => {
           transition={{ delay: 0.3 }}
         />
 
-        {/* Divider */}
-        <div className="w-10 h-[2px] bg-[#fec195]/50 rounded-full"></div>
+          <img
+            src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnY4dWJ5MzloYjVhMXcxbnlvOGo2bTYxZDYydnB5MTByaG5tMzJiOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xSuZSyJDe3JvpAWV47/giphy.gif"
+            alt="Relaxing GIF"
+            className="w-40 sm:w-52 md:w-72 lg:w-full rounded-xl shadow-md"
+          />
 
         {/* Button */}
         <motion.button
