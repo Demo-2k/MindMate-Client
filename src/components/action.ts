@@ -138,7 +138,6 @@ export async function sendMessage(
         Хэрвээ тэмдэглэлд 'СТРЕССТЭЙ', 'УУРТАЙ' эсвэл 'ГУНИГТАЙ' мэдрэмж илэрч байвал хариултынхаа төгсгөлд '[BREATHE_SUGGESTION]' гэсэн тэмдэг нэмэхээ мартуузай.
       `;
       const result = await chat.sendMessage(initialPrompt);
-      console.log("result, ", result);
 
       const text = result.response.text();
 
