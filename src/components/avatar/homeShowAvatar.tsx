@@ -9,7 +9,6 @@ export const ShowAvatarHome = ({
   const [analyze, setAnalyze] = useState(false);
 
 
-  console.log("analyze", analyze);
   
   return (
     <div className="relative md:w-[220px] md:h-[280px] flex flex-col items-center gap-3">

@@ -28,7 +28,7 @@ export default function UserDiaryProvider({
   const fetchDiary = async (showLoading = true) => {
     if (!userProvider?.id) return;
 
-    if (showLoading) setLoading(true); // ✅ зөвхөн showLoading үед асаана
+    if (showLoading) setLoading(true);
     try {
       const response = await axios.get<DiaryNote[]>(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/ai/getAllDiaryNotes/${userProvider?.id}`
@@ -38,7 +38,7 @@ export default function UserDiaryProvider({
       toast.error("Error fetching diary notes");
       console.error(error);
     } finally {
-      if (showLoading) setLoading(false); // ✅ зөвхөн showLoading үед унтраана
+      if (showLoading) setLoading(false);
     }
   };
 
@@ -54,13 +54,3 @@ export default function UserDiaryProvider({
     </userDiaryContext.Provider>
   );
 }
-
-// const obj1 = {
-//   name: "bold",
-// };
-
-// const obj2 = {
-//   name: "bold",
-// };
-
-// [obj1, obj2]

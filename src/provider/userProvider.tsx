@@ -2,7 +2,13 @@
 
 import { User } from "@/types";
 import axios from "axios";
-import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 
 type userContextType = {
   userProvider: User | null;
@@ -37,7 +43,6 @@ export default function UserContextProvider({
 
       setUserProvider(response?.data?.user || null);
     } catch (error) {
-      console.log(error);
       setUserProvider(null);
     } finally {
       setLoading(false);

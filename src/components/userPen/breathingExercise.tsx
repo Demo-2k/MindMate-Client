@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { TreePalm } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -18,33 +23,29 @@ const cycles = [
 export function DialogBreath() {
   const [open, setOpen] = useState(false);
 
-  const totalRounds = 4; // how many full inhale-hold-exhale cycles until done
+  const totalRounds = 4;
   const [isActive, setIsActive] = useState(false);
-  const [roundIndex, setRoundIndex] = useState(0); // 0..totalRounds-1
-  const [phaseIndex, setPhaseIndex] = useState(0); // 0..2 (inhale/hold/exhale)
+  const [roundIndex, setRoundIndex] = useState(0);
+  const [phaseIndex, setPhaseIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(cycles[0].duration);
 
   const currentPhase = cycles[phaseIndex].phase;
   const currentLabel = cycles[phaseIndex].label;
   const currentDuration = cycles[phaseIndex].duration;
 
-  // timer
   useEffect(() => {
     if (!isActive) return;
 
     if (timeLeft <= 0) {
-      // advance phase
       if (phaseIndex < cycles.length - 1) {
         setPhaseIndex((p) => p + 1);
         setTimeLeft(cycles[phaseIndex + 1].duration);
       } else {
-        // finished one full cycle
         if (roundIndex < totalRounds - 1) {
           setRoundIndex((r) => r + 1);
           setPhaseIndex(0);
           setTimeLeft(cycles[0].duration);
         } else {
-          // session complete
           setIsActive(false);
         }
       }
@@ -62,7 +63,6 @@ export function DialogBreath() {
     if (isActive) {
       setIsActive(false);
     } else {
-      // if finished previously, reset
       if (!isActive && roundIndex >= totalRounds) {
         reset();
       }
@@ -77,27 +77,24 @@ export function DialogBreath() {
     setTimeLeft(cycles[0].duration);
   };
 
-  // visual scale mapping per phase (to match image vibe)
   const scaleMap: Record<Phase, number> = {
     inhale: 1.45,
     hold: 1.35,
     exhale: 0.75,
   };
 
-  // gradient colors per phase (works with bg-gradient-to-br + Tailwind color tokens OR inline fallback)
   const gradientMap: Record<Phase, string> = {
-    inhale: "from-cyan-400 to-blue-500", // bright cyan -> blue
+    inhale: "from-cyan-400 to-blue-500",
     hold: "from-violet-400 to-purple-600",
     exhale: "from-pink-300 to-pink-500",
   };
 
   const outerRingColor: Record<Phase, string> = {
-    inhale: "bg-[rgba(139,92,246,0.14)]", // subtle purple halo
+    inhale: "bg-[rgba(139,92,246,0.14)]",
     hold: "bg-[rgba(99,102,241,0.14)]",
     exhale: "bg-[rgba(236,72,153,0.12)]",
   };
 
-  // progress for dots (rounds)
   const dots = Array.from({ length: totalRounds }).map((_, i) => i);
 
   return (
@@ -120,13 +117,10 @@ export function DialogBreath() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!max-w-6xl w-full h-[60vh] text-white bg-black overflow-auto">
           <DialogTitle></DialogTitle> <DialogDescription></DialogDescription>
-
           <div className=" flex items-center justify-center px-3 sm:px-4 md:px-6">
             <div className="w-full max-w-sm sm:max-w-md md:max-w-lg text-center">
-              {/* big circle area */}
               <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8">
                 <div className="relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] md:w-[280px] md:h-[280px] lg:w-[320px] lg:h-[320px] xl:w-[360px] xl:h-[360px]">
-                  {/* outer soft ring */}
                   <motion.div
                     animate={{ scale: isActive ? 1 : 1 }}
                     className={`absolute inset-0 rounded-full flex items-center justify-center ${outerRingColor[currentPhase]}`}
@@ -135,14 +129,13 @@ export function DialogBreath() {
                     }}
                   />
 
-                  {/* large rotating subtle ring (to match the image swoosh) */}
                   <motion.div
                     initial={{ rotate: 0 }}
                     animate={{ rotate: isActive ? 360 : 0 }}
                     transition={{
                       duration: isActive ? 8 : 0,
-                      repeat: Infinity, // 🔁 давтах
-                      ease: "linear", // жигд эргэлт
+                      repeat: Infinity,
+                      ease: "linear",
                     }}
                     className="absolute -inset-3 sm:-inset-4 md:-inset-5 lg:-inset-6 rounded-full pointer-events-none"
                   >
@@ -174,9 +167,7 @@ export function DialogBreath() {
                     </svg>
                   </motion.div>
 
-                  {/* white ring */}
                   <div className="absolute inset-[20px] sm:inset-[24px] md:inset-[28px] lg:inset-[30px] xl:inset-[32px] rounded-full bg-white flex items-center justify-center">
-                    {/* inner pink bubble (animated) */}
                     <motion.div
                       className={`rounded-full shadow-2xl`}
                       style={{
@@ -194,7 +185,6 @@ export function DialogBreath() {
                         ease: currentPhase === "hold" ? "linear" : "easeInOut",
                       }}
                     >
-                      {/* gradient pink fill as inner */}
                       <div
                         className={`w-full h-full rounded-full overflow-hidden bg-gradient-to-br ${gradientMap[currentPhase]}`}
                         style={{
@@ -203,7 +193,6 @@ export function DialogBreath() {
                           justifyContent: "center",
                         }}
                       >
-                        {/* small highlight */}
                         <svg
                           className="absolute w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] md:w-[90px] md:h-[90px] lg:w-[110px] lg:h-[110px] xl:w-[120px] xl:h-[120px] -translate-y-1 sm:-translate-y-2 md:-translate-y-3"
                           viewBox="0 0 110 110"
@@ -227,7 +216,6 @@ export function DialogBreath() {
                           <circle cx="55" cy="45" r="45" fill="url(#rGrad)" />
                         </svg>
 
-                        {/* smiling face (centered) */}
                         <div className="relative w-full h-full flex items-center justify-center">
                           <img
                             src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzV2Zm9uOTA1ZjB5Zzhzb2did3gwZGtnZ3VyaGZodnl1Z2J6NDdudSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/cefJOb0iuO040skF4y/giphy.gif"
@@ -239,7 +227,6 @@ export function DialogBreath() {
                   </div>
                 </div>
 
-                {/* phase text */}
                 <div className="mt-4 sm:mt-5 md:mt-6">
                   <AnimatePresence mode="wait">
                     <motion.h3
@@ -254,7 +241,6 @@ export function DialogBreath() {
                     </motion.h3>
                   </AnimatePresence>
                   <div className="mt-2 sm:mt-3 flex items-center justify-center gap-2 sm:gap-3">
-                    {/* progress dots */}
                     <div className="flex items-center gap-2 sm:gap-3">
                       {dots.map((d) => {
                         const active =
@@ -285,7 +271,6 @@ export function DialogBreath() {
                   </div>
                 </div>
 
-                {/* controls */}
                 <div className="mt-4 sm:mt-5 md:mt-6 flex  sm:flex-row items-center justify-center gap-3 sm:gap-4">
                   <button
                     onClick={toggleStart}
@@ -311,13 +296,11 @@ export function DialogBreath() {
                     Дуусгах
                   </button>
 
-                  {/* timer small */}
                   <div className="text-xs sm:text-sm text-white/80 px-2 py-1 sm:px-3 sm:py-2 rounded-full bg-white/6">
                     {timeLeft}s
                   </div>
                 </div>
 
-                {/* subtle footer hint */}
                 <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-white/70 text-center px-4">
                   Дараагийн фазын хугацаа: {currentDuration}s • Цикл{" "}
                   {roundIndex + 1}/{totalRounds}

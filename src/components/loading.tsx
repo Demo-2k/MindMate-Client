@@ -6,7 +6,6 @@ const Loader = () => {
     <div className="w-full h-screen backdrop-blur-sm flex justify-center items-center">
       <StyledWrapper>
         <div className="loader">
-          {/* Gradient definitions */}
           <svg height={0} width={0} viewBox="0 0 64 64" className="absolute">
             <defs>
               <linearGradient
@@ -54,7 +53,6 @@ const Loader = () => {
             </defs>
           </svg>
 
-          {/* Path 1 */}
           <svg
             viewBox="0 0 64 64"
             height={64}
@@ -79,7 +77,6 @@ const Loader = () => {
             />
           </svg>
 
-          {/* Path 2 */}
           <svg
             viewBox="0 0 64 64"
             height={64}
@@ -102,7 +99,6 @@ const Loader = () => {
 
           <div className="w-2" />
 
-          {/* Path 3 */}
           <svg
             viewBox="0 0 64 64"
             height={64}

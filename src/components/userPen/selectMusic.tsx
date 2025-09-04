@@ -115,7 +115,6 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
   useEffect(() => {
     const unlocked = JSON.parse(localStorage.getItem("unlockedSongs") || "[]");
 
-    // Хамгийн эхний дууг unlock хийсэн гэж нэмэх
     if (!unlocked.includes(songs[0].title)) {
       unlocked.push(songs[0].title);
       localStorage.setItem("unlockedSongs", JSON.stringify(unlocked));
@@ -139,12 +138,10 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
         { songPrice: song?.price }
       );
 
-      // Song list update
       setSongList((prev) =>
         prev.map((s) => (s.title === song.title ? { ...s, locked: false } : s))
       );
 
-      // LocalStorage update
       const unlocked = JSON.parse(
         localStorage.getItem("unlockedSongs") || "[]"
       );
@@ -153,10 +150,9 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
         JSON.stringify([...unlocked, song.title])
       );
 
-      // **Frontend-д оноо update**
       setUserProvider({
         ...userProvider,
-        totalPoints: response?.data?.totalPoints, // backend-с ирсэн шинэ оноо
+        totalPoints: response?.data?.totalPoints,
       });
 
       toast.message(`"${song.title}" unlock боллоо!`);
@@ -164,12 +160,6 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
       toast.message("Алдаа гарлаа");
     }
   };
-
-  // useEffect(() => {
-  //   if (userProvider?.id) {
-  //     fetchUnlockedSongs();
-  //   }
-  // }, [userProvider?.id]);
 
   return (
     <div>
@@ -199,14 +189,6 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
                   if (song?.locked) {
                     if ((userProvider?.totalPoints ?? 0) >= song?.price) {
                       UnlockSongs(song);
-                      //   if (confirm(`${song?.price}-р unlock хийх үү?`)) {
-                      //     setSongList((prev) =>
-                      //       prev.map((s) =>
-                      //         s.title === song.title ? { ...s, locked: false } : s
-                      //       )
-                      //     );
-                      //     // setPoints(stats?.points - song.price);
-                      //   }
                     } else {
                       toast.message(
                         `Оноо хүрэхгүй байна! (${song.price} points хэрэгтэй)`
@@ -214,7 +196,7 @@ export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
                     }
                   } else {
                     setSelected(song.url);
-                    setOpen(false); // dialog хаах
+                    setOpen(false);
                     setUrlMusic(song.url);
                   }
                 }}
