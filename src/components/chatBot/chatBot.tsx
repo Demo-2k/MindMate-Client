@@ -201,6 +201,8 @@
 // );
 // };
 
+"use client";
+
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { sendMessage } from "../action";
@@ -228,7 +230,9 @@ type chatBotType = {
 };
 
 export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
-  if (!diaries[0] || !diaries) return;
+  // if (!diaries || !diaries[0]) {
+  //   return null; // ❗️ return-ыг hooks-оос доошлуулсан
+  // }
   const setCurrentDiary = diaries[0];
 
   const diaryData = {
@@ -267,9 +271,7 @@ export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-
-
-    const handleEndChat = () => {
+  const handleEndChat = () => {
     console.log("handleEndCHat ajilj baigaag shalgaj baina:");
     setMessages((prev) => [
       ...prev,
