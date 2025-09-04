@@ -8,7 +8,6 @@ export default function Clock() {
     const updateTime = () => {
       const now = new Date();
 
-      // цаг
       let hours = now.getHours();
       const minutes = now.getMinutes();
       const seconds = now.getSeconds();
@@ -18,7 +17,6 @@ export default function Clock() {
       const time = `${hours}:${pad(minutes)}:${pad(seconds)} ${ampm}`;
       setTimeString(time);
 
-      // өдөр
       const weekdays = [
         "Sunday",
         "Monday",

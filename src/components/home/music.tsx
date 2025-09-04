@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Maximize2, Minimize2, X } from "lucide-react";
+import { Maximize2, Minimize2 } from "lucide-react";
+
 interface SpotifyEmbedProps {
   urlMusic: string | null;
   width?: number;
@@ -17,9 +18,14 @@ export default function SpotifyEmbed({
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentUrl, setCurrentUrl] = useState<string>(defaultUrl);
+  const [constraints, setConstraints] = useState({
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  });
 
   useEffect(() => {
-    // Refresh хийсэн ч сүүлд сонгосон дууг хадгалах
     const savedUrl = localStorage.getItem("currentUrlMusic");
     if (savedUrl) {
       setCurrentUrl(savedUrl);
@@ -35,6 +41,27 @@ export default function SpotifyEmbed({
     }
   }, [urlMusic]);
 
+  useEffect(() => {
+    const updateConstraints = () => {
+      setConstraints({
+        top: 0,
+        left: 0,
+        right: window.innerWidth - (typeof width === "number" ? width : 350),
+        bottom:
+          window.innerHeight -
+          (isExpanded
+            ? 452
+            : typeof height === "number"
+            ? height
+            : 152),
+      });
+    };
+
+    updateConstraints();
+    window.addEventListener("resize", updateConstraints);
+    return () => window.removeEventListener("resize", updateConstraints);
+  }, [isExpanded, width, height]);
+
   const w = isExpanded
     ? "350px"
     : typeof width === "number"
@@ -46,22 +73,22 @@ export default function SpotifyEmbed({
     ? `${height}px`
     : height;
 
-    
-
   return (
     <motion.div
       drag
       dragElastic={0.2}
+      dragMomentum={false}
+      dragConstraints={constraints}
       initial={{ opacity: 0, scale: 0.95, y: 24 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95, y: 24 }}
       className="fixed left-6 top-20 z-50 rounded-2xl cursor-grab shadow-2xl"
       style={{ width: w }}
     >
-      {/* Gradient frame */}
+     
       <div className="rounded-2xl ">
         <div className="rounded-2xl overflow-hidden bg-black/5 backdrop-blur-md border border-white/10">
-          {/* Header */}
+        
           <div className="flex items-center justify-between px-4 py-1 border-b border-white/10">
             <div className="flex items-center gap-2 text-white/80 text-sm font-medium">
               <span className="tracking-wide">Spotify</span>
@@ -78,7 +105,7 @@ export default function SpotifyEmbed({
             </div>
           </div>
 
-          {/* Iframe */}
+        
           <div className="relative" style={{ width: "100%", height: h }}>
             <div
               className="absolute inset-x-0 top-0 h-20 pointer-events-none"

@@ -25,14 +25,14 @@ export type User = {
   password: string;
   username: string;
   birthday?: Date;
-  themeUrl:  string,
+  themeUrl: string;
 
   diaryNotes: DiaryNote[];
   progress?: Progress;
   achievements: AchievementType[];
 
-   totalStreaks:number;
-  totalPoints:number;
+  totalStreaks: number;
+  totalPoints: number;
 
   createdAt: Date;
   updatedAt: Date;

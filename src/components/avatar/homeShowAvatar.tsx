@@ -7,7 +7,7 @@ export const ShowAvatarHome = ({
   setShowChatBotHome: Dispatch<SetStateAction<boolean>>;
 }) => {
   const [analyze, setAnalyze] = useState(false);
-  
+
   return (
     <div className="relative md:w-[220px] md:h-[280px] flex flex-col items-center gap-3">
 

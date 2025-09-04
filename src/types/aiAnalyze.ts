@@ -7,29 +7,24 @@ export type AiAnalysis = {
 
   summary: string;
   emotions: EmotionCategory[];
-  topics:string[];
-  moodAction:string;
-  // calendarTasks: string[];
-  // calendarHighlight: string;
-  // calendarDate: Date;
-  // calendarType: CalendarType;
-
+  topics: string[];
+  moodAction: string;
   createdAt: Date;
   updatedAt: Date;
 };
 
 export type AiInsight = {
-  id:number,
-  diaryNoteId:number,
-  diaryNote:DiaryNote,
+  id: number;
+  diaryNoteId: number;
+  diaryNote: DiaryNote;
 
-  mood_caption:string,
-  fun_fact:string,
-  achievements:AchievementsType[],
-}
+  mood_caption: string;
+  fun_fact: string;
+  achievements: AchievementsType[];
+};
 
-export type AchievementsType ={
-    id :string,
-    desc:string,
-    title:string
-}
+export type AchievementsType = {
+  id: string;
+  desc: string;
+  title: string;
+};

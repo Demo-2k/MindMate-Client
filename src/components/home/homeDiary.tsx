@@ -41,6 +41,7 @@ export default function HomeDiary() {
   // const [currenDiaryId, setCurrentDiaryId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
 
+
   //SET SHOW AVATAR
   const [showChatBotHome, setShowChatBotHome] = useState(false);
   //hadaglah
@@ -49,6 +50,7 @@ export default function HomeDiary() {
   //show music
   const [urlMusic, setUrlMusic] = useState<string | null>(null);
 
+
   const handleDiarySave = async () => {
     setSaving(true);
     try {
@@ -56,16 +58,13 @@ export default function HomeDiary() {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/ai/postDiary/${userProvider?.id}`,
         { text: text }
       );
-      // setText(response.data.note);
-      console.log("response response", response);
+ 
+
       await fetchDiary(false);
-      // setCurrentDiaryId(response.data.id);
       if (response.status === 200) {
-        console.log("toast дуудагдаж байна");
         toast.success("Амжилттай нэмэгдлээ");
       }
 
-      console.log("response.status", response.status);
     } catch (error) {
       toast.error("Error saving diary");
 
@@ -81,8 +80,6 @@ export default function HomeDiary() {
     handleDiarySave();
   };
 
-  console.log("user provideerrr:", userProvider);
-
   useEffect(() => {
     if (!userProvider?.id || !diaries[0]) return;
 
@@ -91,11 +88,25 @@ export default function HomeDiary() {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/processDiary/${userProvider?.id}`
         );
+
+      
+      } catch (error) {
+        toast.error("streaks error");
+      }
+    };
+    const allProgress = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/getStreaks/${userProvider?.id}`
+        );
+
+
         console.log(
           "all process diary",
           response.data.success.finalProgress.points
         );
         setAllPoints(response?.data?.success?.finalProgress?.points);
+
       } catch (error) {
         // toast.error("streaks error");
         console.log(error);
@@ -124,6 +135,8 @@ export default function HomeDiary() {
     // allProgress();
   }, [userProvider?.id]);
 
+
+
   const handleChatBotClick = () => {
     if (!diaries || diaries.length === 0) {
       toast.error("Эхлээд өдрийн тэмдэглэлээ бичнэ үү");
@@ -132,6 +145,7 @@ export default function HomeDiary() {
 
     setShowChatBotHome(true);
   };
+
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">

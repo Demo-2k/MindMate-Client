@@ -85,14 +85,13 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
   const handleClick = async () => {
     if ((lastDiary?.aiInsight?.achievements?.length ?? 0) > 0) {
       setShowPoints(true);
-      setTimeout(() => setShowPoints(false), 1500); // 1.5 сек дараа алга болно
+      setTimeout(() => setShowPoints(false), 1500);
     }
   };
 
   return (
     <div>
       <div className="bg-black text-white grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
-        {/* Sidebar */}
         <div className="flex flex-col gap-4">
           <Card className="bg-black text-white p-6 border-white/20">
             <div className="flex justify-between">
@@ -129,7 +128,6 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
           </Card>
         </div>
 
-        {/* Journal Section */}
         <div className="flex flex-col gap-4 lg:col-span-2">
           <Card className="bg-black text-white border-white/20 p-6">
             <h2 className="text-2xl font-bold flex items-center gap-2 text-white">
@@ -146,7 +144,6 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
     }`}
             onClick={handleClick}
           >
-            {/* Point Popup */}
             <AnimatePresence>
               {showPoints && (
                 <motion.div
@@ -189,11 +186,6 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
             ) : (
               <div className="flex flex-col items-center justify-center py-6">
                 <div className="relative">
-                  {/* <img
-                    src="/lock-icon.png"
-                    alt="Locked"
-                    className="w-12 h-12 mb-2 opacity-70"
-                  /> */}
                   <Lock className="w-12 h-12 mb-2 opacity-70 text-white" />
                   <div className="absolute inset-0 rounded-full bg-yellow-300/20 blur-md"></div>
                 </div>
@@ -205,9 +197,6 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
           </Card>
         </div>
 
-        {/* <div className=""></div> */}
-
-        {/* Right Sidebar */}
         <div className="flex flex-col gap-4">
           <Card className="bg-cover bg-center text-white border-white/20 p-6 bg-[url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWNhejU3dWw4aTUzenJmZjY0eTEwYmU4YnQ1dGJvcHg2eWZ4NGYzdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1zgzISaYrnMAYRJJEr/giphy.gif')]">
             <p className="text-md font-extrabold"> Өнөөдрийн Fun Fact ✏️ </p>
