@@ -20,11 +20,21 @@ and improve emotional stability through interactive features such as breathing e
 
 ---
 
-## 🛠 Tech Stack
-- **Frontend:** Next.js, React, TypeScript, TailwindCSS  
-- **Backend:** Node.js (API Routes / Express)  
-- **Database:** PostgreSQL / SQLite / MongoDB  
-- **Auth:** NextAuth / JWT  
-- **AI Integration:** OpenAI API (+ optional Pinecone vector search)  
-- **UI Library:** shadcn/ui, lucide-icons  
-- **Deployment:** Vercel  
+### 🎨 Frontend / Backend
+- **Next.js (React framework)** – UI development (SSR/SPA)  
+- **Tailwind CSS + shadcn/ui** – Modern, responsive UI  
+- **Node.js (Express/Fastify)** – APIs & user management  
+- **Gemini API** – AI-powered assignment analysis & feedback
+- **REST API** – Communication between frontend & backend  
+
+### 🤖 AI Integration
+- **Gemini** – Automated assignment checking & analysis
+
+### 🗄️ Database
+- **Prisma ORM** – Schema & data handling  
+- **PostgreSQL** – Store users, classrooms, submissions  
+
+### ☁️ Deployment
+- **Vercel** – Frontend & backend & database hosting  
+
+---
