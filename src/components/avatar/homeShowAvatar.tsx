@@ -14,16 +14,16 @@ export const ShowAvatarHome = ({
       {/* Action buttons */}
       <div className="flex gap-2">
         <button
-          className="text-[14px] md:text-lg bg-gradient-to-r from-orange-400 via-pink-300 to-yellow-300 
-             text-white px-3 py-2 md:px-5 md:py-3 rounded-full shadow-xl hover:scale-105 hover:brightness-110 transition-transform duration-300"
+          className="text-[14px] md:text-lg bg-black border-2 border-[#fec195] 
+             text-[#fec195] px-2 py-1 md:px-5 md:py-3 rounded-full shadow-xl hover:scale-105 hover:brightness-110 transition-transform duration-300"
           onClick={() => setAnalyze(true)}
         >
           Анализ
         </button>
 
         <button
-          className="text-[14px] md:text-lg bg-gradient-to-r from-yellow-400 via-orange-500 to-red-400 
-             text-white px-3 py-2 md:px-5 md:py-3 rounded-full shadow-xl hover:scale-105 hover:brightness-110 transition-transform duration-300"
+          className="text-[14px] md:text-lg bg-black border-2 border-[#fec195] 
+             text-[#fec195] px-2 py-1 md:px-5 md:py-3 rounded-full shadow-xl hover:scale-105 hover:brightness-110 transition-transform duration-300"
           onClick={() => setShowChatBotHome(true)}
         >
           Ярилцах

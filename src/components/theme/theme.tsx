@@ -24,11 +24,11 @@ const themes = [
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1754630551378-e1ecffe9da6b?q=80&w=3866&auto=format&fit=crop&ixlib=rb-4.1.0",
+    url: "https://img.freepik.com/free-photo/anime-night-sky-illustration_23-2151684356.jpg?t=st=1759137014~exp=1759140614~hmac=0e2a93859e2ec636a7b3cb741ee5c814ebdcff965e47cf50cfe0cbb0a702e2c6&w=2000",
   },
   {
     id: 3,
-    url: "https://images.hdqwalls.com/download/high-angle-view-of-cityscape-against-cloudy-sky-new-york-rq-3840x2160.jpg",
+    url: "https://img.freepik.com/free-photo/illustration-anime-city_23-2151779648.jpg?t=st=1759137140~exp=1759140740~hmac=71dbd5860a5934fcaee58b87510b9cc087ba2043d69b2f7da0622344cd00d310&w=2000",
   },
   { id: 4, url: "https://wallpapercave.com/wp/wp6287510.jpg" },
   {
@@ -41,7 +41,7 @@ const themes = [
   },
   {
     id: 7,
-    url: "https://4kwallpapers.com/images/wallpapers/anime-girl-5120x2880-15604.jpg",
+    url: "https://img.freepik.com/free-photo/japan-background-digital-art_23-2151546124.jpg?t=st=1759136866~exp=1759140466~hmac=b33d002c2c30566802eeeb38a1d1fa27828a6148f548c061484cd66286cdf6ab&w=2000",
   },
   {
     id: 8,
@@ -54,15 +54,15 @@ const themes = [
   { id: 10, url: "https://cdn.wallpapersafari.com/45/17/fsFvBk.jpg" },
   {
     id: 11,
-    url: "https://images.hdqwalls.com/download/soldier-battlefield-6-game-xo-3840x2160.jpg",
+    url: "https://img.freepik.com/free-photo/fantasy-anime-style-scene_23-2151135003.jpg?t=st=1759136534~exp=1759140134~hmac=ea21a6b00715513c3567bd1787159d9e83f3eb7f9f5c92bf394d73d3ffec9a1f&w=2000",
   },
   {
     id: 12,
-    url: "https://images.hdqwalls.com/wallpapers/bthumb/final-of-time-synthwave-5k-rx.jpg",
+    url: "https://img.freepik.com/free-photo/black-cat-stack-books-dreamy-sky_23-2152005275.jpg?t=st=1759135695~exp=1759139295~hmac=68d4174e412e519bb640d8b7ca1037d833ff105f92bccbef03569cba7a1a9fa4&w=2000",
   },
   {
     id: 13,
-    url: "https://images.unsplash.com/photo-1752430038064-250d400e220f?q=80&w=3962&auto=format&fit=crop&ixlib=rb-4.1.0",
+    url: "https://images.unsplash.com/photo-1618336753974-aae8e04506aa?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 14,
@@ -110,14 +110,14 @@ export function DialogTheme() {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
-            variant="ghost"
-            className="h-8 w-8 md:h-[42px] md:w-[42px] hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
+            
+            className="h-8 w-8 md:h-[42px] md:w-[42px] hover:scale-110 transition-transform duration-200 bg-white/30 backdrop-blur-sm text-[#fec195] rounded-lg shadow-md"
             onClick={() => setOpen(true)}
           >
             <Images />
           </Button>
         </TooltipTrigger>
-        <TooltipContent side="bottom">
+        <TooltipContent side="bottom" className="text-[#fec195]">
           <p>зураг</p>
         </TooltipContent>
       </Tooltip>
