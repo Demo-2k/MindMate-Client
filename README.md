@@ -1,37 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌱 MindMate
 
-## Getting Started
+## 📖 Background
+MindMate is a **mental wellness app** designed for modern users.  
+Many people struggle with stress, anxiety, and emotional challenges in their daily lives.  
+This project aims to help users freely write their personal diary, receive support from an AI chatbot,  
+and improve emotional stability through interactive features such as breathing exercises, motivational quotes, and achievements.  
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📚 Terminology
+- **Diary Entry:** A private journal that the user writes daily.  
+- **Mood:** The emotional state of the user for the day, automatically determined by AI analysis of their written diary entry (e.g., happy, sad, stressed).  
+- **AI Chatbot:** A supportive assistant that provides advice and conversations based on diary entries and mood.  
+- **Analysis:** Insights generated from the diary, including fun facts and motivational quotes.  
+- **Achievements:** Daily accomplishments users can unlock. One achievement = **5 points**.  
+- **Points:** Collected by completing achievements. Points can be used to unlock special rewards such as Spotify playlists.  
+- **Calendar View:** Displays moods by color across different days and allows users to revisit past diary entries.  
+- **Customization:** Ability to change background images and themes for a personalized experience.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Mind-Mate
+## 🛠 Tech Stack
+- **Frontend:** Next.js, React, TypeScript, TailwindCSS  
+- **Backend:** Node.js (API Routes / Express)  
+- **Database:** PostgreSQL / SQLite / MongoDB  
+- **Auth:** NextAuth / JWT  
+- **AI Integration:** OpenAI API (+ optional Pinecone vector search)  
+- **UI Library:** shadcn/ui, lucide-icons  
+- **Deployment:** Vercel  
