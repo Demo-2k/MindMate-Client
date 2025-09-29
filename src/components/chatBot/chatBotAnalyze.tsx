@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useContext, useState } from "react";
-import { Analysis } from "../toDo/analyze";
+import { Analysis } from "../analyze/analyze";
 import {
   Dialog,
   DialogContent,
@@ -10,9 +10,13 @@ import {
 } from "../ui/dialog";
 import { userDiaryContext } from "@/provider/userDiaryProvider";
 
-
-
-export const ChatBotaAnalyze = ({setOpen, open}:{setOpen: Dispatch<SetStateAction<boolean>>,open:boolean }) => {
+export const ChatBotaAnalyze = ({
+  setOpen,
+  open,
+}: {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  open: boolean;
+}) => {
   const { diaries } = useContext(userDiaryContext);
   const lastDiary = diaries[0];
 
@@ -51,7 +55,7 @@ export const ChatBotaAnalyze = ({setOpen, open}:{setOpen: Dispatch<SetStateActio
   const weekday = weekdaysMn[today.getDay()];
 
   const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-//   const [open, setOpen] = useState(false);
+  //   const [open, setOpen] = useState(false);
 
   return (
     <div>

@@ -212,18 +212,7 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
             </CardContent>
           </Card>
 
-          {/* <Card className="bg-black text-white border border-white/20 p-6">
-            <CardContent>
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Activity size={20} /> Өдрийн зорилго
-              </h3>
-              <Progress
-                value={progressValue}
-                className="mt-3 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-pulse"
-              />
-              <p className="mt-2 text-sm">{progressValue}% complete</p>
-            </CardContent>
-          </Card> */}
+
         </div>
       </div>
     </div>

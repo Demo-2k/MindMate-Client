@@ -66,7 +66,7 @@ export function CoverImage() {
           </Button>
         </TooltipTrigger>
         <TooltipContent side="bottom">
-          <p>анализ</p>
+          <p>Сүүлийн мэдрэмжийн тойм</p>
         </TooltipContent>
       </Tooltip>
 
