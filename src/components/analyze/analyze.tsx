@@ -44,6 +44,8 @@ import axios from "axios";
 
 export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
   const { userProvider } = useContext(UserContext);
+  console.log("lastDiary lastDiary", lastDiary);
+  
 
   const [progressValue, setProgressValue] = useState(data.progress);
   const [greeting, setGreeting] = useState("");
@@ -211,8 +213,6 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
               <p className="mt-2 text-lg">{lastDiary?.analysis?.moodAction}</p>
             </CardContent>
           </Card>
-
-
         </div>
       </div>
     </div>
