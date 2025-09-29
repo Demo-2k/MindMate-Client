@@ -32,7 +32,7 @@ and improve emotional stability through interactive features such as breathing e
 
 ### 🗄️ Database
 - **Prisma ORM** – Schema & data handling  
-- **PostgreSQL** – Store users, classrooms, submissions  
+- **PostgreSQL** – Stores all application data 
 
 ### ☁️ Deployment
 - **Vercel** – Frontend & backend & database hosting  
