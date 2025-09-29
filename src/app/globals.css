@@ -218,3 +218,14 @@
     orbGlow 5s ease-in-out infinite;
   will-change: transform, opacity, box-shadow;
 }
+
+.points-animation {
+  color: gold;
+  font-weight: bold;
+  animation: riseAndFade 1s ease-out forwards;
+}
+
+@keyframes riseAndFade {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-30px); opacity: 0; }
+}
