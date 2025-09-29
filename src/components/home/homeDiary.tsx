@@ -89,8 +89,8 @@ export default function HomeDiary() {
         if (addedPoints > 0) {
           setPointsAnimation(addedPoints);
 
-          let start = userPoints;
-          let end = userPoints + addedPoints;
+          const start = userPoints;
+          const end = userPoints + addedPoints;
           const duration = 1000;
           const steps = 30;
           const increment = (end - start) / steps;
