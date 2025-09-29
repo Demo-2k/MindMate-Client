@@ -16,14 +16,14 @@ export function DialogBreath() {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
-            variant="outline"
-            className="h-8 w-8 md:h-[42px] md:w-[42px] hover:scale-110 transition-transform duration-200 bg-white/20 backdrop-blur-sm border border-white/40 rounded-lg shadow-md"
+            
+            className="h-8 w-8 md:h-[42px] md:w-[42px] hover:scale-110 transition-transform duration-200 bg-white/30 backdrop-blur-sm text-[#fec195] rounded-lg shadow-md"
             onClick={() => setOpen(true)}
           >
             <TreePalm />
           </Button>
         </TooltipTrigger>
-        <TooltipContent side="bottom">
+        <TooltipContent side="bottom" className="text-[#fec195]">
           <p>Тайвширах дасгал</p>
         </TooltipContent>
       </Tooltip>

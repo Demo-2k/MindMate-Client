@@ -118,7 +118,7 @@ export const DairyText = ({
                 className={`px-5 py-2 rounded-lg font-medium transition duration-200 shadow-md transform
                          ${
                            isDisabled || saving
-                             ? "bg-gray-400 text-white cursor-not-allowed"
+                             ? "bg-black text-[#fec195] cursor-not-allowed"
                              : "bg-[#fec195] border border-[#fec195] text-black hover:scale-110 focus:ring-2 focus:ring-yellow-300"
                          }`}
               >

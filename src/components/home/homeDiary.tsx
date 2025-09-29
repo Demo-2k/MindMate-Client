@@ -94,7 +94,7 @@ export default function HomeDiary() {
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
-      <div className="absolute absolute bottom-0 right-0 z-50">
+      <div className="absolute bottom-0 right-0 z-50">
         {showChatBotHome && (
           <ChatBot diaries={diaries} setShowChatBotHome={setShowChatBotHome} />
         )}
@@ -139,7 +139,7 @@ export default function HomeDiary() {
       )}
      
 
-      <div className="backdrop-blur-md py-3 px-3 md:px-7 border-none rounded-lg absolute bottom-6 md:bottom-15">
+      <div className="md:px-7 border-none rounded-lg absolute bottom-6 md:bottom-15">
         <BarSide setUrlMusic={setUrlMusic} />
       </div>
     </div>

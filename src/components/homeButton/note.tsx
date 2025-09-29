@@ -169,8 +169,8 @@ const StyledWrapper = styled.div`
     font-size: 17px;
     font-weight: 500;
     color: #fec195;
-    border: 3px solid #fec195;
-    border-radius: 8px;
+    border: 2px solid #fec195;
+    border-radius: 50px;
     box-shadow: 0 0 0 #fec1958c;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
