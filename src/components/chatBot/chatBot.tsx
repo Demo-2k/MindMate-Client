@@ -230,9 +230,7 @@ type chatBotType = {
 };
 
 export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
-  // if (!diaries || !diaries[0]) {
-  //   return null; // ❗️ return-ыг hooks-оос доошлуулсан
-  // }
+
   const setCurrentDiary = diaries[0];
 
   const diaryData = {
@@ -246,17 +244,6 @@ export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
     },
   };
 
-  // const diaryData = {
-  //   id: 325,
-  //   userId: 1,
-  //   note: "Мэдэхгүй төслөөс болоод хэд хоног бүр аймар муухай стрессдээд. Багийнхантай ч ойлгоцож чадахгүй хүн болгон намайг муулаад зүхээдч байгаа юм шиг тийм л мэдрэмж төрөөд байна",
-  //   analysis: {
-  //     summary:
-  //       "Төслийн учир нь гайгүй ойлгогдож байгаа ч хангалтгүй мэдрэмж төрөөд, өөрийгөө байнга дутуу үнэлээд байгаа бололтой. Хичээгээд ч хангалттай биш санагдаад байгаа юм шиг байна.",
-  //     emotions: ["ГУНИГТАЙ", "СТРЕССТЭЙ"],
-  //     needs: ["encouragement", "focus"],
-  //   },
-  // };
 
   const [showBreathing, setShowBreathing] = useState(false);
 
@@ -386,8 +373,6 @@ export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
     }
   };
 
-  //   handleBreathingExerciseDone()
-
   return (
     <div>
       <main className="flex flex-col items-center justify-between bg-black absolute bottom-0 right-0 z-50">
@@ -469,12 +454,6 @@ export const ChatBot = ({ diaries, setShowChatBotHome }: chatBotType) => {
         )}
       </AnimatePresence>
 
-      {/* {done && !showBreathing && (
-        <DoneBreathExercise onDone={handleBreathingExerciseDone} />
-      )} */}
-      {/* {showBreathing && (
-        <BreathingExerciseHoyr onDone={handleBreathingExerciseDone} />
-      )} */}
     </div>
   );
 };

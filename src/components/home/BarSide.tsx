@@ -1,6 +1,6 @@
 import { DialogTheme } from "../theme/theme";
 import { Month } from "../calendar/month";
-import { CoverImage } from "../toDo/coverImage";
+import { CoverImage } from "../analyze/coverImage";
 import { TooltipProvider } from "../ui/tooltip";
 import { DialogBreath } from "../userPen/breathingExercise";
 import SelectMusic from "../userPen/selectMusic";
@@ -14,9 +14,9 @@ export const BarSide = ({ setUrlMusic }: BarSideProps) => {
       <div className="flex gap-4">
         <CoverImage />
         <Month />
-        <DialogTheme />
-        <SelectMusic setUrlMusic={setUrlMusic} />
         <DialogBreath />
+        <SelectMusic setUrlMusic={setUrlMusic} />
+        <DialogTheme />
       </div>
     </TooltipProvider>
   );
