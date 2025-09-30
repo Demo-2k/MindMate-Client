@@ -50,13 +50,15 @@ export const DairyText = ({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-1/2 left-1/2 
-                     w-[70vw] max-w-[600px] 
-                     h-[80vh] max-h-[700px] 
-                     -translate-x-1/2 -translate-y-1/2 
-                     bg-black/70 backdrop-blur-lg
-                     rounded-2xl shadow-2xl p-6 flex flex-col
-                     md:w-[900px] md:h-[700px]"
+            className="
+  fixed top-1/2 left-1/2 
+  w-[90vw] sm:w-[70vw] max-w-[600px] 
+  h-[75vh] sm:h-[80vh] max-h-[700px] 
+  -translate-x-1/2 -translate-y-1/2 
+  bg-black/70 backdrop-blur-lg
+  rounded-2xl shadow-2xl p-4 sm:p-6 flex flex-col
+  md:w-[900px] md:h-[700px]
+"
           >
             <h2 className="text-2xl mb-4 text-white font-semibold ">
               Өнөөдрийн мэдрэмж ✍️
@@ -113,7 +115,9 @@ export const DairyText = ({
               </button>
 
               <button
-                onClick={() => handleSaveButtonDiary(selectedCategory || undefined)}
+                onClick={() =>
+                  handleSaveButtonDiary(selectedCategory || undefined)
+                }
                 disabled={isDisabled || saving}
                 className={`px-5 py-2 rounded-lg font-medium transition duration-200 shadow-md transform
                          ${
