@@ -69,8 +69,8 @@ export default function HomeDiary() {
       console.log("post diary res", response);
 
       if (response.status === 200) {
-        toast.success("Diary амжилттай хадгалагдлаа ✅", { duration: 3000 });
         const progress = response.data?.progress || {};
+
         const {
           addedPoints = 0,
           addedAchievements = [],
@@ -90,7 +90,7 @@ export default function HomeDiary() {
           const pointsMessage =
             addedPoints > 0 ? ` ${addedPoints} оноо нэмэгдлээ! 🎉` : "";
           toast.success(`${achievementMessage}${pointsMessage}`, {
-            duration: 5000,
+            duration: 8000,
           });
         }
 
@@ -154,13 +154,13 @@ export default function HomeDiary() {
 
       <div className="absolute top-2 md:top-5 right-4 z-50 flex items-center gap-4">
         <div className="flex items-center gap-2">
-          <span>⭐</span>
+          <span className="text-[14px] md:text-2xl">⭐</span>
           <motion.span
             key={userPoints}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="font-semibold text-white"
+            className="text-[14px] md:text-2xl font-semibold text-white"
           >
             {userPoints}
           </motion.span>
