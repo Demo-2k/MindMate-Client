@@ -45,7 +45,6 @@ import axios from "axios";
 export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
   const { userProvider } = useContext(UserContext);
   console.log("lastDiary lastDiary", lastDiary);
-  
 
   const [progressValue, setProgressValue] = useState(data.progress);
   const [greeting, setGreeting] = useState("");
@@ -110,23 +109,29 @@ export function Analysis({ lastDiary }: { lastDiary: DiaryNote }) {
             </div>
           </Card>
           <Card className="bg-black text-white p-6 border-white/20">
-            {Object.entries(moodMap).map(([moodName, { Icon, textClass }]) => {
-              const isActive = (moodsFromBackend ?? []).includes(
-                moodName as EmotionCategory
-              );
+            <div className="grid grid-cols-3 md:grid-cols-1 gap-5">
+              {Object.entries(moodMap).map(
+                ([moodName, { Icon, textClass }]) => {
+                  const isActive = (moodsFromBackend ?? []).includes(
+                    moodName as EmotionCategory
+                  );
 
-              return (
-                <div
-                  key={moodName}
-                  className="flex flex-col gap-1 items-center"
-                >
-                  <Icon
-                    className={`h-8 w-8 ${isActive ? textClass : "opacity-30"}`}
-                  />
-                  <span className="text-xs mt-1">{moodName}</span>
-                </div>
-              );
-            })}
+                  return (
+                    <div
+                      key={moodName}
+                      className="flex flex-col gap-1 items-center"
+                    >
+                      <Icon
+                        className={`h-8 w-8 ${
+                          isActive ? textClass : "opacity-30"
+                        }`}
+                      />
+                      <span className="text-xs mt-1">{moodName}</span>
+                    </div>
+                  );
+                }
+              )}
+            </div>
           </Card>
         </div>
 

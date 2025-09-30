@@ -24,11 +24,11 @@ const themes = [
   },
   {
     id: 2,
-    url: "https://img.freepik.com/free-photo/anime-night-sky-illustration_23-2151684356.jpg?t=st=1759137014~exp=1759140614~hmac=0e2a93859e2ec636a7b3cb741ee5c814ebdcff965e47cf50cfe0cbb0a702e2c6&w=2000",
+    url: "https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 3,
-    url: "https://img.freepik.com/free-photo/illustration-anime-city_23-2151779648.jpg?t=st=1759137140~exp=1759140740~hmac=71dbd5860a5934fcaee58b87510b9cc087ba2043d69b2f7da0622344cd00d310&w=2000",
+    url: "https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?q=80&w=3374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   { id: 4, url: "https://wallpapercave.com/wp/wp6287510.jpg" },
   {
@@ -54,7 +54,7 @@ const themes = [
   { id: 10, url: "https://cdn.wallpapersafari.com/45/17/fsFvBk.jpg" },
   {
     id: 11,
-    url: "https://img.freepik.com/free-photo/fantasy-anime-style-scene_23-2151135003.jpg?t=st=1759136534~exp=1759140134~hmac=ea21a6b00715513c3567bd1787159d9e83f3eb7f9f5c92bf394d73d3ffec9a1f&w=2000",
+    url: "https://images.unsplash.com/photo-1502252430442-aac78f397426?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 12,
