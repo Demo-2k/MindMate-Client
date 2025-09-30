@@ -19,6 +19,7 @@ import { ShowAvatarHome } from "../avatar/homeShowAvatar";
 import NotebookCoverCard from "../homeButton/note";
 
 import { ChatBot } from "../chatBot/chatBot";
+import { AchievementNotification } from "../showNotficationAndsuggest.tsx/shownotfication";
 
 // import { ChatBotBreathEx } from "../chatBot/chatBotBreath";
 
@@ -40,11 +41,11 @@ export default function HomeDiary() {
 
   //SET SHOW AVATAR
   const [showChatBotHome, setShowChatBotHome] = useState(false);
-  //hadaglah
-  const [isSaved, setIsSaved] = useState(false);
 
-  const [showBreathingExercise, setShowBreathingExercise] = useState(false);
-  const [showBreathingConfirm, setShowBreathingConfirm] = useState(false);
+  const [achievementCard, setAchievementCard] = useState<{
+    message: string;
+    points: string;
+  } | null>(null);
 
   //show music
   const [urlMusic, setUrlMusic] = useState<string | null>(null);
@@ -88,10 +89,18 @@ export default function HomeDiary() {
                   .join(", ")}.`
               : "";
           const pointsMessage =
-            addedPoints > 0 ? ` ${addedPoints} оноо нэмэгдлээ! 🎉` : "";
-          toast.success(`${achievementMessage}${pointsMessage}`, {
-            duration: 8000,
+            addedPoints > 0 ? `+${addedPoints} оноо нэмэгдлээ! 🎉` : "";
+
+          // Set state to show the central card
+          setAchievementCard({
+            message: achievementMessage,
+            points: pointsMessage,
           });
+
+          // Auto-hide the card after 4 seconds
+          setTimeout(() => {
+            setAchievementCard(null);
+          }, 4000); // 4 seconds
         }
 
         // Point animation эхлүүлэх
@@ -100,7 +109,7 @@ export default function HomeDiary() {
 
           const start = userPoints;
           const end = userPoints + addedPoints;
-          const duration = 1000;
+          const duration = 1500;
           const steps = 30;
           const increment = (end - start) / steps;
           let current = start;
@@ -157,39 +166,64 @@ export default function HomeDiary() {
           <span className="text-[14px] md:text-2xl">⭐</span>
           <motion.span
             key={userPoints}
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
+            // Animate: Pops up then settles when the score updates
+            initial={{ scale: 1 }}
+            animate={{ scale: [1.2, 1] }} // Pops up slightly then settles back
             transition={{ duration: 0.3 }}
             className="text-[14px] md:text-2xl font-semibold text-white"
           >
             {userPoints}
           </motion.span>
 
+          {/* --- ДРАМАТИК ОНОО НЭМЭГДЭХ АНИМЭЙШН --- */}
           <AnimatePresence>
             {pointsAnimation > 0 && (
               <motion.span
                 key="plusPoints"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: -20 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-green-400 font-bold"
+                initial={{
+                  opacity: 0,
+                  scale: 2, // Start much bigger for visual impact
+                  x: 200, // Move further right to emphasize the flight path
+                  y: 200, // Move further down
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1, // Shrink slightly as it flies
+                  x: 0,
+                  y: -30,
+                }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.5,
+                  transition: { duration: 0.2 },
+                }}
+                transition={{
+                  // Нэмэгдсэн хугацаа: 1.5 секунд
+                  duration: 1.5,
+                  ease: "easeInOut",
+                }}
+                className="text-yellow-400 text-3xl font-extrabold absolute z-50 whitespace-nowrap drop-shadow-lg"
               >
                 +{pointsAnimation}
               </motion.span>
             )}
           </AnimatePresence>
+          {/* ------------------------------------------- */}
         </div>
-
-        {/* <div className="flex items-center justify-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full shadow-md">
-          <span className="text-[14px] md:text-2xl">⭐</span>
-          <span className="text-[14px] md:text-2xl font-semibold text-white">
-            {userPoints}
-          </span>
-        </div> */}
 
         <Clock />
       </div>
+
+      <AnimatePresence>
+        {achievementCard && (
+          <AchievementNotification
+            key={achievementCard.message} // key-г нэмэх
+            achievementMessage={achievementCard.message}
+            pointsMessage={achievementCard.points}
+            onClose={() => setAchievementCard(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {!showdiaryInput && (
         <div className="flex gap-3">

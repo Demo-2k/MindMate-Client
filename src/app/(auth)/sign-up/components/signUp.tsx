@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react"; // 👈 нэмсэн
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "@/provider/userProvider";
 
 const formSchema = z.object({
   username: z.string().min(2, { message: "Username is required" }),
@@ -23,6 +24,8 @@ const formSchema = z.object({
 export const SignUpEmailPassword = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+
+  const { getCurrentUserByAccessToken } = useContext(UserContext);
 
   const {
     register,
@@ -46,23 +49,22 @@ export const SignUpEmailPassword = () => {
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/sign-up`,
-        {
-          username,
-          email,
-          password,
-        }
+        { username, email, password }
       );
 
       // Токен localStorage-д хадгалах
-      localStorage.setItem("token", response?.data?.signUpUserAccessToken);
+      if (response?.data?.signUpUserAccessToken) {
+        localStorage.setItem("token", response.data.signUpUserAccessToken);
+      }
 
-      return true;
+      return true; // ✅ Амжилттай бүртгүүлсэн бол ямар ч тохиолдолд TRUE буцаа
     } catch (error) {
       const axiosError = error as AxiosError;
 
       if (axiosError.response) {
         const errorMessage = (axiosError.response.data as { message: string })
           .message;
+
         console.log("error message:", errorMessage);
 
         if (errorMessage === "User profile already created") {
@@ -85,7 +87,16 @@ export const SignUpEmailPassword = () => {
     if (!isSuccess) {
       alert("User profile already created");
     } else {
-      router.push("/");
+      try {
+        await getCurrentUserByAccessToken(); // context update
+        router.push("/"); // зөвхөн амжилттай үед home руу
+      } catch (err) {
+        console.error("User fetch error:", err);
+        alert(
+          "Sign-up successful, but user data not loaded. Please sign in again."
+        );
+        router.push("/sign-in");
+      }
     }
   }
 

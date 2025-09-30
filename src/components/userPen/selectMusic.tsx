@@ -27,6 +27,7 @@ type SongType = {
   price: number;
 };
 
+
 const songs = [
   {
     title: "Tokyo Reflections 🎴 ",
@@ -104,6 +105,7 @@ const songs = [
     price: 130,
   },
 ];
+
 
 export default function SelectMusic({ setUrlMusic }: SelectMusicProps) {
   const [selected, setSelected] = useState<string | null>(null);
