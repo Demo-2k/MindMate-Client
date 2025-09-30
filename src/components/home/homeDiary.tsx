@@ -69,8 +69,6 @@ export default function HomeDiary() {
       console.log("post diary res", response);
 
       if (response.status === 200) {
-        toast.success("Diary амжилттай хадгалагдлаа ✅", { duration: 3000 });
-
         const progress = response.data?.progress || {};
 
         const {
@@ -92,7 +90,7 @@ export default function HomeDiary() {
           const pointsMessage =
             addedPoints > 0 ? ` ${addedPoints} оноо нэмэгдлээ! 🎉` : "";
           toast.success(`${achievementMessage}${pointsMessage}`, {
-            duration: 5000,
+            duration: 8000,
           });
         }
 
