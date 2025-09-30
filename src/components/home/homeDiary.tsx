@@ -67,8 +67,12 @@ export default function HomeDiary() {
       );
 
       if (response.status === 200) {
-        const { addedPoints, addedAchievements, finalProgress } =
-          response.data.progress;
+        const progress = response.data?.progress || {};
+        const {
+          addedPoints = 0,
+          addedAchievements = [],
+          finalProgress = null,
+        } = progress;
 
         // Toast
         if (addedAchievements.length > 0 || addedPoints > 0) {
