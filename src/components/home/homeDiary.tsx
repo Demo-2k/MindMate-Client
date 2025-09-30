@@ -66,7 +66,10 @@ export default function HomeDiary() {
         { text: text }
       );
 
+      console.log("post diary res", response);
+
       if (response.status === 200) {
+        toast.success("Diary амжилттай хадгалагдлаа ✅", { duration: 3000 });
         const progress = response.data?.progress || {};
         const {
           addedPoints = 0,
@@ -76,6 +79,8 @@ export default function HomeDiary() {
 
         // Toast
         if (addedAchievements.length > 0 || addedPoints > 0) {
+          console.log("progress", progress);
+
           const achievementMessage =
             addedAchievements.length > 0
               ? `Шинэ achievement: ${addedAchievements
@@ -134,38 +139,6 @@ export default function HomeDiary() {
     }
     setShowChatBotHome(true);
   };
-
-  // useEffect(() => {
-  //   if (!userProvider?.id || !diaries[0]) return;
-
-  //   // const processTodayDiary = async () => {
-  //   //   try {
-  //   //     const response = await axios.get(
-  //   //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/processDiary/${userProvider?.id}`
-  //   //     );
-  //   //   } catch (error) {
-  //   //     toast.error("streaks error");
-  //   //   }
-  //   // };
-  //   const allProgress = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.NEXT_PUBLIC_BACKEND_URL}/progress/getStreaks/${userProvider?.id}`
-  //       );
-
-  //       console.log(
-  //         "all process diary",
-  //         response.data.success.finalProgress.points
-  //       );
-  //       setAllPoints(response?.data?.success?.finalProgress?.points);
-  //     } catch (error) {
-  //       // toast.error("streaks error");
-  //       console.log(error);
-  //     }
-  //   };
-  //   // processTodayDiary();
-  //   // allProgress();
-  // }, [userProvider?.id]);
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center ">
